@@ -5,15 +5,14 @@
 /* variables */
 :root
 {
-    --primary-color: rgb(0, 143, 156);
+    --primary-color: #2a41e8;
     --secondary-color: rgb(247, 144, 49);
     --field-text-color:rgb(62, 63, 94);
     --bg-color: rgb(255,255,255);
     --heading-color: rgb(255,255,255);
     --text-color: rgb(48, 47, 69);
     --label-color: rgb(175, 176, 192);
-    --border-color: rgb(222, 222, 234);
-    
+    --border-color: rgb(222, 222, 234);    
 }
   
 body
@@ -90,18 +89,13 @@ main::after
 .logo-icon
 {
     width: auto;
+   
 }
 .logo-icon img
 {
     width: 100%;
 }
-.logo-text
-{
-    font-size: 37px;
-    color: var(--heading-color);
-    font-weight: bold;
-    margin-left: 8px;
-}
+
 .p-relate
 {
     position: relative;
@@ -288,7 +282,7 @@ main::after
 {
     -webkit-appearance: none;
     border-radius: 6px;
-    background-color: rgb(0 145 158);
+    background-color:var(--primary-color);
     width: 22px;
     height: 22px;
     position: relative;
@@ -331,7 +325,7 @@ main::after
 .login-btn button
 {
     border-radius: 12px;
-    background-color: rgb(247, 144, 49);
+    background-color: var(--secondary-color);
     width: 100%;
     transition: 0.4s;
     height: 54px;
@@ -345,14 +339,14 @@ main::after
 }
 .login-btn .signup
 {
-    background-color: var(--primary-color);
+    background: var(--secondary-color);
 }
 .login-btn button::before
 {
     content: "GO!";
     font-size: 20px;
     font-weight: bold;
-    background-color: var(--field-text-color);
+    background-color: var(--primary-color);
     color: var(--heading-color);
     line-height: 54px;
     display: block;
@@ -373,40 +367,6 @@ main::after
 }
 
 
-.divide-heading
-{
-
-    position: relative;
-    z-index: 1;
-    margin-bottom: 30px;
-  }
-.divide-heading span
-{
-    font-size: 15px;
-    color: var(--field-text-color);
-    font-weight: bold;
-    text-align: center;
-    background-color: var(--bg-color);
-    padding: 0 20px;
-    width: max-content;
-    margin: 0 auto;
-    display: block;
-}
-
-.divide-heading::after
-{
-    content: "";
-    position: absolute;
-    width: 100%;
-    background-color: rgb(234, 234, 245);
-    height: 1px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    top: 10px;
-    z-index: -1;
-}
 
 .register-text
 {
@@ -495,140 +455,6 @@ main .signup-form
 
 
   
-
-
-
-
-
-.thankyou-page .logo
-{
-    justify-content: center;
-    margin-top: 60px;
-}
-.thankyou-page .logo-icon
-{
-    width: 55px;
-    margin-right: 10px;
-}
-.thankyou-page .logo .logo-icon img
-{
-    width: 100%;
-}
-.thankyou-page .logo-text
-{
-    font-size: 65px;
-}
-.thankyou-page .main-inner
-{
-    background-image: url(../images/thankyou-bg.png) !important;
-    background-color: var(--text-color-hover);
-
-}
-.thankyou-page article
-{
-    text-align: center;
-    margin-top: 80px;
-}
-.thankyou-page article h1
-{
-        font-size: 75px;
-        font-weight: bold;
-        text-transform: uppercase; 
-}
-.thankyou-page article h1 span
-{
-    display: block;
-    font-size: 80px;
-    font-weight: 900;
-    color: var(--primary-color);
-}
-.thankyou-page article span
-{
-    font-size: 20px;
-    color: var(--primary-color);
-    font-weight: 500;
-}
-.thankyou-page article p
-{
-    font-size: 18px;
-    font-family: "Myriad Pro";
-    color: var(--secondary--text-color);
-    margin: 0 auto;
-    margin-top: 45px;
-    width: 39%;
-}
-.social-media
-{
-    text-align: center;
-    margin: 40px auto;
-    background-color: var(--text-color-hover);
-    width: 30%;
-    padding: 6px 10px;
-}
-.social-media a
-{
-    border: solid 1px rgb(244, 244, 244);
-    border-radius: 5px;
-    background-color: transparent;
-    color: var(--secondary--text-color);
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: inline-block;
-}
-.social-media a i
-{
-    margin-right: 10px;
-    font-size: 20px;
-}
-.back-home
-{
-    width: 188px;
-    height: 63px;
-    margin: 0 auto;
-}
-.back-home a
-{
-    background-color: var(--primary-color);
-    border-radius: 50px;
-    color: var(--text-color-hover);
-    width: 100%;
-    height: 100%;
-    display: block;
-    text-decoration: none;
-    text-align: center;
-    line-height: 63px;
-    font-size: 17px;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    border: 0;
-
-}
-
-
-
-
-
-
-
-#sub img
-{
-    width: 60px;
-}
-
-.highlight
-{
-    border-top: solid 3px var(--primary-color) !important;
-    border-bottom: solid 3px var(--primary-color) !important;
-
-}
-
-
-
-
-
-
 
 
 

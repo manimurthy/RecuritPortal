@@ -1,5 +1,6 @@
 package com.recuritportal.jspwebapp.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,13 +12,21 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int empid;
+	@Column
 	private String empemail;
+	@Column
 	private String firstname;
+	@Column
 	private String lastname;
+	@Column
 	private String address1;
+	@Column
 	private String address2;
+	@Column
 	private String pincode;
+	@Column
 	private String contact;
+	@Column
 	private String password;
 	
 

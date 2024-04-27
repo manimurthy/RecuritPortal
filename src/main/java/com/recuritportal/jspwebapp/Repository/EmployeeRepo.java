@@ -5,4 +5,6 @@ import com.recuritportal.jspwebapp.Entity.*;
 
 public interface EmployeeRepo extends CrudRepository<Employee, Integer>{
 	Employee findByEmpemailAndPassword(String empemail, String password);
+	
+	
 }

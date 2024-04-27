@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.recuritportal.jspwebapp.Entity.*;
-import com.recuritportal.jspwebapp.Repository.EmployeeRepo;
+//import com.recuritportal.jspwebapp.Repository.EmployeeRepo;
+import com.recuritportal.jspwebapp.Service.*;
 import org.springframework.ui.Model;
 
 
@@ -16,32 +18,66 @@ import org.springframework.ui.Model;
 @Controller
 public class LoginController {
     @Autowired
-    private EmployeeRepo employeeRepo;
-
-    @RequestMapping("/login")
-    public String showLoginForm() {
-        System.out.println("You have to see login form here");
-    	return "login";
+    private FirmService firmService;
+    private EmployeeService empService;
+   
+    public LoginController(FirmService userService, EmployeeService emailService) {
+        this.firmService = userService;
+        this.empService = emailService;
     }
     
-    @RequestMapping("/abcd")
-    public String showabcdForm() {
-    	return "abcdlogin";
+    @RequestMapping("/login")
+    public String showLoginForm() {
+        return "login";
     }
+    
     @PostMapping("/login")
-    public String login(@RequestParam String empemail, @RequestParam String password, Model model) {
-        Employee employee = employeeRepo.findByEmpemailAndPassword(empemail, password);
-        if (employee != null) {
-            // Valid credentials, redirect to main landing page
-            return "redirect:landing";
+    public String login(@RequestParam String empemail, @RequestParam String password, @RequestParam(required = false) String emptype, Model model) {
+        //Employee employee = employeeRepo.findByEmpemailAndPassword(empemail, password);
+       if ("Employee".equals(emptype.trim())) {
+    	if (empService.validateCredentials(empemail, password)) {
+            // Valid credentials, redirect to main empdashboard page
+           // return "redirect:employeedashboard";
+        	return "redirect:empdashboard";
         } else {
             // Invalid credentials, show error message
-            model.addAttribute("error", "Invalid credentials");
+            model.addAttribute("error", "Invalid credentials!! Please try again");
             return "login";
         }
+       } else {
+           if (firmService.validatefirmCredentials(empemail, password)) {
+               return "redirect:firmdashboard";
+           } else {
+               model.addAttribute("error", "Invalid Firm credentials!! Please try again");
+               return "login";
+           }    	   
+    	   
+       }
+       
     }
-    @GetMapping("/landing")
+    
+    @GetMapping("/empdashboard")
     public String showLandingPage() {
-        return "landing"; // Assuming "landing.html" is the name of your landing page HTML file
+        return "empdashboard"; // Assuming "landing.html" is the name of your landing page HTML file
     }    
+    
+    @GetMapping("/firmdashboard")
+    public String firmDashboard(Model model) {
+        // Add necessary attributes to the model and return the view name
+        return "firmdashboard"; // This should be the name of the .html or .jsp file, if using templates
+    }
+    
+/*	@RequestMapping ("/empreg")
+	public String details()
+	{
+		return "empreg";
+	}
+*/	
+	@PostMapping ("/savedetails")
+	public String details(Employee empReg, Model model)
+	{
+		 empService.insertEmployeeDetails(empReg);
+		 model.addAttribute("error", "You have been registered successfully!!! Please go and login.");
+		return "login";
+	}    
 }
