@@ -46,7 +46,8 @@ public class LoginController {
         }
        } else {
            if (firmService.validatefirmCredentials(empemail, password)) {
-               return "redirect:firmdashboard";
+             //  return "redirect:firmdashboard";
+        	   return "redirect:searchjob";
            } else {
                model.addAttribute("error", "Invalid Firm credentials!! Please try again");
                return "login";
@@ -76,8 +77,12 @@ public class LoginController {
 	@PostMapping ("/savedetails")
 	public String details(Employee empReg, Model model)
 	{
+		if (empService.checkEmployeeExists(empReg.getEmpemail()) )	{
+			model.addAttribute("error", "This email is already registered. Please login in directly.");
+			return  "login";
+		}
 		 empService.insertEmployeeDetails(empReg);
-		 model.addAttribute("error", "You have been registered successfully!!! Please go and login.");
+		 model.addAttribute("info", "You have been registered successfully!!! Please go and login.");
 		return "login";
 	}    
 }

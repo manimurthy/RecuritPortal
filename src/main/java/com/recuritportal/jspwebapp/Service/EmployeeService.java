@@ -14,6 +14,10 @@ public class EmployeeService {
         Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
         return employee != null;
     }
+    public boolean checkEmployeeExists(String  empemail) {
+    	 Employee employee = employeeRepository.findByEmpemail(empemail);
+        return  employee != null;
+    }       
     public boolean insertEmployeeDetails(Employee emp) {
         //Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
     	employeeRepository.save(emp);
