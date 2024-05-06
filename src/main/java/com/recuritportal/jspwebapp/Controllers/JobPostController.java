@@ -41,7 +41,7 @@ public class JobPostController {
 	{
 		 jobpostService.insertJobPostDetails(jobPost);
 		 model.addAttribute("error", "Job details posted  successfully!!! ");
-		return "firmdashboard";
+		return "postjob";
 	}	
 	
 	@PostMapping ("/searchjob_backup")

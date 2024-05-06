@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.recuritportal.jspwebapp.Entity.*;
 //import com.recuritportal.jspwebapp.Repository.EmployeeRepo;
 import com.recuritportal.jspwebapp.Service.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 
@@ -33,6 +37,7 @@ public class LoginController {
     
     @PostMapping("/login")
     public String login(@RequestParam String empemail, @RequestParam String password, @RequestParam(required = false) String emptype, Model model) {
+
         //Employee employee = employeeRepo.findByEmpemailAndPassword(empemail, password);
        if ("Employee".equals(emptype.trim())) {
     	if (empService.validateCredentials(empemail, password)) {
@@ -45,7 +50,7 @@ public class LoginController {
             return "login";
         }
        } else {
-           if (firmService.validatefirmCredentials(empemail, password)) {
+           if (firmService.validatefirmCredentials(empemail, password)!=0) {
              //  return "redirect:firmdashboard";
         	   return "redirect:searchjob";
            } else {

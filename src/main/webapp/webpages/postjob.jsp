@@ -1,3 +1,4 @@
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -89,18 +90,13 @@
 				</div>
 			</div>
 		</div>
-		
-		
-
-		
-
 	</div>
 </div>
 
 
-
+	<form action="/saveFAQJob" method="post">
 	<div id="post-jobs" class="section margin-top-45 padding-bottom-75">
-		<form action="/savejobdetails" method="post">
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -215,7 +211,7 @@
 			</div>
 		</div>
 	</div>
-	</form>
+	<!--  </form>-->
 	</div>
 	<!-- Category Boxes -->
 	<div class="section  gray padding-top-65 padding-bottom-75">
@@ -228,8 +224,23 @@
 					</div>
 				</div>
 			</div>
+		    <label for="question">FAQ Question:</label>
+		    <input type="text" id="question" name="faqs[0].question"><br>
+		
+		    <label for="answer">FAQ Answer:</label>
+		    <input type="text" id="answer" name="faqs[0].answer"><br>
+		    <label for="question">FAQ Question:</label>
+		    <input type="text" id="question" name="faqs[1].question"><br>
+		
+		    <label for="answer">FAQ Answer:</label>
+		    <input type="text" id="answer" name="faqs[1].answer"><br>
+		    <label for="question">FAQ Question:</label>
+		    <input type="text" id="question" name="faqs[2].question"><br>
+		
+		    <label for="answer">FAQ Answer:</label>
+		    <input type="text" id="answer" name="faqs[2].answer"><br>			
 			<div class="row">
-				<table class="table table-hover table-responsive table-bordered" style="background: #fff;">
+				<table class="table table-hover table-responsive table-bordered" id="dataTable" style="background: #fff;">
 					<thead>
 						<tr>
 							<th width="5%">ID</th>
@@ -240,7 +251,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<!--  <tr>
 							<td>1</td>
 							<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
 							<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>							
@@ -250,31 +261,17 @@
 								</button>
 							</td>
 							<td class="text-center">
-								<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm">
+								<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm" onclick="deleteRow(this)">
 									<span class="icon-material-outline-delete"></span>
 								</button>
 							</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-							<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>							
-							<td class="text-center">
-								<button type="button" data-bs-toggle="modal" data-bs-target="#edit" data-uid="1" class="update btn btn-warning btn-sm">
-									<span class="icon-line-awesome-edit"></span>
-								</button>
-							</td>
-							<td class="text-center">
-								<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm">
-									<span class="icon-material-outline-delete"></span>
-								</button>
-							</td>
-						</tr>
+						</tr>-->
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+	 </form>
 	<div id="edit" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -304,7 +301,7 @@
 
 		</div>
 		<div class="modal-footer">
-			<button type="button" id="up" class="button ripple-effect big" data-bs-dismiss="modal">Update</button>
+			<button type="button" id="up" class="button ripple-effect big" data-bs-dismiss="modal" >Update</button>
 			<button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
 		</div>
 		</div>
@@ -399,22 +396,20 @@
 					<div class="col-xl-12">
 						<div class="submit-field">
 							<h5>Question</h5>
-							<input type="text" class="with-border" />
+							<input type="text" id = "question" name = "question" class="with-border" />
 						</div>
 					</div>
 
 					<div class="col-xl-12">
 						<div class="submit-field">
 							<h5>Answer</h5>
-							<textarea cols="15" rows="5" class="with-border"></textarea>
+							<textarea cols="15"  id = "answer" name = "answer" rows="5" class="with-border"></textarea>
 						</div>
 					</div>
 					
 					<div class="col-xl-12">
-						<a href="#" class="button ripple-effect big"><i class="icon-feather-plus"></i> Submit</a>
+						<button type="button" id="up" class="button ripple-effect big" data-bs-dismiss="modal" onclick="addData()">Add FAQ</button>
 					</div>
-						
-					
 				</div>
 
 			</div>
@@ -439,7 +434,6 @@
 		</div>
 	</div>
 	<!-- Footer / End -->
-
 </div>
 
 
@@ -527,6 +521,89 @@
 	        return input >= tomorrow; // Check if the input date is at least tomorrow
 	    }
 	});
+    function addData() {
+    	
+        // Get the input field values
+        var question = document.getElementById("question").value;
+        var answer = document.getElementById("answer").value;
+
+        // Get the table body where the new row will be added
+        var tableBody = document.querySelector("#dataTable tbody");
+
+        // Create a new row
+        var newRow = document.createElement("tr");
+        alert ('Called Add function');
+        alert (tableBody);
+        
+        // Count the number of existing rows
+        var rowCount = tableBody.rows.length;
+
+        // Generate the ID for the new row
+        var newRowId = rowCount + 1;
+        alert (newRowId);
+        // Create cells for the new row
+        var idCell = document.createElement("td");
+        var questionCell = document.createElement("td");
+        var answerCell = document.createElement("td");
+        var editCell = document.createElement("td");
+        var deleteCell = document.createElement("td");
+
+        // Set the text content of the cells
+        idCell.textContent = newRowId //"New ID"; // You can generate the ID dynamically if needed
+        questionCell.textContent = question;
+        answerCell.textContent = answer;
+        editCell.innerHTML = '<button type="button" data-bs-toggle="modal" data-bs-target="#edit" data-uid="1" class="update btn btn-warning btn-sm" onclick="populateModal(this.parentElement.parentElement)"><span class="icon-line-awesome-edit"></span></button>';
+        deleteCell.innerHTML = '<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><span class="icon-material-outline-delete" onclick="deleteRow(this)"></span></button>';
+
+        // Append cells to the new row
+        newRow.appendChild(idCell);
+        newRow.appendChild(questionCell);
+        newRow.appendChild(answerCell);
+        newRow.appendChild(editCell);
+        newRow.appendChild(deleteCell);
+
+        // Append the new row to the table body
+        tableBody.appendChild(newRow);
+
+        // Set the id attributes for question and answer input fields
+        questionCell.innerHTML = '<input type="text" id="faqs[' + newRowId + '].question" value="' + question + '" readonly>';
+        answerCell.innerHTML = '<input type="text" id="faqs[' + newRowId + '].answer" value="' + answer + '"readonly>';
+
+    }
+    // Function to populate modal form fields with row data
+    function populateModal(row) {
+    	
+        // Extract data from the clicked row
+        var cells = row.getElementsByTagName("td");
+        var question = cells[1].textContent; // Index 1 corresponds to the question column
+        var answer = cells[2].textContent; // Index 2 corresponds to the answer column
+		alert('Called the values....');
+        // Set the values of the modal form fields
+        document.getElementById("question").value = question;
+        document.getElementById("answer").value = answer;
+    }	
+
+    function deleteRow(button) {
+        // Get the parent row of the delete button
+        var row = button.closest("tr");
+
+        // Store a reference to the modal delete button
+        var deleteButton = document.getElementById("del");
+
+        // Show the modal
+        var deleteModal = new bootstrap.Modal(document.getElementById('delete'));
+        deleteModal.show();
+
+        // Attach event listener to the delete button inside the modal
+        deleteButton.addEventListener("click", function() {
+            // Remove the row from the table
+            row.parentNode.removeChild(row);
+            
+            // Close the modal
+            deleteModal.hide();
+        });
+    }
+    
  </script>
 </body>
 </html>
