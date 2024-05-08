@@ -30,6 +30,11 @@ public class LoginController {
         this.empService = emailService;
     }
     
+    @GetMapping("/")
+    public String showLoginPage() {
+        return "login"; // Assuming your login page is named "login.jsp" or "login.html"
+    }
+    
     @RequestMapping("/login")
     public String showLoginForm() {
         return "login";
@@ -50,7 +55,8 @@ public class LoginController {
             return "login";
         }
        } else {
-           if (firmService.validatefirmCredentials(empemail, password)!=0) {
+//           if (firmService.validatefirmCredentials(empemail, password)!=0) {
+           if (firmService.validatefirmCredentials(empemail, password)) {
              //  return "redirect:firmdashboard";
         	   return "redirect:searchjob";
            } else {

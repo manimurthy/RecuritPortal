@@ -101,7 +101,7 @@
 				
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
-					<h3>Liked Jobs</h3>					
+					<h3>Applied Jobs and Status</h3>					
 				</div>
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0">
@@ -113,24 +113,25 @@
 
 						<div class="content">
 							<ul class="dashboard-box-list">
-							<c:forEach items="${likedJobs}" var="jp">
 								<li>
 									<!-- Job Listing -->
 									<div class="job-listing">
 
 										<!-- Job Listing Details -->
 										<div class="job-listing-details">
-
 											<!-- Logo -->
 											<a href="#" class="job-listing-company-logo">
 												<img src="assets/img/company-logo-01.png" alt=""> 
 											</a>
-
 											<!-- Details -->
 											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">${jp.jobdesc}</a></h3>
-
-												
+												<h3 class="job-listing-title"><a href="#">Job Title</a></h3>
+											</div>
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">Applied Status</a></h3>
+											</div>
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">Applied Date</a></h3>
 											</div>
 										</div>
 									</div>
@@ -138,68 +139,37 @@
 									<div class="buttons-to-right single-right-button">
 										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
 										
+									</div>
+								</li>							
+							<c:forEach items="${jobApplications}" var="jp">
+								<li>
+									<!-- Job Listing -->
+									<div class="job-listing">
+
+										<!-- Job Listing Details -->
+										<div class="job-listing-details">
+											<!-- Logo -->
+											<a href="#" class="job-listing-company-logo">
+												<img src="assets/img/company-logo-01.png" alt=""> 
+											</a>
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">${jp.jobPost.jobtitle}</a></h3>
+											</div>
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">${jp.status}</a></h3>
+											</div>
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">${jp.applieddate}</a></h3>
+											</div>
+										</div>
+									</div>
+									<!-- Buttons -->
+									<div class="buttons-to-right single-right-button">
+										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
 									</div>
 								</li>
 							</c:forEach>
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-02.png" alt="">
-											</a>
-
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Administrative Assistant</a></h3>
-
-												<!-- Job Listing Footer -->
-												
-											</div>
-
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										
-									</div>
-								</li>
-
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-03.png" alt="">
-											</a>
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Construction Labourers</a></h3>
-
-												<!-- Job Listing Footer -->
-												
-											</div>
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										
-									</div>
-								</li>
 							</ul>
 						</div>
 					</div>
