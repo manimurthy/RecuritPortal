@@ -40,7 +40,7 @@
 						<ul id="responsive">						
 						<li><a href="searchjob" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
-						<li><a href="applyjobs" class="current">Apply jobs</a></li>
+						<li><a href="empappliedjob?empid=0" class="current">Applied jobs</a></li>
 						</ul>
 					</nav>
 					<div class="clearfix"></div>				
@@ -120,14 +120,14 @@
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Emp Id</h5>
-									<input type="text" id = "empid" name = "empid" class="with-border" />
+									<input type="text" id = "empid" name = "empid"  value ="${empid}" class="with-border" readonly />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Job Id</h5>
-									<input type="text" id = "jobpostingId" name = "jobpostingId" class="with-border" />
+									<input type="text" id = "job_post_id" name = "job_post_id" value="${jobpostingid}"  class="with-border" readonly />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
@@ -309,6 +309,7 @@
 	            const errorSpan = $(this).next();
 	            if ($(this).val().trim() === '') {
 	                errorSpan.text('This field is required.').css('display', 'inline');
+	                alert('failed required field');
 	                isValid = false;
 	            }
 	        });
@@ -320,6 +321,7 @@
 	        	errorSpanqfy.textContent('Select a proper Education qualification');//.css('display', 'inline');
 	        	errorSpanqfy.text('Select a proper Education qualification').css('display', 'inline');
 	        	errorSpanqfy.style.display = "inline";
+	        	alert('Failed looped error')
 	        	isValid =false;
 	        }
 	        else{
@@ -330,13 +332,14 @@
 	            const value = Number(input.val());
 	            if (!Number.isInteger(value)) {
 	                input.next().text('Must be a whole number.').css('display', 'inline');
+	                alert('Must be a whole number.');
 	                isValid = false;
 	            }
 	        }
 
 	        // Validate specific fields
-	        validateInteger($('#eduweightpercent'));
-	        validateInteger($('#expweightpercent'));
+	        //validateInteger($('#eduweightpercent'));
+	        //validateInteger($('#expweightpercent'));
 	        validateInteger($('#expinskills'));
 	        validateInteger($('#noofyearsofexp'));
 /*

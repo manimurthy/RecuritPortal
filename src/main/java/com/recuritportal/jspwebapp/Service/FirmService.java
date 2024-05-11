@@ -11,9 +11,9 @@ public class FirmService {
     @Autowired
     private FirmRepo firmRepo ;
 
-    public boolean validatefirmCredentials(String firmemail, String password) {
+    public Firm validatefirmCredentials(String firmemail, String password) {
         Firm firm= firmRepo.findByFirmemailAndPassword(firmemail, password);
         //return firm.firmid;
-        return firm != null;
+        return firm;
     }    
 }

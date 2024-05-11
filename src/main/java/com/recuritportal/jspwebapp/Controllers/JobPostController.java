@@ -10,11 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.recuritportal.jspwebapp.Entity.JobPost;
 import com.recuritportal.jspwebapp.Entity.JobPost1;
 import com.recuritportal.jspwebapp.Entity.JobPostFAQ;
 import com.recuritportal.jspwebapp.Service.JobPostService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class JobPostController {
@@ -37,7 +40,7 @@ public class JobPostController {
     }
     
 	@PostMapping ("/savejobdetails")
-	public String details(JobPost jobPost, Model model)
+	public String details(JobPost1 jobPost, Model model)
 	{
 		 jobpostService.insertJobPostDetails(jobPost);
 		 model.addAttribute("error", "Job details posted  successfully!!! ");
@@ -65,15 +68,26 @@ public class JobPostController {
 	}
 	
     @GetMapping("/searchjob")
-    public String searchJob(Model model) {
-        // Add necessary attributes to the model and return the view name
+    public String searchJob(Model model, HttpSession session) {
+        // Get the empname and empid from the session
+        String empName = (String) session.getAttribute("empname");
+        Integer empId = (Integer) session.getAttribute("empId");
+
+        if (empId == null) {
+        	model.addAttribute("error", "You are not logged in. Please log in to access this page.");
+            return "redirect:/login"; 
+        }
+        // Add empname and empid to the model
+        model.addAttribute("empName", empName);
+        model.addAttribute("empId", empId);    	
+    	        
         return "/searchjob"; // This should be the name of the .html or .jsp file, if using templates
     }
 	
-	@PostMapping ("/searchjob")
-	public String jobdetails(@RequestParam String jobId, @RequestParam String jobDesc, Model model)
+	@PostMapping ("/searchjobbyval")
+	public String jobdetails(@RequestParam String jobId, @RequestParam String jobDesc, RedirectAttributes redirectAttributes)
 	{
-		 List<JobPost> jobPost = null;
+		 List<JobPost1> jobPost = null;
 	        if (jobId != null) {
 	            jobPost = jobpostService.findByjobtitle(jobId);
 	        	//return "Hello";
@@ -83,13 +97,22 @@ public class JobPostController {
 		          //  jobPost = jobpostService.findByJobTitleAndDesc(jobId, jobDesc);
 	        }*/
 	        // Add jobPost to the model
-	        model.addAttribute("jobPost", jobPost);
+	        //model.addAttribute("jobPost", jobPost);
+	        redirectAttributes.addFlashAttribute("jobPost", jobPost);
 	        //return "jobDetailsView";
-	        return "firmdashboard";
+	        return "redirect:/searchjob";
 	}		
     
 	@GetMapping("/postjob")
-    public String firmPostJob(Model model) {
+    public String firmPostJob(Model model ,HttpSession session, RedirectAttributes redirectAttributes) {
+		//get the firmid stored in the session  
+		Integer firmId = (Integer) session.getAttribute("firmid");
+        // If firm ID is null, redirect to login page with error message
+        if (firmId == null) {
+            redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
+            return "redirect:/login"; 
+        }		
+		 model.addAttribute("firmunqid", firmId); 
         // Add necessary attributes to the model and return the view name
         return "postjob"; // This should be the name of the .html or .jsp file, if using templates
     }
@@ -101,7 +124,7 @@ public class JobPostController {
     }
     
 	@PostMapping("/saveFAQJob")
-    public String saveJobPost(JobPost1 jobPost1) {
+    public String saveJobPost(JobPost1 jobPost1, RedirectAttributes redirectAttributes) {
         for (JobPostFAQ faq : jobPost1.getFaqs()) {
             faq.setJobPost(jobPost1);
         }
@@ -109,6 +132,7 @@ public class JobPostController {
 		        faq.setJobPost(jobPost1);  // Set the parent
 		    });*/
         jobpostService.savefaq(jobPost1);
-        return "redirect:/faqjob";
+        redirectAttributes.addFlashAttribute("info","Job Post created successfully!!!");
+        return "redirect:/postjob";
     }
 }

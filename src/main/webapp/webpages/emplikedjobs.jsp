@@ -49,6 +49,8 @@
 			<div class="right-side">					
 
 				<div class="header-widget">
+					<span>${empdtl.firstname}</span>
+					<input type="hidden" id="firmname" name="firmname" value="${empdtl.empid}" />				
 					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->

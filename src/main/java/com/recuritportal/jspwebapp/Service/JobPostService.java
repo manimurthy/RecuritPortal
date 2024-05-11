@@ -21,18 +21,18 @@ public class JobPostService {
 		this.jobRepo = jp;
 		this.jobfaqRepo = jp1;
 	}
-    public boolean insertJobPostDetails(JobPost jobPost) {
+    public boolean insertJobPostDetails(JobPost1 jobPost) {
         //Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
     	jobRepo.save(jobPost);
         return true;
     }    
     
-    public List<JobPost>  findByjobdesc(String jobDesc) {
-    	List<JobPost> jobPostSrch = jobRepo.findByjobdesc(jobDesc);
+    public List<JobPost1>  findByjobdesc(String jobDesc) {
+    	List<JobPost1> jobPostSrch = jobRepo.findByjobdesc(jobDesc);
     	return jobPostSrch ;    			
     }
-    public List<JobPost>  findByjobtitle(String jobTitle) {
-    	List<JobPost> jobPostSrch = jobRepo.findByjobtitle(jobTitle);
+    public List<JobPost1>  findByjobtitle(String jobTitle) {
+    	List<JobPost1> jobPostSrch = jobRepo.findByjobtitle(jobTitle);
     	return jobPostSrch;
     }
     /*public boolean  findByjobtitleanddesc(String jobTitle, String jobDesc) {

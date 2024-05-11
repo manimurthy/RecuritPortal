@@ -106,7 +106,7 @@
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0 jb-head">
 						<div class="row">
-						<form action="/searchjob" method="post">
+						<!-- <form action="/searchjob" method="post"> -->
 							<div class="col-md-12 p-5 pb-0 pt-4">
 									<div class="row">
 										<div class="col-xl-4">
@@ -130,7 +130,7 @@
 										</div>
 									</div>
 							</div>
-							</form>
+							<!-- </form> -->
 						</div>
 						
 

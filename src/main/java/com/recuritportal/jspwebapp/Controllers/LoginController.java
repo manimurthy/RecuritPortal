@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.recuritportal.jspwebapp.Entity.*;
 //import com.recuritportal.jspwebapp.Repository.EmployeeRepo;
@@ -41,31 +42,40 @@ public class LoginController {
     }
     
     @PostMapping("/login")
-    public String login(@RequestParam String empemail, @RequestParam String password, @RequestParam(required = false) String emptype, Model model) {
-
+    public String login(@RequestParam String empemail, @RequestParam String password, @RequestParam(required = false) String emptype,RedirectAttributes redirectAttributes, HttpSession session) {
+    	Firm firm;
+    	Employee emp;
         //Employee employee = employeeRepo.findByEmpemailAndPassword(empemail, password);
        if ("Employee".equals(emptype.trim())) {
-    	if (empService.validateCredentials(empemail, password)) {
-            // Valid credentials, redirect to main empdashboard page
-           // return "redirect:employeedashboard";
-        	return "redirect:empdashboard";
-        } else {
-            // Invalid credentials, show error message
-            model.addAttribute("error", "Invalid credentials!! Please try again");
-            return "login";
+    	   emp = empService.validateCredentials(empemail, password);
+	    	if (emp != null) {
+	            // Valid credentials, redirect to main empdashboard page
+	           // return "redirect:employeedashboard";
+	     	   redirectAttributes.addFlashAttribute("empdtl", emp);
+	           session.setAttribute("empId",emp.getEmpid());
+	           session.setAttribute("empname",emp.getFirstname());
+	           session.setAttribute("usertype","Employee");
+	     	   return "redirect:emphome";
+	        } else {
+	            // Invalid credentials, show error message
+	        	redirectAttributes.addFlashAttribute("error", "Invalid credentials!! Please try again");
+	            return "redirect:/";
         }
        } else {
 //           if (firmService.validatefirmCredentials(empemail, password)!=0) {
-           if (firmService.validatefirmCredentials(empemail, password)) {
-             //  return "redirect:firmdashboard";
-        	   return "redirect:searchjob";
-           } else {
-               model.addAttribute("error", "Invalid Firm credentials!! Please try again");
-               return "login";
+	    	   firm = firmService.validatefirmCredentials(empemail, password);
+	           if (firm != null) {
+	             //  return "redirect:firmdashboard";
+	        	   //model.addAttribute("firmdtl", firm);
+	        	   redirectAttributes.addFlashAttribute("firmdtl", firm);
+		           session.setAttribute("firmid",firm.getFirmid());
+		           session.setAttribute("usertype","Firm");	        	   
+	        	   return "redirect:firmhome";
+	           } else {
+	        	   redirectAttributes.addFlashAttribute("error", "Invalid Firm credentials!! Please try again");
+	               return "redirect:/";
            }    	   
-    	   
        }
-       
     }
     
     @GetMapping("/empdashboard")
@@ -79,6 +89,17 @@ public class LoginController {
         return "firmdashboard"; // This should be the name of the .html or .jsp file, if using templates
     }
     
+    @GetMapping("/firmhome")
+    public String firmHome(Model model) {
+        // Add necessary attributes to the model and return the view name
+        return "searchjob"; // This should be the name of the .html or .jsp file, if using templates
+    }
+    
+    @GetMapping("/emphome")
+    public String empHome(Model model) {
+        // Add necessary attributes to the model and return the view name
+        return "emplikedjobs"; // This should be the name of the .html or .jsp file, if using templates
+    }        
 /*	@RequestMapping ("/empreg")
 	public String details()
 	{

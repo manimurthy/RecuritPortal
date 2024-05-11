@@ -103,6 +103,8 @@
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
 					<h3>Post Jobs</h3>					
+					<span id ="infomsg">${info}</span>
+					<span id ="errmsg">${info}</span>
 				</div>
 			</div>
 		</div>
@@ -117,13 +119,6 @@
 
 					<div class="content with-padding padding-bottom-10">
 						<div class="row">
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Unique Handle</h5>
-									<input type="text" id = "firmunqid" name = "firmunqid" class="with-border" />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
 
 							<div class="col-xl-4">
 								<div class="submit-field">
@@ -184,17 +179,18 @@
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<input type="hidden" id = "firmunqid" name = "firmunqid" class="with-border" value="${firmunqid}"/>
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>
 														
 							<div class="col-xl-12">
 								<div class="submit-field">
 									<h5>Job Description</h5>
 									<textarea id = "jobdesc" name="jobdesc" cols="30" rows="5" class="with-border"></textarea>
 									<span class="error-message" style="color: red; display: none;"></span>
-									<div class="uploadButton margin-top-30">
-										<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple="" />
-										<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-										<span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -470,6 +466,11 @@
 
 	        // Clear previous errors
 	        $('.error-message').css('display', 'none');
+	        var errorSpan = document.getElementById("errmsg");
+	        var infoSpan = document.getElementById("infomsg");
+	        
+	        errorSpan.style.display = "none";
+	        infoSpan.style.display = "none";
 
 	        // Check if all fields are filled and display error messages next to inputs
 	        inputs.each(function() {

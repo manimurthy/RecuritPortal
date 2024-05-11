@@ -10,9 +10,9 @@ public class EmployeeService {
     private EmployeeRepo employeeRepository;
 //    private FirmRepo firmRepo ;
 
-    public boolean validateCredentials(String empemail, String password) {
+    public Employee validateCredentials(String empemail, String password) {
         Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
-        return employee != null;
+        return employee ;
     }
     public boolean checkEmployeeExists(String  empemail) {
     	 Employee employee = employeeRepository.findByEmpemail(empemail);

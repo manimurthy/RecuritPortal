@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.recuritportal.jspwebapp.Repository.JobPostRepo;
 import com.recuritportal.jspwebapp.Repository.LikedJobsRepo;
 import com.recuritportal.jspwebapp.Entity.JobPost;
+import com.recuritportal.jspwebapp.Entity.JobPost1;
 import com.recuritportal.jspwebapp.Entity.LikedJobs;
 
 @Service
@@ -21,11 +22,11 @@ public class LikedJobService {
 		this.jobpostRepo = jpRepo;
 		this.likedJobRepo = ljRepo;
 	}
-    public List<JobPost> getLikedJobsForEmployee(Integer empID) {
+    public List<JobPost1> getLikedJobsForEmployee(Integer empID) {
         List<LikedJobs> empLikedJobs = likedJobRepo.findByEmpID(empID);
-        List<JobPost> likedJobs = new ArrayList<>();
+        List<JobPost1> likedJobs = new ArrayList<>();
         for (LikedJobs empLikedJob : empLikedJobs) {
-            JobPost jobPost = jobpostRepo.findByjobpostingid(empLikedJob.getJobID());
+            JobPost1 jobPost = jobpostRepo.findByjobpostingid(empLikedJob.getJobID());
             if (jobPost != null) {
                 likedJobs.add(jobPost);
             }

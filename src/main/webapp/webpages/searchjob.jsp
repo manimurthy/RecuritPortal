@@ -1,3 +1,4 @@
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,10 +35,13 @@
 
 				<!-- Main Navigation -->
 				<nav id="navigation">
-					<ul id="responsive">						
+					<ul id="responsive">
 						<li><a href="searchjob" class="current">Search Jobs</a></li>
+						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
+						<li><a href="empappliedjob?empid=0" class="current">Applied jobs</a></li>											
+						<!-- <li><a href="searchjob" class="current">Search Jobs</a></li>
 						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="jobfirmdashboard" class="current">PostedJob</a></li>		
+						<li><a href="jobfirmdashboard" class="current">PostedJob</a></li> -->		
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
@@ -47,6 +51,10 @@
 			<div class="right-side">					
 
 				<div class="header-widget">
+					<!-- <span>${firmdtl.firmname}</span> 
+					<input type="hidden" id="firmname" name="firmname" value="${firmdtl.firmid}" />-->
+					<span>${empName}</span> 
+					<input type="hidden" id="firmname" name="firmname" value="${empId}" />
 					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
@@ -88,11 +96,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-
-		
-
 	</div>
 </div>
 
@@ -110,35 +113,39 @@
 					<div class="dashboard-box margin-top-0 jb-head">
 
 						<div class="row">
+						<form action="/searchjobbyval" method ="post">
 							<div class="col-md-12 p-5 pb-0 pt-4">
 																
 									<div class="row">
 										<div class="col-xl-4">
 											<div class="submit-field mb-3">
 												<h5>Job ID</h5>
-												<input type="text" class="with-border">
+												<input type="text" id ="jobId" name ="jobId"  class="with-border">
 											</div>
 										</div>
 			
 										<div class="col-xl-4">
 											<div class="submit-field mb-3">
 												<h5>Job Status</h5>
-												<input type="text" class="with-border">
+												<input type="text" id = "jobDesc"  name = "jobDesc" class="with-border">
 											</div>
 										</div>
 										
 										<div class="col-xl-3">
-											<a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Search Jobs</a>
+											<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Search Jobs</a> -->
+											<button type="submit" class="button ripple-effect big margin-top-30">Search</button>
 										</div>
 									</div>
 								
 							</div>
+						</form>
 						</div>
 						
 
 						<div class="content">
 							
 							<ul class="dashboard-box-list">
+								<c:forEach items="${jobPost}" var="jp">
 								<li>
 									<!-- Job Listing -->
 									<div class="job-listing">
@@ -153,79 +160,18 @@
 
 											<!-- Details -->
 											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Barista and Cashier</a></h3>
-
-												
+												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
 											</div>
 										</div>
 									</div>
 									<!-- Buttons -->
 									<div class="buttons-to-right single-right-button">
 										<a href="javascript:void(0);" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										<a href="apply-job.html" class="list-apply-button ripple-effect">Apply Now</a>
+										<a href="applyjobid?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Apply Now</a>
 									</div>
+
 								</li>
-
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-02.png" alt="">
-											</a>
-
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Administrative Assistant</a></h3>
-
-												<!-- Job Listing Footer -->
-												
-											</div>
-
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										<a href="javascript:void(0);" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										<a href="apply-job.html" class="list-apply-button ripple-effect">Apply Now</a>
-									</div>
-								</li>
-
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-03.png" alt="">
-											</a>
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Construction Labourers</a></h3>
-
-												<!-- Job Listing Footer -->
-												
-											</div>
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										<a href="javascript:void(0);" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										<a href="apply-job.html" class="list-apply-button ripple-effect">Apply Now</a>
-									</div>
-								</li>
-
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -254,11 +200,6 @@
 
 				<!-- Category Boxes Container -->
 				<div class="categories-container d-flex align-items-center justify-content-center">
-
-					
-
-					
-					
 					<!-- Category Box -->
 					<a href="jobs-list-layout-1.html" class="category-box">
 						<div class="category-box-icon">

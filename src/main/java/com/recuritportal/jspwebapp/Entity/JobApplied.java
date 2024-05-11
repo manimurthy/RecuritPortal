@@ -1,5 +1,6 @@
 package com.recuritportal.jspwebapp.Entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,23 +14,31 @@ public class JobApplied {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobapplyid;
-    @ManyToOne
-    @JoinColumn(name = "job_post_id")
+	
+    @ManyToOne (optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "jobpostingid", referencedColumnName="jobpostingid")
     private JobPost1 jobPost;
-    @ManyToOne
-    @JoinColumn(name = "empid")
+    
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "empid" , referencedColumnName="empid" )
     private Employee employee;
-	@Column
+	
+    @Column
 	private String applieddate;
-	@Column
+	
+    @Column
 	private int noofyearsofexp;
-	@Column
+	
+    @Column
 	private String eduqualify;
-	@Column
+	
+    @Column
 	private int	expinskills;
-	@Column
+	
+    @Column
 	private String miscinfo;
-	@Column
+	
+    @Column
 	private String status;    
 	
 	public int getJobapplyid() {
