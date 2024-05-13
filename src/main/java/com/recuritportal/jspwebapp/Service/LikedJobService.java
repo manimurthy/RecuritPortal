@@ -33,4 +33,9 @@ public class LikedJobService {
         }
         return likedJobs;
     }
+    
+    public boolean insertLikedJobs(LikedJobs likeJob) {
+    	likedJobRepo.save(likeJob);
+        return true;
+    }
 }

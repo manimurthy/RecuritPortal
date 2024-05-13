@@ -1,4 +1,2 @@
---insert into Employee values (1,'asd','rewtw','asdf','mm@y.com','Fname', 'LName','test123','43343');
+insert into EMPLOYEE (empemail,   firstname ,  lastname ,  address1 , address2 , pincode , contact , password ) values ('yy@y.com','Fname LName','LastName', 'Address1','Address second line','421012','91-22-36465000','asdf');
 insert into Firm   (firmemail , firmname,    address1,    address2 ,    contactnumber,    contactperson ,    password ) values ('yy@y.com','Tech Pro Solutions','Plot 5, Sector24','Navi Mumbai','91-22-54675532','HR Team Person','asdf');
-insert into Firm   (firmemail , firmname,    address1,    address2 ,    contactnumber,    contactperson ,    password ) values ('zz@z.com','VR Solutions','Nirmal Building, Nariman Point','Mumbai','91-22-22167892','Resource Team','asdf');
-insert into Firm   (firmemail , firmname,    address1,    address2 ,    contactnumber,    contactperson ,    password ) values ('aa@z.com','New Reources','Plot61 Area 51 ,Vadodra','Mumbai','91-22-9874325','Resource Team','asdf');

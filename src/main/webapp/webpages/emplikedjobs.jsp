@@ -39,7 +39,8 @@
 					<ul id="responsive">						
 						<li><a href="searchjob" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
-						<li><a href="applyjobs" class="current">Apply jobs</a></li>
+						<!-- <li><a href="applyjobs" class="current">Apply jobs</a></li> -->
+						<li><a href="empappliedjob" class="current">Applied jobs</a></li>						
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
@@ -143,65 +144,6 @@
 									</div>
 								</li>
 							</c:forEach>
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-02.png" alt="">
-											</a>
-
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Administrative Assistant</a></h3>
-
-												<!-- Job Listing Footer -->
-												
-											</div>
-
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										
-									</div>
-								</li>
-
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-03.png" alt="">
-											</a>
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Construction Labourers</a></h3>
-
-												<!-- Job Listing Footer -->
-												
-											</div>
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										
-									</div>
-								</li>
 							</ul>
 						</div>
 					</div>

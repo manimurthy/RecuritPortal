@@ -39,7 +39,7 @@
 					<ul id="responsive">						
 						<li><a href="searchjob" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
-						<li><a href="applyjobs" class="current">Apply jobs</a></li>
+						<li><a href="empappliedjob" class="current">Applied jobs</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				

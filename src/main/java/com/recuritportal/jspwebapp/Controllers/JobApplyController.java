@@ -107,16 +107,26 @@ public class JobApplyController {
         return "redirect:/applyjob";
     }
     
+	/*
+	 * @GetMapping("/empappliedjob") public String getJobDetails(@RequestParam
+	 * Integer empid, Model model, HttpSession session) { if (empid ==0) { empid =
+	 * (Integer) session.getAttribute("empId");
+	 * 
+	 * if (empid == null) { model.addAttribute("error",
+	 * "You are not logged in. Please log in to access this page."); return
+	 * "redirect:/login"; } } List<JobApplied> jobApplications =
+	 * applyjobService.getJobApplicationsByEmployeeId(empid);
+	 * model.addAttribute("jobApplications", jobApplications); return
+	 * "empappliedjobs"; // Return the name of your JSP file }
+	 */
     @GetMapping("/empappliedjob")
-    public String getJobDetails(@RequestParam Integer empid, Model model, HttpSession session) {
-    	if (empid ==0) {
-    		empid = (Integer) session.getAttribute("empId");
+    public String getJobDetails(Model model, HttpSession session) {
+    	Integer empid = (Integer) session.getAttribute("empId");
 
             if (empid == null) {
             	model.addAttribute("error", "You are not logged in. Please log in to access this page.");
                 return "redirect:/login"; 
             }    		
-    	}
         List<JobApplied> jobApplications = applyjobService.getJobApplicationsByEmployeeId(empid);
         model.addAttribute("jobApplications", jobApplications);
         return "empappliedjobs"; // Return the name of your JSP file

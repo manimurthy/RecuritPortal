@@ -19,7 +19,7 @@ public class EmployeeService {
         return  employee != null;
     }       
     public boolean insertEmployeeDetails(Employee emp) {
-        //Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
+      
     	employeeRepository.save(emp);
         return true;
     }    
