@@ -11,5 +11,6 @@ public interface JobPostRepo extends CrudRepository<JobPost1, Integer>{
 	JobPost1  findByjobpostingid( Integer jobPostingId);
 	List<JobPost1>  findByjobtitle( String jobTitle);
 	List<JobPost1> findByjobdesc(String jobDesc);
+	List<JobPost1> findByfirmunqid(String firmunqid);
 	//JobPost  findByjobtitleanddesc(String jobDesc);
 }

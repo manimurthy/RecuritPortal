@@ -102,7 +102,26 @@ public class JobPostController {
 	        //return "jobDetailsView";
 	        return "redirect:/searchjob";
 	}		
-    
+
+	@GetMapping("/searchalljobsfirm")
+    //@GetMapping("/firmhome")
+    public String firmsearchJob(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		//get the firmid stored in the session  
+		Integer firmId = (Integer) session.getAttribute("firmid");
+        // If firm ID is null, redirect to login page with error message
+        if (firmId == null) {
+            redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
+            return "redirect:/login"; 
+        }		
+        List<JobPost1> jobPost =  jobpostService.findByfirm(firmId.toString());
+        //redirectAttributes.addFlashAttribute("firmJobPosted", jobPost); 
+        
+        model.addAttribute("firmJobPosted", jobPost);
+        // Add necessary attributes to the model and return the view name
+        //return "redirect:/firmsearchjob";
+       return "firmsearchjob";
+    }
+	
 	@GetMapping("/postjob")
     public String firmPostJob(Model model ,HttpSession session, RedirectAttributes redirectAttributes) {
 		//get the firmid stored in the session  

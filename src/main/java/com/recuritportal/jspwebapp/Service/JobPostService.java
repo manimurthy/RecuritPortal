@@ -39,6 +39,10 @@ public class JobPostService {
     	JobPost jobPostSrch = jobRepo.findByjobtitleanddesc(jobDesc);
     	return jobPostSrch!= null;
     }*/
+    public List<JobPost1>  findByfirm(String firmid) {
+    	List<JobPost1> jobPostSrch = jobRepo.findByfirmunqid(firmid);
+    	return jobPostSrch ;    			
+    }
     public boolean savefaq(JobPost1 jobPost1) {
         //Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
     	jobfaqRepo.save(jobPost1);

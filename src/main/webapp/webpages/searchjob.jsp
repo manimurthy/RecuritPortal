@@ -119,14 +119,14 @@
 									<div class="row">
 										<div class="col-xl-4">
 											<div class="submit-field mb-3">
-												<h5>Job ID</h5>
+												<h5>Job Title</h5>
 												<input type="text" id ="jobId" name ="jobId"  class="with-border">
 											</div>
 										</div>
 			
 										<div class="col-xl-4">
 											<div class="submit-field mb-3">
-												<h5>Job Status</h5>
+												<h5>Job Description</h5>
 												<input type="text" id = "jobDesc"  name = "jobDesc" class="with-border">
 											</div>
 										</div>

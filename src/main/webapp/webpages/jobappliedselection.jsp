@@ -104,59 +104,29 @@
 				
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
-					<h3>Posted Jobs</h3>					
+					<h3>Job Application Selection</h3>					
 				</div>
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0 jb-head">
 
-						<!-- div class="row">
-						<form action="/searchjobbyval" method ="post">
-							<div class="col-md-12 p-5 pb-0 pt-4">
-																
-									<div class="row">
-										<div class="col-xl-4">
-											<div class="submit-field mb-3">
-												<h5>Job ID</h5>
-												<input type="text" id ="jobId" name ="jobId"  class="with-border">
-											</div>
-										</div>
-			
-										<div class="col-xl-4">
-											<div class="submit-field mb-3">
-												<h5>Job Status</h5>
-												<input type="text" id = "jobDesc"  name = "jobDesc" class="with-border">
-											</div>
-										</div>
-										
-										<div class="col-xl-3">
-											<button type="submit" class="button ripple-effect big margin-top-30">Search</button>
-										</div>
-									</div>
-								
-							</div>
-						</form>
-						</div>-->
-						
-
 						<div class="content">
-							<span>${firmJobPosted}</span>
-							<ul class="dashboard-box-list">
+							<!-- <ul class="dashboard-box-list">
 								<c:forEach items="${firmJobPosted}" var="jp">
 								<li>
-									<!-- Job Listing -->
+									
 									<div class="job-listing">
 
-										<!-- Job Listing Details -->
+										
 										<div class="job-listing-details">
-											<!-- Details -->
+											
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><c:out value= "${jp.jobtitle}" /></h3>
 											</div>
-											<!-- Details -->
+											
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
 											</div>
-											<!-- Details -->
+											
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><c:out value= "${jp.applybydate}" /></h3>
 											</div>
@@ -169,13 +139,46 @@
 
 								</li>
 								</c:forEach>
-							</ul>
+							</ul> -->
+						     <table border="1">
+						        <thead>
+						            <tr>
+						                <th>Employee Name</th>
+						                <th>Applied Date</th>
+						                <th>Years of Experience</th>
+						                <th>Skills</th>
+						                <th>Educational Qualification</th>
+						                <th>Miscellaneous Info</th>
+						                <th>Status</th>
+						                <th>Action</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						            <c:forEach items="${jobApplications}" var="jobApplication">
+						                <tr>
+						                    <td>${jobApplication.employee.firstname} ${jobApplication.employee.lastname}</td>
+						                    <td>${jobApplication.applieddate}</td>
+						                    <td>${jobApplication.noofyearsofexp}</td>
+						                    <td>${jobApplication.expinskills}</td>
+						                    <td>${jobApplication.eduqualify}</td>
+						                    <td>${jobApplication.miscinfo}</td>
+						                    <td>
+						                        <form action="/updateStatus" method="post">
+						                            <input type="hidden" name="jobapplyid" value="${jobApplication.jobapplyid}">
+						                            <select name="status">
+						                                <option value="Accept" ${jobApplication.status eq 'Accept' ? 'selected' : ''}>Accept</option>
+						                                <option value="Reject" ${jobApplication.status eq 'Reject' ? 'selected' : ''}>Reject</option>
+						                            </select>
+						                            <input type="submit" value="Update">
+						                        </form>
+						                    </td>
+						                </tr>
+						            </c:forEach>
+						        </tbody>
+						    </table>							
 						</div>
 					</div>
 				</div>
-				
-				
-
 			</div>
 		</div>
 	</div>

@@ -70,7 +70,7 @@ public class LoginController {
 	        	   redirectAttributes.addFlashAttribute("firmdtl", firm);
 		           session.setAttribute("firmid",firm.getFirmid());
 		           session.setAttribute("usertype","Firm");	        	   
-	        	   return "redirect:firmhome";
+	        	   return "redirect:/firmhome";
 	           } else {
 	        	   redirectAttributes.addFlashAttribute("error", "Invalid Firm credentials!! Please try again");
 	               return "redirect:/";
