@@ -38,7 +38,7 @@
 					<!-- Main Navigation -->
 					<nav id="navigation">
 						<ul id="responsive">						
-						<li><a href="searchjob" class="current">Search Jobs</a></li>
+						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
 						<li><a href="empappliedjob?empid=0" class="current">Applied jobs</a></li>
 						</ul>
@@ -152,6 +152,7 @@
 									<!--  <input type="text" id = "eduqualify" name ="eduqualify" class="with-border" />-->
 									<select id="eduqualify" name="eduqualify" class="with-border">
 									    <option value="Select">Select</option>
+									    <option value="Under Graduate">High School</option>
 									    <option value="Under Graduate">Under Graduate</option>
 									    <option value="Graduate">Graduate</option>
 									    <option value="Post Graduate">Post Graduate</option>

@@ -37,7 +37,7 @@
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">						
-						<li><a href="searchjob" class="current">Search Jobs</a></li>
+						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
 						<!-- <li><a href="applyjobs" class="current">Apply jobs</a></li> -->
 						<li><a href="empappliedjob" class="current">Applied jobs</a></li>						
@@ -139,8 +139,7 @@
 									</div>
 									<!-- Buttons -->
 									<div class="buttons-to-right single-right-button">
-										<a href="#" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										
+										<a href="applyjobid?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Apply Now</a>										
 									</div>
 								</li>
 							</c:forEach>

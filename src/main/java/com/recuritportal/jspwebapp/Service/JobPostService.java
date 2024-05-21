@@ -28,7 +28,8 @@ public class JobPostService {
     }    
     
     public List<JobPost1>  findByjobdesc(String jobDesc) {
-    	List<JobPost1> jobPostSrch = jobRepo.findByjobdesc(jobDesc);
+    	//List<JobPost1> jobPostSrch = jobRepo.findByjobdesc(jobDesc);
+    	List<JobPost1> jobPostSrch = jobRepo.findByJobDescriptionContaining(jobDesc);
     	return jobPostSrch ;    			
     }
     public List<JobPost1>  findByjobtitle(String jobTitle) {
@@ -43,6 +44,11 @@ public class JobPostService {
     	List<JobPost1> jobPostSrch = jobRepo.findByfirmunqid(firmid);
     	return jobPostSrch ;    			
     }
+    public List<JobPost1>  findByAllPostedJob() {
+    	List<JobPost1> jobPostSrch = jobRepo.findByAllJobs();
+    	return jobPostSrch ;    			
+    }    
+    
     public boolean savefaq(JobPost1 jobPost1) {
         //Employee employee = employeeRepository.findByEmpemailAndPassword(empemail, password);
     	jobfaqRepo.save(jobPost1);

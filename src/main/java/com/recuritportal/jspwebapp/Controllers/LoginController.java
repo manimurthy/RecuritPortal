@@ -55,7 +55,8 @@ public class LoginController {
 	           session.setAttribute("empId",emp.getEmpid());
 	           session.setAttribute("empname",emp.getFirstname());
 	           session.setAttribute("usertype","Employee");
-	     	   return "redirect:emphome";
+	     	  // return "redirect:/searchjob?fromsrch=false";
+	           return "redirect:/searchjob";
 	        } else {
 	            // Invalid credentials, show error message
 	        	redirectAttributes.addFlashAttribute("error", "Invalid credentials!! Please try again");
@@ -92,7 +93,7 @@ public class LoginController {
     @GetMapping("/firmhome")
     public String firmHome(Model model) {
         // Add necessary attributes to the model and return the view name
-        return "searchjob"; // This should be the name of the .html or .jsp file, if using templates
+        return "firmsearchjob"; // This should be the name of the .html or .jsp file, if using templates
     }
     
     @GetMapping("/emphome")

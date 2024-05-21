@@ -36,7 +36,7 @@
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-						<li><a href="searchjob" class="current">Search Jobs</a></li>
+						<li><a href="firmsearchjob" class="current">Firm Search Jobs</a></li>
 						<li><a href="postjob" class="current">Post Jobs</a></li>
 						<li><a href="jobfirmdashboard" class="current">PostedJob</a></li>		
 					</ul>

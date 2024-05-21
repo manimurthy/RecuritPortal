@@ -39,9 +39,16 @@ public class ApplyJobService {
         return true;
     }
 	
-    public List<JobApplied> getJobApplicationsByEmployeeId(Integer empid) {
+    // Get the list of jobdetails  the employee has already applied to
+	public List<JobApplied> getJobApplicationsByEmployeeId(Integer empid) {
         List<JobApplied> apJobs= applyjobRepo.findByEmployee_Empid(empid);
         return apJobs;
+    }
+
+    // Get the list of job posting IDs the employee has already applied to
+	public List<Integer> findJobIdsByEmployeeId(Integer empid) {
+        List<Integer> listJobs= applyjobRepo.findJobIdsByEmployeeId(empid);
+        return listJobs;
     }
 
  /*   public List<JobApplied> getJobApplicationsByPostingd(Integer jobpostingid) {

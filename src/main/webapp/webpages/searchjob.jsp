@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/css/blue.css">
 
 </head>
-<body>
+<body onload="showAlert('${info}')">
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -36,7 +36,7 @@
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-						<li><a href="searchjob" class="current">Search Jobs</a></li>
+						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
 						<li><a href="empappliedjob" class="current">Applied jobs</a></li>											
 						<!-- <li><a href="searchjob" class="current">Search Jobs</a></li>
@@ -161,12 +161,24 @@
 											<!-- Details -->
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
+						                        <!-- FAQs Section -->
+						                        <div class="faqs-section">
+						                            <h4>FAQs:</h4>
+						                            <ul>
+						                                <c:forEach items="${jp.faqs}" var="faq">
+						                                    <li>
+						                                        <strong>Q:</strong> <c:out value="${faq.question}" /><br>
+						                                        <strong>A:</strong> <c:out value="${faq.answer}" />
+						                                    </li>
+						                                </c:forEach>
+						                            </ul>
+						                        </div>												
 											</div>
 										</div>
 									</div>
 									<!-- Buttons -->
 									<div class="buttons-to-right single-right-button">
-										<a href="savelikejob?jobPostId=${jp.jobpostingid}" class="button red ripple-effect ico"><i class="icon-feather-heart">Like</i></a>
+										<a href="savelikejob?jobPostId=${jp.jobpostingid}" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
 										<a href="applyjobid?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Apply Now</a>
 									</div>
 
@@ -295,7 +307,17 @@
 			 }, 800);
 		  }
 	   });
+
 	});
+	
+    /*<![CDATA[*/
+    // JavaScript function to show success message in an alert box
+    function showAlert(message) {
+    	 if (message.trim() !== '') {
+             alert(message);
+         }
+    }
+    /*]]>*/	
  </script>
 </body>
 </html>

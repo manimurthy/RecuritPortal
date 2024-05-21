@@ -37,7 +37,7 @@
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">						
-						<li><a href="searchjob" class="current">Search Jobs</a></li>
+						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
 						<li><a href="empappliedjob" class="current">Applied jobs</a></li>
 					</ul>
