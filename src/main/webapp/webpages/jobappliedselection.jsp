@@ -36,9 +36,10 @@
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
 						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="jobfirmdashboard" class="current">PostedJob</a></li>		
+						<li><a href="firmsearchjob" class="current">Posted Job</a></li>
+						<li><a href="firmappliedjob" class="current">Job Applicants</a></li>
+						<li><a href="firmclculate" class="current">Calculate Weightage</a></li>	
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				

@@ -11,6 +11,14 @@
 <link rel="stylesheet" href="assets/css/style-home.css">
 <link rel="stylesheet" href="assets/css/blue.css">
 
+<style>
+  #accordionContainer{
+		display: none;
+        padding: 10px 0;
+        margin-top: 10px;
+  }  
+	
+</style>
 </head>
 <body onload="showAlert('${info}')">
 
@@ -163,15 +171,19 @@
 												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
 						                        <!-- FAQs Section -->
 						                        <div class="faqs-section">
-						                            <h4>FAQs:</h4>
-						                            <ul>
+						                            <h4 style="color: blue;" onclick="toggleContent()">FAQs:</h4>
+						                            <div id="accordionContainer">
 						                                <c:forEach items="${jp.faqs}" var="faq">
-						                                    <li>
-						                                        <strong>Q:</strong> <c:out value="${faq.question}" /><br>
-						                                        <strong>A:</strong> <c:out value="${faq.answer}" />
-						                                    </li>
+						                                    <div class="accordion_gride">
+																<strong>Q:</strong> <c:out value="${faq.question}"/>
+															</div>
+						                                        
+															<div class="panel">
+																<p><strong>A:</strong> <c:out value="${faq.answer}"/></p>
+															</div>
+						                                    
 						                                </c:forEach>
-						                            </ul>
+						                            </div>
 						                        </div>												
 											</div>
 										</div>
@@ -318,6 +330,16 @@
          }
     }
     /*]]>*/	
+	// Get all accordion buttons
+	var contentDiv = document.getElementById('accordionContainer');
+
+    function toggleContent() {
+        if (contentDiv.style.display === 'none') {
+            contentDiv.style.display = 'block';
+        } else {
+            contentDiv.style.display = 'none';
+        }
+    }  
  </script>
 </body>
 </html>

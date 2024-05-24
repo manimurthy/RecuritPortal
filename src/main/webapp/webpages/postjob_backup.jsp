@@ -39,7 +39,7 @@
 					<nav id="navigation">
 						<ul id="responsive">						
 						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
+						<li><a href="firmsearchjob" class="current">Posted Job</a></li>
 						<li><a href="firmappliedjob" class="current">Job Applicants</a></li>
 						<li><a href="firmclculate" class="current">Calculate Weightage</a></li>
 						</ul>
@@ -105,7 +105,7 @@
 				<div class="section-headline margin-top-0 margin-bottom-35">
 					<h3>Post Jobs</h3>					
 					<span id ="infomsg">${info}</span>
-					<span id ="errmsg">${error}</span>
+					<span id ="errmsg">${info}</span>
 				</div>
 			</div>
 		</div>
@@ -220,7 +220,22 @@
 						<h3>FA'Q Listing</h3>					
 					</div>
 				</div>
-			</div>		
+			</div>
+		    <label for="question">FAQ Question:</label>
+		    <input type="text" id="question" name="faqs[0].question"><br>
+		
+		    <label for="answer">FAQ Answer:</label>
+		    <input type="text" id="answer" name="faqs[0].answer"><br>
+		    <label for="question">FAQ Question:</label>
+		    <input type="text" id="question" name="faqs[1].question"><br>
+		
+		    <label for="answer">FAQ Answer:</label>
+		    <input type="text" id="answer" name="faqs[1].answer"><br>
+		    <label for="question">FAQ Question:</label>
+		    <input type="text" id="question" name="faqs[2].question"><br>
+		
+		    <label for="answer">FAQ Answer:</label>
+		    <input type="text" id="answer" name="faqs[2].answer"><br>			
 			<div class="row">
 				<table class="table table-hover table-responsive table-bordered" id="dataTable" style="background: #fff;">
 					<thead>
@@ -228,11 +243,26 @@
 							<th width="5%">ID</th>
 							<th width="31%">Question</th>
 							<th width="31%">Answer</th>
+							<th width="8%" class="text-center">Edit</th>
 							<th width="8%" class="text-center">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
-						You should see the data here
+						<!--  <tr>
+							<td>1</td>
+							<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+							<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>							
+							<td class="text-center">
+								<button type="button" data-bs-toggle="modal" data-bs-target="#edit" data-uid="1" class="update btn btn-warning btn-sm">
+									<span class="icon-line-awesome-edit"></span>
+								</button>
+							</td>
+							<td class="text-center">
+								<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm" onclick="deleteRow(this)">
+									<span class="icon-material-outline-delete"></span>
+								</button>
+							</td>
+						</tr>-->
 					</tbody>
 				</table>
 			</div>
@@ -261,7 +291,9 @@
 						<textarea cols="15" rows="5" class="with-border"></textarea>
 					</div>
 				</div>
-
+				
+									
+				
 			</div>
 
 		</div>
@@ -337,7 +369,13 @@
 								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 							</div>
 						</a>
+
+						
+
+						
+
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -486,55 +524,56 @@
 	    }
 	});
     function addData() {
-
+    	document.getElementById("question").value="HELLO";
         // Get the input field values
         var question = document.getElementById("question").value;
         var answer = document.getElementById("answer").value;
-
+        debugger;
         // Get the table body where the new row will be added
         var tableBody = document.querySelector("#dataTable tbody");
 
         // Create a new row
         var newRow = document.createElement("tr");
+        alert ('Called Add function');
+        alert ( document.getElementById("question").value);
         
         // Count the number of existing rows
         var rowCount = tableBody.rows.length;
 
         // Generate the ID for the new row
         var newRowId = rowCount + 1;
-
+        alert (newRowId);
         // Create cells for the new row
         var idCell = document.createElement("td");
         var questionCell = document.createElement("td");
         var answerCell = document.createElement("td");
+        var editCell = document.createElement("td");
         var deleteCell = document.createElement("td");
 
         // Set the text content of the cells
         idCell.textContent = newRowId //"New ID"; // You can generate the ID dynamically if needed
-        //questionCell.id="faqs["+ rowCount  +"].question";
-        //questionCell.setAttribute('name', "faqs["+ rowCount + "].question");
-		//questionCell.textContent = question;
-        questionCell.innerHTML = '<input type="text" name="faqs['+ rowCount +'].question" value="'+question+'" readonly>';
-        
-        //answerCell.id="faqs["+ rowCount +"].answer";
-        //answerCell.setAttribute('name',"faqs["+ rowCount +"].answer");
-
-        answerCell.innerHTML = '<input type="text" name="faqs['+rowCount+ '].answer" value="' +answer+'" readonly>';
-        //answerCell.textContent = answer;
+        questionCell.textContent = question;
+        answerCell.textContent = answer;
+        editCell.innerHTML = '<button type="button" data-bs-toggle="modal" data-bs-target="#edit" data-uid="1" class="update btn btn-warning btn-sm" onclick="populateModal(this.parentElement.parentElement)"><span class="icon-line-awesome-edit"></span></button>';
         deleteCell.innerHTML = '<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><span class="icon-material-outline-delete" onclick="deleteRow(this)"></span></button>';
 
         // Append cells to the new row
         newRow.appendChild(idCell);
         newRow.appendChild(questionCell);
         newRow.appendChild(answerCell);
+        newRow.appendChild(editCell);
         newRow.appendChild(deleteCell);
 
         // Append the new row to the table body
         tableBody.appendChild(newRow);
 
+       /* // Set the id attributes for question and answer input fields
+        questionCell.innerHTML = '<input type="text" id="faqs[' + newRowId + '].question" value="' + question + '" readonly>';
+        answerCell.innerHTML = '<input type="text" id="faqs[' + newRowId + '].answer" value="' + answer + '"readonly>';*/
+
     }
     // Function to populate modal form fields with row data
-/*    function populateModal(row) {
+    function populateModal(row) {
     	
         // Extract data from the clicked row
         var cells = row.getElementsByTagName("td");
@@ -545,7 +584,7 @@
         document.getElementById("question").value = question;
         document.getElementById("answer").value = answer;
     }	
-*/
+
     function deleteRow(button) {
         // Get the parent row of the delete button
         var row = button.closest("tr");
@@ -564,31 +603,8 @@
             
             // Close the modal
             deleteModal.hide();
-            
-            // Re-index the remaining rows
-            reindexTable();
         });
     }
-	function reindexTable() {
-	    var tableBody = document.querySelector("#dataTable tbody");
-	    var rows = tableBody.querySelectorAll("tr");
-	
-	    rows.forEach((row, index) => {
-	        // Update the row number
-	        row.cells[0].textContent = index + 1;
-	
-	        // Update the hidden input names
-	        var questionInput = row.querySelector('input[name^="faqs["][name$="].question"]');
-	        var answerInput = row.querySelector('input[name^="faqs["][name$="].answer"]');
-	        
-	        if (questionInput) {
-	            questionInput.name = "faqs[" +index+ "].question";
-	        }
-	        if (answerInput) {
-	            answerInput.name = "faqs[" +index+ "].answer";
-	        }
-	    });
-	}    
     
  </script>
 </body>

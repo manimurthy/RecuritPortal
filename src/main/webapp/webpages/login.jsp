@@ -201,8 +201,8 @@
                                 <!-- <div class="signup-form register-text">
                                 You'll receive a confirmation email in your inbox with a link to activate your account. If you have any problems, <a href="#">contact us!</a> 
                             </div> -->
-                                <span class="error-message" style="color: red">${error}></span> <!-- Display error message if login fails -->
-                                 <span class="error-message" style="color: blue">${info}></span> <!-- Display error message if login fails -->
+                                <span class="error-message" style="color: red">${error}</span> <!-- Display error message if login fails -->
+                                 <span class="error-message" style="color: blue">${info}</span> <!-- Display error message if login fails -->
                             </div>
                         </div>
                     </div>

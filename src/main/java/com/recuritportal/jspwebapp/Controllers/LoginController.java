@@ -93,7 +93,7 @@ public class LoginController {
     @GetMapping("/firmhome")
     public String firmHome(Model model) {
         // Add necessary attributes to the model and return the view name
-        return "firmsearchjob"; // This should be the name of the .html or .jsp file, if using templates
+        return "redirect:/searchalljobsfirm"; // This should be the name of the .html or .jsp file, if using templates
     }
     
     @GetMapping("/emphome")
