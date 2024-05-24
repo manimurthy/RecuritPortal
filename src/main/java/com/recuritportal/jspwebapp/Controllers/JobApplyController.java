@@ -77,20 +77,9 @@ public class JobApplyController {
         JobPost1 jobPost = entityManager.find(JobPost1.class, jobPostId);
      // Fetch Employee entity from the database
         Employee employee = entityManager.find(Employee.class, empId);
-        
-        //jobPost.setJobpostingid(jobPostId);
-        //emp.setEmpid(empId);
-        
-     // Merge the detached JobPost1 entity
-        //JobPost1 mergedJobPost = entityManager.merge(jobPost);
-
-        // Merge the detached JobPost1 entity
-      //  Employee mergedEmployee = entityManager.merge(emp);
-
         // Set the merged JobPost1 entity to the JobApplied entity
         jobApplied.setJobPost(jobPost);
         jobApplied.setEmployee(employee);
-
 
         // Set other properties of the jobApplied object
         jobApplied.setApplieddate(appliedDate);
@@ -106,19 +95,6 @@ public class JobApplyController {
         // Redirect to the applyjob page
         return "redirect:/applyjob";
     }
-    
-	/*
-	 * @GetMapping("/empappliedjob") public String getJobDetails(@RequestParam
-	 * Integer empid, Model model, HttpSession session) { if (empid ==0) { empid =
-	 * (Integer) session.getAttribute("empId");
-	 * 
-	 * if (empid == null) { model.addAttribute("error",
-	 * "You are not logged in. Please log in to access this page."); return
-	 * "redirect:/login"; } } List<JobApplied> jobApplications =
-	 * applyjobService.getJobApplicationsByEmployeeId(empid);
-	 * model.addAttribute("jobApplications", jobApplications); return
-	 * "empappliedjobs"; // Return the name of your JSP file }
-	 */
     
     @GetMapping("/empappliedjob")
     public String getJobDetails(Model model, HttpSession session) {
@@ -160,4 +136,29 @@ public class JobApplyController {
     	redirectAttributes.addFlashAttribute("info", "Record updated successfully");
         return "redirect:/firmappliedjob"; // Redirect to the job applications page after updating status
     }    
+    
+    @GetMapping("/clacweightscore")
+    public String getclacweightscore(@RequestParam Integer jobpostingid, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
+    	Integer firmid = (Integer) session.getAttribute("firmid");
+
+            if (firmid == null) {
+            	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
+                return "redirect:/login"; 
+            }    		
+        JobPost1 jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
+        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostingid);
+        
+        // Iterate over the job applications and call calcWeightandUpdate for each
+        for (JobApplied jobApplied : jobApplications) {
+            applyjobService.calcWeightandUpdate(jobpost, jobApplied);
+        }
+        
+       // model.addAttribute("info","Weigatge Calculation for applied jobs completed");
+       // return "redirect:/firmsearchjob"; // Return the name of your JSP file
+        //model.addAttribute("jobApplications", jobApplications);
+        //return "jobappliedselection"; // Return the name of your JSP file
+        redirectAttributes.addFlashAttribute ("info","Weigatge Calculation for applied jobs completed");
+        return "redirect:/searchalljobsfirm"; 
+        
+    }
 }

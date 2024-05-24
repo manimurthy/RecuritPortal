@@ -40,6 +40,9 @@ public class JobApplied {
 	
     @Column
 	private String status;    
+    
+    @Column(nullable = true)
+    private Integer calcTotalWeight;
 	
 	public int getJobapplyid() {
 		return jobapplyid;
@@ -95,6 +98,12 @@ public class JobApplied {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+    public Integer getCalcTotalWeight() {
+        return calcTotalWeight;
+    }
 
+    public void setCalcTotalWeight(Integer calcTotalWeight) {
+        this.calcTotalWeight = calcTotalWeight;
+    }
     
 }

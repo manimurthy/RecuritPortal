@@ -40,7 +40,7 @@ public class JobPostService {
     	JobPost jobPostSrch = jobRepo.findByjobtitleanddesc(jobDesc);
     	return jobPostSrch!= null;
     }*/
-    public List<JobPost1>  findByfirm(String firmid) {
+    public List<JobPost1>  findByfirm(int firmid) {
     	List<JobPost1> jobPostSrch = jobRepo.findByfirmunqid(firmid);
     	return jobPostSrch ;    			
     }

@@ -19,7 +19,7 @@ public class JobPost1 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobpostingid;
 	@Column
-	private String firmunqid;
+	private int firmunqid;
 	@Column
 	private String jobtitle;
 	@Column
@@ -31,13 +31,13 @@ public class JobPost1 {
 	@Column
 	private String applybydate;
 	@Column
-	private String yearsofexp;
+	private int yearsofexp;
 	@Column
-	private String expweightpercent;
+	private int expweightpercent;
 	@Column
-	private String eduweightpercent;
+	private int eduweightpercent;
 	@Column
-	private String expskills;	
+	private int expskills;	
 	
     @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
     private List<JobPostFAQ> faqs;
@@ -50,11 +50,11 @@ public class JobPost1 {
 		this.jobpostingid = jobpostingid;
 	}
 
-	public String getFirmunqid() {
+	public int getFirmunqid() {
 		return firmunqid;
 	}
 
-	public void setFirmunqid(String firmunqid) {
+	public void setFirmunqid(int firmunqid) {
 		this.firmunqid = firmunqid;
 	}
 
@@ -98,35 +98,35 @@ public class JobPost1 {
 		this.applybydate = applybydate;
 	}
 
-	public String getYearsofexp() {
+	public int getYearsofexp() {
 		return yearsofexp;
 	}
 
-	public void setYearsofexp(String yearsofexp) {
+	public void setYearsofexp(int yearsofexp) {
 		this.yearsofexp = yearsofexp;
 	}
 
-	public String getExpweightpercent() {
+	public int getExpweightpercent() {
 		return expweightpercent;
 	}
 
-	public void setExpweightpercent(String expweightpercent) {
+	public void setExpweightpercent(int expweightpercent) {
 		this.expweightpercent = expweightpercent;
 	}
 
-	public String getEduweightpercent() {
+	public int getEduweightpercent() {
 		return eduweightpercent;
 	}
 
-	public void setEduweightpercent(String eduweightpercent) {
+	public void setEduweightpercent(int eduweightpercent) {
 		this.eduweightpercent = eduweightpercent;
 	}
 
-	public String getExpskills() {
+	public int getExpskills() {
 		return expskills;
 	}
 
-	public void setExpskills(String expskills) {
+	public void setExpskills(int expskills) {
 		this.expskills = expskills;
 	}
 

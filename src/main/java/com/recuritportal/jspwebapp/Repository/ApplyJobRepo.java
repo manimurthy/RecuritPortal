@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.recuritportal.jspwebapp.Entity.JobApplied;
 
+import jakarta.transaction.Transactional;
+
 //public interface ApplyJobRepo extends CrudRepository<Applyjob, Integer> {
 public interface ApplyJobRepo extends CrudRepository<JobApplied, Integer> {
 
@@ -20,4 +22,9 @@ public interface ApplyJobRepo extends CrudRepository<JobApplied, Integer> {
     
     @Query("SELECT aj.jobPost.jobpostingid FROM JobApplied aj WHERE aj.employee.empid = :employeeId")
     List<Integer> findJobIdsByEmployeeId(Integer employeeId);
+    
+    @Transactional
+    @Modifying
+    @Query("UPDATE JobApplied j SET j.calcTotalWeight = :totalWeight WHERE j.jobapplyid = :jobapplyid")
+    void updateTotalWeightById(@Param("jobapplyid") int jobapplyid, @Param("totalWeight") int totalWeight);
 }

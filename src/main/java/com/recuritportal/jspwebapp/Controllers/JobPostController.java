@@ -195,7 +195,7 @@ public class JobPostController {
             redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
             return "redirect:/login"; 
         }		
-        List<JobPost1> jobPost =  jobpostService.findByfirm(firmId.toString());
+        List<JobPost1> jobPost =  jobpostService.findByfirm(firmId);
         //redirectAttributes.addFlashAttribute("firmJobPosted", jobPost); 
         
         model.addAttribute("firmJobPosted", jobPost);

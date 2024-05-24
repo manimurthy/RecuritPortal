@@ -19,3 +19,36 @@ CREATE TABLE Employee (
     contact VARCHAR(15),
     password VARCHAR(255) NOT NULL
 );
+CREATE TABLE Job_Post1 (
+    jobpostingid INT AUTO_INCREMENT PRIMARY KEY,
+    firmunqid VARCHAR(255),
+    jobtitle VARCHAR(255),
+    jobdesc VARCHAR(255),
+    dept VARCHAR(255),
+    admin_in_charge VARCHAR(255),
+    applybydate VARCHAR(255),
+    yearsofexp INT,
+    expweightpercent INT,
+    eduweightpercent INT,
+    expskills INT
+);
+CREATE TABLE Job_PostFAQ (
+    faqid INT AUTO_INCREMENT PRIMARY KEY,
+    job_post_id INT,
+    question TEXT,
+    answer TEXT,
+    FOREIGN KEY (job_post_id) REFERENCES Job_Post1(jobpostingid)
+);
+CREATE TABLE Job_Applied (
+    jobapplyid INT AUTO_INCREMENT PRIMARY KEY,
+    jobpostingid INT NOT NULL,
+    empid INT NOT NULL,
+    applieddate VARCHAR(255),
+    noofyearsofexp INT,
+    eduqualify VARCHAR(255),
+    expinskills INT,
+    miscinfo VARCHAR(255),
+    status VARCHAR(255),
+    FOREIGN KEY (jobpostingid) REFERENCES Job_Post1(jobpostingid),
+    FOREIGN KEY (empid) REFERENCES Employee(empid)
+);

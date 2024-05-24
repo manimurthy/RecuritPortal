@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/css/blue.css">
 
 </head>
-<body>
+<body onload="showAlert('${info}')">
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -38,7 +38,7 @@
 					<ul id="responsive">
 						<li><a href="postjob" class="current">Post Jobs</a></li>
 						<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
-						<li><a href="firmappliedjob" class="current">Job Applicants</a></li>
+						<li><a href="firmappliedjob?jobpostingid=0" class="current">Job Applicants</a></li>
 						<li><a href="firmclculate" class="current">Calculate Weightage</a></li>	
 					</ul>
 				</nav>
@@ -109,36 +109,6 @@
 				</div>
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0 jb-head">
-
-						<!-- div class="row">
-						<form action="/searchjobbyval" method ="post">
-							<div class="col-md-12 p-5 pb-0 pt-4">
-																
-									<div class="row">
-										<div class="col-xl-4">
-											<div class="submit-field mb-3">
-												<h5>Job ID</h5>
-												<input type="text" id ="jobId" name ="jobId"  class="with-border">
-											</div>
-										</div>
-			
-										<div class="col-xl-4">
-											<div class="submit-field mb-3">
-												<h5>Job Status</h5>
-												<input type="text" id = "jobDesc"  name = "jobDesc" class="with-border">
-											</div>
-										</div>
-										
-										<div class="col-xl-3">
-											<button type="submit" class="button ripple-effect big margin-top-30">Search</button>
-										</div>
-									</div>
-								
-							</div>
-						</form>
-						</div>-->
-						
-
 						<div class="content">
 							<ul class="dashboard-box-list">
 								<c:forEach items="${firmJobPosted}" var="jp">
@@ -164,6 +134,7 @@
 									</div>
 									
 									<div class="buttons-to-right single-right-button">
+										<a href="clacweightscore?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Calculate Weightage</a>
 										<a href="firmappliedjob?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">View Applications</a>
 									</div>
 
@@ -293,6 +264,12 @@
 		  }
 	   });
 	});
+	
+    function showAlert(message) {
+   	 if (message.trim() !== '') {
+            alert(message);
+        }
+   }	
  </script>
 </body>
 </html>
