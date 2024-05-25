@@ -131,14 +131,28 @@ public class JobApplyController {
     
     @PostMapping("/updateStatus")
     public String updateStatus(@RequestParam("jobapplyid") int jobApplyId,
-                               @RequestParam("status") String status, RedirectAttributes redirectAttributes) {
+                               @RequestParam("status") String status,@RequestParam("jobpostid") Integer jobpostid,  RedirectAttributes redirectAttributes, Model model,HttpSession session ) {
+
+    	//Code for checking of the frim user has logged in. If not then send to login page
+    	Integer firmid = (Integer) session.getAttribute("firmid");
+
+            if (firmid == null) {
+            	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
+                return "redirect:/login"; 
+            }    		
+            
     	applyjobService.updateStatus(jobApplyId, status);
-    	redirectAttributes.addFlashAttribute("info", "Record updated successfully");
-        return "redirect:/firmappliedjob"; // Redirect to the job applications page after updating status
+    	String jobpostidstr= jobpostid.toString();
+    	
+        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostid);
+        model.addAttribute("jobApplications", jobApplications);
+    	model.addAttribute("info", "Record updated successfully");
+    	return "jobappliedselection";
     }    
     
     @GetMapping("/clacweightscore")
     public String getclacweightscore(@RequestParam Integer jobpostingid, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
+    	//Code for checking of the frim user has logged in. If not then send to login page
     	Integer firmid = (Integer) session.getAttribute("firmid");
 
             if (firmid == null) {

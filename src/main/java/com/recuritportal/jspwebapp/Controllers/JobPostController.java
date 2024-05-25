@@ -142,7 +142,7 @@ public class JobPostController {
 	        // Get the current date
 
 	        // Define the DateTimeFormatter according to your date format, e.g., "yyyy-MM-dd"
-	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        
 	        LocalDate today = LocalDate.now();
 	        

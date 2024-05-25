@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/css/blue.css">
 
 </head>
-<body>
+<body onload="showAlert('${info}')">
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -38,8 +38,8 @@
 					<ul id="responsive">
 						<li><a href="postjob" class="current">Post Jobs</a></li>
 						<li><a href="firmsearchjob" class="current">Posted Job</a></li>
-						<li><a href="firmappliedjob" class="current">Job Applicants</a></li>
-						<li><a href="firmclculate" class="current">Calculate Weightage</a></li>	
+						<!-- <li><a href="firmappliedjob" class="current">Job Applicants</a></li>
+						<li><a href="firmclculate" class="current">Calculate Weightage</a></li> -->	
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
@@ -111,36 +111,6 @@
 					<div class="dashboard-box margin-top-0 jb-head">
 
 						<div class="content">
-							<!-- <ul class="dashboard-box-list">
-								<c:forEach items="${firmJobPosted}" var="jp">
-								<li>
-									
-									<div class="job-listing">
-
-										
-										<div class="job-listing-details">
-											
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><c:out value= "${jp.jobtitle}" /></h3>
-											</div>
-											
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
-											</div>
-											
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><c:out value= "${jp.applybydate}" /></h3>
-											</div>
-										</div>
-									</div>
-									
-									<div class="buttons-to-right single-right-button">
-										<a href="firmappliedjob?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">View Applications</a>
-									</div>
-
-								</li>
-								</c:forEach>
-							</ul> -->
 						     <table border="1">
 						        <thead>
 						            <tr>
@@ -166,6 +136,7 @@
 						                    <td>
 						                        <form action="/updateStatus" method="post">
 						                            <input type="hidden" name="jobapplyid" value="${jobApplication.jobapplyid}">
+						                            <input type="hidden" name="jobpostid" value="${jobApplication.jobPost.jobpostingid}">
 						                            <select name="status">
 						                                <option value="Accept" ${jobApplication.status eq 'Accept' ? 'selected' : ''}>Accept</option>
 						                                <option value="Reject" ${jobApplication.status eq 'Reject' ? 'selected' : ''}>Reject</option>
@@ -297,6 +268,12 @@
 		  }
 	   });
 	});
+	
+    function showAlert(message) {
+      	 if (message.trim() !== '') {
+               alert(message);
+           }
+      }	
  </script>
 </body>
 </html>
