@@ -1,12 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-
-
+/* for title */
+@font-face {
+    font-family: 'HenriDidot';
+    src: url('../fonts/HenriDidot/HenriDidot.eot');
+    src: url('../fonts/HenriDidot/HenriDidot.eot') format('embedded-opentype'),
+         url('../fonts/HenriDidot/HenriDidot.woff2') format('woff2'),
+         url('../fonts/HenriDidot/HenriDidot.woff') format('woff'),
+         url('../fonts/HenriDidot/HenriDidot.ttf') format('truetype'),
+         url('../fonts/HenriDidot/HenriDidot.svg#HenriDidot') format('svg');
+}
+/* for body */
+@font-face {
+    font-family: 'MogenBold';
+    src: url('../fonts/MogenBold/MogenBold.eot');
+    src: url('../fonts/MogenBold/MogenBold.eot') format('embedded-opentype'),
+         url('../fonts/MogenBold/MogenBold.woff2') format('woff2'),
+         url('../fonts/MogenBold/MogenBold.woff') format('woff'),
+         url('../fonts/MogenBold/MogenBold.ttf') format('truetype'),
+         url('../fonts/MogenBold/MogenBold.svg#MogenBold') format('svg');
+}
 
 /* variables */
 :root
 {
-    --primary-color: #2a41e8;
-    --secondary-color: rgb(247, 144, 49);
+    --primary-color: rgb(15, 22, 15);
+    --secondary-color: rgb(21, 41, 19);
     --field-text-color:rgb(62, 63, 94);
     --bg-color: rgb(255,255,255);
     --heading-color: rgb(255,255,255);
@@ -17,7 +34,7 @@
   
 body
 {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'MogenBold', sans-serif;
     width: 100%;
     position: relative;
     min-height: 100vh;
@@ -204,6 +221,7 @@ main::after
   font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
+  font-family: 'HenriDidot';
 }
 .input-field
 {

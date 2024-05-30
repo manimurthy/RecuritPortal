@@ -18,7 +18,7 @@ public class JobPostFAQ {
 
     @ManyToOne
     @JoinColumn(name = "job_post_id")
-    private JobPost1 jobPost;
+    private JobPost jobPost;
 
     // getters and setters    	
     public Integer getFaqid() {
@@ -45,11 +45,11 @@ public class JobPostFAQ {
 		this.answer = answer;
 	}
 
-	public JobPost1 getJobPost() {
+	public JobPost getJobPost() {
 		return jobPost;
 	}
 
-	public void setJobPost(JobPost1 jobPost) {
+	public void setJobPost(JobPost jobPost) {
 		this.jobPost = jobPost;
 	}
 }

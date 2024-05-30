@@ -19,7 +19,7 @@ CREATE TABLE Employee (
     contact VARCHAR(15),
     password VARCHAR(255) NOT NULL
 );
-CREATE TABLE Job_Post1 (
+CREATE TABLE Job_Post (
     jobpostingid INT AUTO_INCREMENT PRIMARY KEY,
     firmunqid VARCHAR(255),
     jobtitle VARCHAR(255),
@@ -30,14 +30,20 @@ CREATE TABLE Job_Post1 (
     yearsofexp INT,
     expweightpercent INT,
     eduweightpercent INT,
-    expskills INT
+    expskills INT,
+    mineduqualify varchar(255),
+    minexpskills INT,
+    yearly_expweight INT,
+    yearlyeduweightpercent INT,	
+    yearlyexpskills INT,
+    skillname VARCHAR(255)
 );
 CREATE TABLE Job_PostFAQ (
     faqid INT AUTO_INCREMENT PRIMARY KEY,
     job_post_id INT,
     question TEXT,
     answer TEXT,
-    FOREIGN KEY (job_post_id) REFERENCES Job_Post1(jobpostingid)
+    FOREIGN KEY (job_post_id) REFERENCES Job_Post(jobpostingid)
 );
 CREATE TABLE Job_Applied (
     jobapplyid INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,6 +55,7 @@ CREATE TABLE Job_Applied (
     expinskills INT,
     miscinfo VARCHAR(255),
     status VARCHAR(255),
-    FOREIGN KEY (jobpostingid) REFERENCES Job_Post1(jobpostingid),
+    calc_total_weight INT,
+    FOREIGN KEY (jobpostingid) REFERENCES Job_Post(jobpostingid),
     FOREIGN KEY (empid) REFERENCES Employee(empid)
 );

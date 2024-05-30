@@ -115,75 +115,44 @@
 						<h3><i class="icon-feather-folder-plus"></i> Job Application Form</h3>
 					</div>
 
-					<div class="content with-padding padding-bottom-10">
-						<div class="row">
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Emp Id</h5>
-									<input type="text" id = "empid" name = "empid"  value ="${empid}" class="with-border" readonly />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Job Id</h5>
-									<input type="text" id = "job_post_id" name = "job_post_id" value="${jobpostingid}"  class="with-border" readonly />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Apply date </h5>
-									<input type="text" id = "applieddate" name ="applieddate" class="with-border" readonly/>
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Years of Experience </h5>
-									<input type="text" id = "noofyearsofexp" name ="noofyearsofexp" class="with-border" />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Highest Education</h5>
-									<select id="eduqualify" name="eduqualify" class="with-border">
-									    <option value="Select">Select</option>
-									    <option value="High School">High School</option>
-									    <option value="Under Graduate">Under Graduate</option>
-									    <option value="Graduate">Graduate</option>
-									    <option value="Post Graduate">Post Graduate</option>
-									    <option value="Doctrate">Doctorate</option>
-									</select>									
-									<span id="eduqualifyError" class="error-message" style="color: red; display: inline;"></span>
-								</div>
-							</div>
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Experience in : "${skillname}" </h5>
-									<input type="text" id = "expinskills" name ="expinskills" class="with-border" />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-														
-							<div class="col-xl-12">
-								<div class="submit-field">
-									<h5>Miscellaneous Information</h5>
-									<textarea id = "miscinfo" name="miscinfo" cols="30" rows="5" class="with-border"></textarea>
-									<span class="error-message" style="color: red; display: none;"></span>
-									<input type="hidden" id = "status" name ="status" value ="Applied" class="with-border" />
-								</div>
-							</div>
-						</div>
+				    <table border="1">
+				        <tr>
+				            <th>Employee Name</th>
+				            <td>${jobApplication.employee.firstname} ${jobApplication.employee.lastname}</td>
+				        </tr>
+				        <tr>
+				            <th>Applied Date</th>
+				            <td>${jobApplication.applieddate}</td>
+				        </tr>
+				        <tr>
+				            <th>No of Years of Experience</th>
+				            <td>${jobApplication.noofyearsofexp}</td>
+				        </tr>
+				        <tr>
+				            <th>Educational Qualification</th>
+				            <td>${jobApplication.eduqualify}</td>
+				        </tr>
+				        <tr>
+				            <th>Experience in Skills</th>
+				            <td>${jobApplication.expinskills}</td>
+				        </tr>
+				        <tr>
+				            <th>Miscellaneous Info</th>
+				            <td>${jobApplication.miscinfo}</td>
+				        </tr>
+				        <tr>
+				            <th>Status</th>
+				            <td>${jobApplication.status}</td>
+				        </tr>
+				        <tr>
+				            <th>Cumulative Weightage</th>
+				            <td>${jobApplication.calcTotalWeight}</td>
+				        </tr>
+		        
+				    </table>
+                				<a href="/firmappliedjob?jobpostingid=${jobApplication.jobPost.jobpostingid}" class="list-apply-button ripple-effect">Back</a>
 					</div>
 				</div>
-			</div>
-
-			<div class="col-xl-12">
-				<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a> -->
-				<button type="submit" class="button ripple-effect big margin-top-30">Submit</button>			
 			</div>
 		</div>
 	</div>

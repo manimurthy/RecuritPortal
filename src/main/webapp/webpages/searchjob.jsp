@@ -46,10 +46,7 @@
 					<ul id="responsive">
 						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
 						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
-						<li><a href="empappliedjob" class="current">Applied jobs</a></li>											
-						<!-- <li><a href="searchjob" class="current">Search Jobs</a></li>
-						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="jobfirmdashboard" class="current">PostedJob</a></li> -->		
+						<li><a href="empappliedjob" class="current">Applied jobs</a></li>												
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
@@ -63,7 +60,7 @@
 					<input type="hidden" id="firmname" name="firmname" value="${firmdtl.firmid}" />-->
 					<span>${empName}</span> 
 					<input type="hidden" id="firmname" name="firmname" value="${empId}" />
-					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -93,7 +90,7 @@
 	<div class="container">
 		
 		<!-- Intro Headline -->
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
 				<div class="banner-headline">
 					<h3>
@@ -103,7 +100,7 @@
 					</h3>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 
@@ -190,8 +187,8 @@
 									</div>
 									<!-- Buttons -->
 									<div class="buttons-to-right single-right-button">
-										<a href="savelikejob?jobPostId=${jp.jobpostingid}" class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
-										<a href="applyjobid?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Apply Now</a>
+										<a href="savelikejob?jobPostId=${jp.jobpostingid} " class="button red ripple-effect ico"><i class="icon-feather-heart"></i></a>
+										<a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}" class="list-apply-button ripple-effect">Apply Now</a>
 									</div>
 
 								</li>

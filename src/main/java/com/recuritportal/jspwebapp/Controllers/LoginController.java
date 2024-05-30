@@ -49,13 +49,10 @@ public class LoginController {
        if ("Employee".equals(emptype.trim())) {
     	   emp = empService.validateCredentials(empemail, password);
 	    	if (emp != null) {
-	            // Valid credentials, redirect to main empdashboard page
-	           // return "redirect:employeedashboard";
 	     	   redirectAttributes.addFlashAttribute("empdtl", emp);
 	           session.setAttribute("empId",emp.getEmpid());
 	           session.setAttribute("empname",emp.getFirstname());
 	           session.setAttribute("usertype","Employee");
-	     	  // return "redirect:/searchjob?fromsrch=false";
 	           return "redirect:/searchjob";
 	        } else {
 	            // Invalid credentials, show error message
@@ -66,8 +63,6 @@ public class LoginController {
 //           if (firmService.validatefirmCredentials(empemail, password)!=0) {
 	    	   firm = firmService.validatefirmCredentials(empemail, password);
 	           if (firm != null) {
-	             //  return "redirect:firmdashboard";
-	        	   //model.addAttribute("firmdtl", firm);
 	        	   redirectAttributes.addFlashAttribute("firmdtl", firm);
 		           session.setAttribute("firmid",firm.getFirmid());
 		           session.setAttribute("usertype","Firm");	        	   
@@ -79,16 +74,16 @@ public class LoginController {
        }
     }
     
-    @GetMapping("/empdashboard")
+   /* @GetMapping("/empdashboard")
     public String showLandingPage() {
         return "empdashboard"; // Assuming "landing.html" is the name of your landing page HTML file
-    }    
+    }    */
     
-    @GetMapping("/firmdashboard")
+/*    @GetMapping("/firmdashboard")
     public String firmDashboard(Model model) {
         // Add necessary attributes to the model and return the view name
         return "firmdashboard"; // This should be the name of the .html or .jsp file, if using templates
-    }
+    }*/
     
     @GetMapping("/firmhome")
     public String firmHome(Model model) {
@@ -101,12 +96,7 @@ public class LoginController {
         // Add necessary attributes to the model and return the view name
         return "emplikedjobs"; // This should be the name of the .html or .jsp file, if using templates
     }        
-/*	@RequestMapping ("/empreg")
-	public String details()
-	{
-		return "empreg";
-	}
-*/	
+
 	@PostMapping ("/savedetails")
 	public String details(Employee empReg, Model model)
 	{
@@ -118,4 +108,15 @@ public class LoginController {
 		 model.addAttribute("info", "You have been registered successfully!!! Please go and login.");
 		return "login";
 	}    
+	
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+		
+        if (session != null) {
+            session.invalidate(); // This line invalidates the session, effectively deleting all session attributes
+        }
+        model.addAttribute("info", "You have been successfully logged out! Login once again to continue");
+        return "login"; // Redirect to login page or any other page you want
+    }	
 }

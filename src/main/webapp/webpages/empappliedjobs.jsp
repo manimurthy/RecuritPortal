@@ -49,7 +49,7 @@
 			<div class="right-side">					
 
 				<div class="header-widget">
-					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -79,7 +79,7 @@
 	<div class="container">
 		
 		<!-- Intro Headline -->
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
 				<div class="banner-headline">
 					<h3>
@@ -89,7 +89,7 @@
 					</h3>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 

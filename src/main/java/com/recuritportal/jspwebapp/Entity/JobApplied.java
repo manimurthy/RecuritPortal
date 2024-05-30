@@ -17,7 +17,7 @@ public class JobApplied {
 	
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "jobpostingid", referencedColumnName="jobpostingid")
-    private JobPost1 jobPost;
+    private JobPost jobPost;
     
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "empid" , referencedColumnName="empid" )
@@ -42,7 +42,7 @@ public class JobApplied {
 	private String status;    
     
     @Column(nullable = true)
-    private Integer calcTotalWeight;
+    private Integer calcTotalWeight = 0;
 	
 	public int getJobapplyid() {
 		return jobapplyid;
@@ -50,10 +50,10 @@ public class JobApplied {
 	public void setJobapplyid(int jobapplyid) {
 		this.jobapplyid = jobapplyid;
 	}
-	public JobPost1 getJobPost() {
+	public JobPost getJobPost() {
 		return jobPost;
 	}
-	public void setJobPost(JobPost1 jobPost) {
+	public void setJobPost(JobPost jobPost) {
 		this.jobPost = jobPost;
 	}
 	public Employee getEmployee() {

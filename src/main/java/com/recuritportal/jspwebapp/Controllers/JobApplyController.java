@@ -15,7 +15,6 @@ import com.recuritportal.jspwebapp.Entity.Applyjob;
 import com.recuritportal.jspwebapp.Entity.Employee;
 import com.recuritportal.jspwebapp.Entity.JobApplied;
 import com.recuritportal.jspwebapp.Entity.JobPost;
-import com.recuritportal.jspwebapp.Entity.JobPost1;
 import com.recuritportal.jspwebapp.Service.ApplyJobService;
 import com.recuritportal.jspwebapp.Service.EmployeeService;
 import com.recuritportal.jspwebapp.Service.InsertApplyService;
@@ -42,17 +41,18 @@ public class JobApplyController {
 		this.empService = eServ;
 	}
 	
-    @GetMapping("/applyjob")
+ /*   @GetMapping("/applyjob")
     public String applyJob(Model model) {
         // Add necessary attributes to the model and return the view name
         return "/applyjobs"; // This should be the name of the .html or .jsp file, if using templates
-    }
+    }*/
     
     @GetMapping("/applyjobid")
-    public String applyJob(@RequestParam Integer jobpostingid, Model model, HttpSession session) {
+    public String applyJob(@RequestParam Integer jobpostingid, @RequestParam String skillname, Model model, HttpSession session) {
         // Add necessary attributes to the model and return the view name
     	Integer empid = (Integer) session.getAttribute("empId");
     	model.addAttribute("jobpostingid", jobpostingid);
+    	model.addAttribute("skillname",skillname);
     	model.addAttribute("empid", empid);
         return "/applyjobs"; // This should be the name of the .html or .jsp file, if using templates
     }  
@@ -70,17 +70,16 @@ public class JobApplyController {
                                Model model) {
         // Create a new JobApplied object
         JobApplied jobApplied = new JobApplied();
-        //Employee emp = new Employee();
-        // Set the jobPost property by creating a new JobPost1 object with the specified ID
-        //JobPost1 jobPost = new JobPost1();
-     // Fetch JobPost1 entity from the database
-        JobPost1 jobPost = entityManager.find(JobPost1.class, jobPostId);
+
+        // Set the jobPost property by creating a new JobPost object with the specified ID
+        //JobPost jobPost = new JobPost();
+     // Fetch JobPost entity from the database
+        JobPost jobPost = entityManager.find(JobPost.class, jobPostId);
      // Fetch Employee entity from the database
         Employee employee = entityManager.find(Employee.class, empId);
-        // Set the merged JobPost1 entity to the JobApplied entity
+        // Set the merged JobPost entity to the JobApplied entity
         jobApplied.setJobPost(jobPost);
         jobApplied.setEmployee(employee);
-
         // Set other properties of the jobApplied object
         jobApplied.setApplieddate(appliedDate);
         jobApplied.setNoofyearsofexp(noOfYearsOfExp);
@@ -92,8 +91,8 @@ public class JobApplyController {
         applyjobService.insertApplyJob(jobApplied);
         // Add a success message to the model
         model.addAttribute("info", "Job details posted successfully!!!");
-        // Redirect to the applyjob page
-        return "redirect:/applyjob";
+
+        return "redirect:/empappliedjob";
     }
     
     @GetMapping("/empappliedjob")
@@ -119,12 +118,16 @@ public class JobApplyController {
             }    		
         //List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingd(firmid);
         List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostingid);
+        
+        // Sort the jobApplications list by calcTotalWeight
+        jobApplications.sort((a, b) -> Integer.compare(b.getCalcTotalWeight(), a.getCalcTotalWeight()));
+      
         model.addAttribute("jobApplications", jobApplications);
         return "jobappliedselection"; // Return the name of your JSP file
     }	    
     @GetMapping("/getdtlsforapplyjob")
     public String getJobDetailsForApply(@RequestParam Integer jobpostingid, RedirectAttributes redirectAttributes) {
-        JobPost1 jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
+        JobPost jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
         redirectAttributes.addAttribute("jobPostDtls", jobpost);
         return "redirect:/applyjobs"; // Return the name of your JSP file
     }		
@@ -142,16 +145,29 @@ public class JobApplyController {
             }    		
             
     	applyjobService.updateStatus(jobApplyId, status);
-    	String jobpostidstr= jobpostid.toString();
-    	
-        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostid);
+    	List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostid);
+               
         model.addAttribute("jobApplications", jobApplications);
     	model.addAttribute("info", "Record updated successfully");
     	return "jobappliedselection";
     }    
+
+    @GetMapping("/viewjobapplicationdetails")
+    public String viewJobApplicationDetails(@RequestParam("jobapplyid") int jobapplyid, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
+    	Integer firmid = (Integer) session.getAttribute("firmid");
+
+        if (firmid == null) {
+        	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
+            return "redirect:/login"; 
+        }    		    	
+        JobApplied jobApplication = applyjobService.getJobApplicationById(jobapplyid);
+        model.addAttribute("jobApplication", jobApplication);
+        return "firmviewjobapplicationdtls";  // The new JSP view name
+    }
     
     @GetMapping("/clacweightscore")
     public String getclacweightscore(@RequestParam Integer jobpostingid, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
+       
     	//Code for checking of the frim user has logged in. If not then send to login page
     	Integer firmid = (Integer) session.getAttribute("firmid");
 
@@ -159,18 +175,14 @@ public class JobApplyController {
             	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
                 return "redirect:/login"; 
             }    		
-        JobPost1 jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
+        JobPost jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
         List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostingid);
         
         // Iterate over the job applications and call calcWeightandUpdate for each
         for (JobApplied jobApplied : jobApplications) {
             applyjobService.calcWeightandUpdate(jobpost, jobApplied);
         }
-        
-       // model.addAttribute("info","Weigatge Calculation for applied jobs completed");
-       // return "redirect:/firmsearchjob"; // Return the name of your JSP file
-        //model.addAttribute("jobApplications", jobApplications);
-        //return "jobappliedselection"; // Return the name of your JSP file
+        //Display the success message
         redirectAttributes.addFlashAttribute ("info","Weigatge Calculation for applied jobs completed");
         return "redirect:/searchalljobsfirm"; 
         

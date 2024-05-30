@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import com.recuritportal.jspwebapp.Entity.Applyjob;
 import com.recuritportal.jspwebapp.Entity.JobApplied;
 import com.recuritportal.jspwebapp.Entity.JobPost;
-import com.recuritportal.jspwebapp.Entity.JobPost1;
 import com.recuritportal.jspwebapp.Repository.ApplyJobRepo;
 import com.recuritportal.jspwebapp.Repository.JobFaqRepo;
 import com.recuritportal.jspwebapp.Repository.JobPostRepo;
+import com.recuritportal.jspwebapp.Util.ConfigReader;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -24,14 +24,18 @@ public class ApplyJobService {
 	@Autowired
 	ApplyJobRepo applyjobRepo;
 	JobFaqRepo jobPostRepo;
+	ConfigReader configReader;
 	
     @PersistenceContext
     private EntityManager entityManager;
 
     
-	public ApplyJobService(ApplyJobRepo ajRepo , JobFaqRepo jpRepo) {
+    
+    
+	public ApplyJobService(ApplyJobRepo ajRepo , JobFaqRepo jpRepo, ConfigReader configReader) {
 		this.applyjobRepo=ajRepo;
 		this.jobPostRepo=jpRepo;
+		this.configReader =configReader;
 	}
 	
     //public boolean insertApplyJob(Applyjob applyJob) {
@@ -58,8 +62,8 @@ public class ApplyJobService {
         return apJobs;
     }*/
 
-    public JobPost1 getJobDtlsForApply(Integer jobpostingid) {
-    	JobPost1 apJobs= jobPostRepo.findByjobpostingid(jobpostingid);
+    public JobPost getJobDtlsForApply(Integer jobpostingid) {
+    	JobPost apJobs= jobPostRepo.findByjobpostingid(jobpostingid);
         return apJobs;
     }	
     
@@ -76,11 +80,15 @@ public class ApplyJobService {
     	applyjobRepo.updateStatusById(jobApplyId, status);
     }
     
-    public void calcWeightandUpdate(JobPost1 jp1, JobApplied jobApplied ) {
+    public JobApplied getJobApplicationById(int jobapplyid) {
+        return applyjobRepo.findById(jobapplyid).orElse(null);
+    }
+    public void calcWeightandUpdate(JobPost jp1, JobApplied jobApplied ) {
     	
-    	int workExWeight = clacWorkExWeight (jp1.getExpweightpercent(), jobApplied.getNoofyearsofexp());
-    	int eduQualWeight =calcEduQualWeight(jp1.getEduweightpercent(), jobApplied.getEduqualify());
-    	int skillsExWeight = calcSkillsWeight(jp1.getExpskills(),jobApplied.getExpinskills());
+    	//int workExWeight = clacWorkExWeight (jp1.getExpweightpercent(), jobApplied.getNoofyearsofexp());
+    	int workExWeight = clacWorkExWeight (jp1.getYearsofexp(),jp1.getYearlyExpweight(), jp1.getExpweightpercent(), jobApplied.getNoofyearsofexp());
+    	int eduQualWeight =calcEduQualWeight(jp1.getMineduqualify(),jp1.getYearlyeduweightpercent(), jp1.getEduweightpercent(), jobApplied.getEduqualify());
+    	int skillsExWeight = calcSkillsWeight(jp1.getMinexpskills(), jp1.getYearlyexpskills(), jp1.getExpskills(),jobApplied.getExpinskills());
     	
         // Calculate total weight
         int totalWeight = workExWeight + eduQualWeight + skillsExWeight;
@@ -90,74 +98,62 @@ public class ApplyJobService {
     	
     }
     
-    private int clacWorkExWeight(int jobPostWorkExWeight, int appliedWorkEx) {
-        // Define the table as an array of arrays where each sub-array represents {years, weight percentage}
-        int[][] weightTable = {
-            {3, 0},
-            {4, 30},
-            {5, 60},
-            {6, 90},
-            {Integer.MAX_VALUE, 100} // Represents >=6 years
-        };
-
-        // Determine the weight percentage based on appliedWorkEx
-        int derivedWeightPercentage = 0;
-        for (int[] row : weightTable) {
-            if (appliedWorkEx < row[0]) {
-                derivedWeightPercentage = row[1];
-                break;
-            }
+    private int clacWorkExWeight( int minWorkExYearRequired , int eachWorkYearWeight,int jobPostsWorkExWeight, int applicantsWorkEx) {
+    	int finalWorkExWeight;
+    	//Check if the candidates years at skill is eligible. If not the weight to be 0
+        if (applicantsWorkEx > minWorkExYearRequired) {
+        	finalWorkExWeight= (applicantsWorkEx-minWorkExYearRequired) * eachWorkYearWeight;
+        	finalWorkExWeight=Math.min(finalWorkExWeight, 100);
+        } else {
+            // If the applicant's qualification is less than or equal to the minimum qualification index, return 0
+        	finalWorkExWeight = 0;
         }
-
         // Calculate the final weight
-        int finalWeight = (jobPostWorkExWeight * derivedWeightPercentage) / 100;
+        int finalWeight = (jobPostsWorkExWeight * finalWorkExWeight) / 100;
+
+        return finalWeight;
+    }    
+
+    public int calcEduQualWeight(String minQualification, int eachQualWeightage, int jobPostEduWeight, String applicantsEduQual) {
+
+    	 int finalEduCalcWeight;
+    	int minQualificationIndex = configReader.getEduIndex(minQualification);
+    	// Convert the applicant's education qualification to an index
+        int applicantsEduQualIndex = configReader.getEduIndex(applicantsEduQual);
+    	
+        // Ensure the weightage to be applied does not exceed 100
+        eachQualWeightage = Math.min(eachQualWeightage, 100);
+        
+        // Calculate the weightage if the applicant's education qualification is greater than the minimum qualification index
+        if (applicantsEduQualIndex > minQualificationIndex) {
+            finalEduCalcWeight = (applicantsEduQualIndex - minQualificationIndex) * eachQualWeightage;
+
+            // Ensure the final calculated weight does not exceed 100
+            finalEduCalcWeight = Math.min(finalEduCalcWeight, 100);
+        } else {
+            // If the applicant's qualification is less than or equal to the minimum qualification index, set value to 0
+        	finalEduCalcWeight = 0;
+        }
+        
+        // Calculate the final weight
+        int finalWeight = (jobPostEduWeight * finalEduCalcWeight) / 100;
 
         return finalWeight;
     }
+    private int calcSkillsWeight( int minSkillYearRequired , int eachskillYearWeight,int jobPostSkillsWeight, int applicantsSkillsWorkEx) {
+    	int finalSkillWeight;
+    	//Check if the candidates years at skill is eligible. If not the weight to be 0
+        if (applicantsSkillsWorkEx > minSkillYearRequired) {
+        	finalSkillWeight= (applicantsSkillsWorkEx-minSkillYearRequired) * eachskillYearWeight;
+        	finalSkillWeight=Math.min(finalSkillWeight, 100);
+        } else {
+            // If the applicant's qualification is less than or equal to the minimum qualification index, return 0
+        	finalSkillWeight = 0;
+        }
+        // Calculate the final weight
+        int finalWeight = (jobPostSkillsWeight * finalSkillWeight) / 100;
+
+        return finalWeight;
+    }    
     
-    private int calcEduQualWeight(int jobPostEduWeight, String eduQualification) {
-        // Define the table as a map where each key is the education level and value is the weight percentage
-        Map<String, Integer> eduWeightTable = new HashMap<>();
-        eduWeightTable.put("High School", 0);
-        eduWeightTable.put("Under Graduate", 20);
-        eduWeightTable.put("Graduate", 40);
-        eduWeightTable.put("Post Graduate", 60);
-        eduWeightTable.put("Doctrate", 100);
-
-        // Determine the weight percentage based on eduQualification
-        Integer derivedWeightPercentage = eduWeightTable.get(eduQualification);
-        if (derivedWeightPercentage == null) {
-            throw new IllegalArgumentException("Invalid education qualification: " + eduQualification);
-        }
-
-        // Calculate the final weight
-        int finalWeight = (jobPostEduWeight * derivedWeightPercentage) / 100;
-
-        return finalWeight;
-    }    
-    private int calcSkillsWeight(int jobPostSkillsWeight, int skillsWorkEx) {
-        // Define the table as an array of arrays where each sub-array represents {years, weight percentage}
-        int[][] weightTable = {
-            {2, 0},
-            {3, 20},
-            {4, 40},
-            {5, 60},
-            {6, 80},
-            {Integer.MAX_VALUE, 100} // Represents >=7 years
-        };
-
-        // Determine the weight percentage based on skillsWorkEx
-        int derivedWeightPercentage = 0;
-        for (int[] row : weightTable) {
-            if (skillsWorkEx < row[0]) {
-                derivedWeightPercentage = row[1];
-                break;
-            }
-        }
-
-        // Calculate the final weight
-        int finalWeight = (jobPostSkillsWeight * derivedWeightPercentage) / 100;
-
-        return finalWeight;
-    }    
 }

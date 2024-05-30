@@ -53,7 +53,7 @@
 					<input type="hidden" id="firmname" name="firmname" value="${firmdtl.firmid}" />-->
 					<span>Firm Name</span> 
 					<input type="hidden" id="firmname" name="firmname" value="1" />
-					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">

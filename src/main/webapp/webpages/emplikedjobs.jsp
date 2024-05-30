@@ -52,7 +52,7 @@
 				<div class="header-widget">
 					<span>${empdtl.firstname}</span>
 					<input type="hidden" id="firmname" name="firmname" value="${empdtl.empid}" />				
-					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -132,14 +132,12 @@
 											<!-- Details -->
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><a href="#">${jp.jobdesc}</a></h3>
-
-												
 											</div>
 										</div>
 									</div>
 									<!-- Buttons -->
 									<div class="buttons-to-right single-right-button">
-										<a href="applyjobid?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Apply Now</a>										
+										<a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}" class="list-apply-button ripple-effect">Apply Now</a>										
 									</div>
 								</li>
 							</c:forEach>
@@ -170,8 +168,8 @@
 						</div>
 						
 						<div class="category-box-content">
-							<h3>Lorem Ipsum is simply dummy </h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							<h3>Data Scientist </h3>
+							<p>Inviting highly skilled and qualified people for an exciting  opportunity in our company. /p>
 						</div>
 					</a>
 
@@ -182,8 +180,8 @@
 						</div>
 											
 						<div class="category-box-content">
-							<h3>Lorem Ipsum is simply dummy </h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							<h3>Data Engineer</h3>
+							<p>Like challenges!  Love to solve complex problems! This is a right place for you. Apply now!</p>
 						</div>
 					</a>
 
@@ -194,8 +192,8 @@
 						</div>
 						
 						<div class="category-box-content">
-							<h3>Lorem Ipsum is simply dummy </h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							<h3>Security Analysts </h3>
+							<p>We are looking out for candidates having interests in IT security to join our red team.</p>
 						</div>
 					</a>
 				</div>

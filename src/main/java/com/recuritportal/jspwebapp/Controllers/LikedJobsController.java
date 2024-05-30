@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import com.recuritportal.jspwebapp.Entity.JobPost;
-import com.recuritportal.jspwebapp.Entity.JobPost1;
 import com.recuritportal.jspwebapp.Entity.LikedJobs;
 import com.recuritportal.jspwebapp.Service.JobPostService;
 import com.recuritportal.jspwebapp.Service.LikedJobService;
@@ -30,16 +29,7 @@ public class LikedJobsController {
     	jpService = jpServ;
     	likedJobsService = ljServ;
     }
-    
-	/*@RequestMapping("/likedjobs")
-	public String showLoginForm() {
-	    return "emplikedjobs";
-	}*/
-    
-    
-	//@GetMapping("/employeeLikedJobs")
     @GetMapping("/likedjobs")
-    //public String showEmployeeLikedJobs(@RequestParam Integer empID, Model model ) {
     public String showEmployeeLikedJobs( RedirectAttributes redirectAttributes , HttpSession session, Model model) {
     	
     	Integer empid = (Integer) session.getAttribute("empId");
@@ -48,7 +38,7 @@ public class LikedJobsController {
             	redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");						
                 return "redirect:/login"; 
             }    		    	
-        List<JobPost1> likedJobs = likedJobsService.getLikedJobsForEmployee(empid);
+        List<JobPost> likedJobs = likedJobsService.getLikedJobsForEmployee(empid);
         model.addAttribute("likedJobs", likedJobs);
         return "emplikedjobs"; // return the name of the JSP file
     }	

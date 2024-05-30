@@ -1,10 +1,33 @@
 @charset "UTF-8";
-
+body{
+	font-family: 'MogenBold';
+}
 /* -------------------------------------------------------------- */
 /* 01. Import Section
 ----------------------------------------------------------------- */
 @import url('icons.css');                              /* Default Reset, Responsive Grid*/
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+
+/* for title */
+@font-face {
+    font-family: 'HenriDidot';
+    src: url('../fonts/HenriDidot/HenriDidot.eot');
+    src: url('../fonts/HenriDidot/HenriDidot.eot') format('embedded-opentype'),
+         url('../fonts/HenriDidot/HenriDidot.woff2') format('woff2'),
+         url('../fonts/HenriDidot/HenriDidot.woff') format('woff'),
+         url('../fonts/HenriDidot/HenriDidot.ttf') format('truetype'),
+         url('../fonts/HenriDidot/HenriDidot.svg#HenriDidot') format('svg');
+}
+/* for body */
+@font-face {
+    font-family: 'MogenBold';
+    src: url('../fonts/MogenBold/MogenBold.eot');
+    src: url('../fonts/MogenBold/MogenBold.eot') format('embedded-opentype'),
+         url('../fonts/MogenBold/MogenBold.woff2') format('woff2'),
+         url('../fonts/MogenBold/MogenBold.woff') format('woff'),
+         url('../fonts/MogenBold/MogenBold.ttf') format('truetype'),
+         url('../fonts/MogenBold/MogenBold.svg#MogenBold') format('svg');
+}
 
 
 /* ---------------------------------- */
@@ -165,6 +188,7 @@ a{text-decoration: none;}
 /* ---------------------------------- */
 /* Header
 ------------------------------------- */
+
 #logo { 
 	display: inline-block;
 	border-right: 1px solid #e0e0e0;
@@ -175,7 +199,7 @@ a{text-decoration: none;}
 }
 
 #logo img {
-	width: auto;
+	width: 130px;
 	top: 50%;
 	position: relative;
 	transform: translate3d(0,-50%,0);
@@ -630,7 +654,7 @@ header.fullwidth .container {
 #navigation {
 	position: relative;
 	display: inline-block;
-	margin-top: 22px;
+	margin-top: 26px;
 }
 
 #navigation ul {
@@ -645,6 +669,11 @@ header.fullwidth .container {
 	display: block;
 	text-decoration: none;
 	padding: 5px 0;
+	font-size: 18px;
+    font-family: 'HenriDidot';
+	font-weight: 700;
+    letter-spacing: 2px;
+    color: #215a63 !important;
 }
 
 #navigation ul li {
@@ -2347,16 +2376,18 @@ em.mm-counter+a.mm-fullsubopen+span {
   display: block;
   width: 46px;
   height: 46px;
-  background-color: #66676b;
+  background-color: #fff;
   opacity: 1;
   transition: all 0.3s;
   border-radius: 4px;
   text-align: center;
   font-size: 26px;
 }
-
+.section.gray label {
+    color: #fff;
+}
 body #backtotop a {
-  color: #fff;
+  color: #0f160f;
 }
 
 #backtotop a:after {
@@ -4731,11 +4762,11 @@ button.button,
 input[type="button"],
 input[type="submit"],
 a.button {
-	background-color: #66676b;
+	background-color: #fff;
 	top: 0;
 	padding: 10px 20px;
 	line-height: 24px;
-	color: #fff;
+	color: #0f160f;
 	position: relative;
 	font-size: 16px;
 	font-weight: 500;
@@ -4822,6 +4853,7 @@ body .button i.icon-material-outline-arrow-right-alt {
 .button.big {
 	font-size: 18px;
 	padding: 13px 22px;
+	background: #fff;
 }
 
 body .button.big i {
@@ -5795,115 +5827,6 @@ table.basic-table { margin-bottom: 0; }
 }
 
 
-/* ---------------------------------- */
-/* Keywords Input
-------------------------------------- */
-.keywords-container { margin-bottom: -15px; }
-
-.keywords-list {
-	display: block;
-	float: left;
-	height: 0;
-}
-
-.keyword {
-	background-color: rgba(102,103,107,0.07);
-	color: #66676b;
-	display: inline-block;
-	float: left;
-	padding: 0;
-	border-radius: 4px;
-	cursor: default;
-	margin: 0 7px 7px 0;
-	height: 35px;
-	line-height: 35px;
-	box-sizing: border-box; 
-	animation: KeywordIn 0.3s ease-in-out;
-	animation-fill-mode: both;
-	transition: 0.4s;
-	overflow: hidden;
-	max-width: 100%;
-	font-size: 14.7px;
-}
-
-@keyframes KeywordIn {
-	0% {
-		opacity: 0;
-		transform: scale(0.9);
-	}
-	100% {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
-
-.keyword.keyword-removed {
-    max-width: 0;
-    margin: 0;
-    overflow: hidden;
-    opacity: 0;
-	animation: KeywordOut 0.4s ease-in-out;
-	animation-fill-mode: both;
-	pointer-events: none;
-}
-
-@keyframes KeywordOut {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-	margin-top: -35px;
-  }
-}
-
-.keyword-text { padding-right: 12px;  }
-
-.keyword .keyword-remove:before {
-	display: inline-block;
-	cursor: pointer;
-	font-family: "Feather-Icons";
-	content: "\ea02";
-	line-height: 20px;
-	position: relative;
-	top: 2px;
-	margin-right: 4px;
-	margin-left: 10px;
-	font-size: 15px;
-}
-
-.keyword-input-container {
-	position: relative;
-}
-
-.keyword-input-container .keyword-input-button {
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 36px;
-	width: 36px;
-	padding: 0;
-	color: #fff;
-	background-color: #66676b; 
-	border-radius: 4px;
-	margin: 6px;
-	font-size: 19px;
-	text-align: center;
-	line-height: 36px;
-}
-
-.keyword-input-container .keyword-input-button i {
-	color: #fff;
-	position: relative;
-	top: 2px;
-}
-
-input.keyword-input { margin: 0 0 15px 0; }
-
-
 
 /* ---------------------------------- */
 /* Radio Button
@@ -6220,6 +6143,7 @@ input.keyword-input { margin: 0 0 15px 0; }
 	font-weight: 300;
 	color: #777;
 	line-height: 42px;
+	font-family: 'HenriDidot';
 }
 
 .banner-headline strong {
@@ -6785,191 +6709,6 @@ input.keyword-input { margin: 0 0 15px 0; }
 .recommended .pricing-plan-label strong {
 	color: #66676b;
 }
-
-/* Pricing Plan Features */
-.pricing-plan-features strong {
-	color: #333;
-	font-weight: 600;
-	margin-bottom: 5px;
-	line-height: 24px;
-	display: inline-block;
-}
-
-.pricing-plan-features ul {
-	padding: 0;
-	margin: 0;
-}
-
-.pricing-plan-features ul li {
-	display: block;
-	margin: 0;
-	padding: 3px 0;
-	line-height: 24px;
-}
-
-/* Pricing Plan Button */
-.pricing-plan .button:hover,
-.pricing-plan.recommended .button {
-	color: #fff;
-	background-color: #66676b;
-	box-shadow: 0 4px 12px rgba(102,103,107,0.15);
-}
-
-.pricing-plan .button {
-	color: #66676b;
-	background-color: #fff;
-	border: 1px solid #66676b;
-	box-shadow: 0 4px 12px rgba(102,103,107,0.1);
-}
-
-.pricing-plan .button:hover { box-shadow: 0 4px 12px rgba(102,103,107,0.15); }
-
-/* Recommended Plan */
-.pricing-plan.recommended {
-	box-shadow: 0 0px 45px rgba(0,0,0,0.09);
-	padding: 35px;
-	margin: 0 15px;
-}
-
-.pricing-plan .recommended-badge {
-	background-color: #66676b;
-	color: #fff;
-	position: absolute;
-	width: 100%;
-	height: 45px;
-	top: -45px;
-	left: 0;
-	text-align: center;
-	border-radius: 4px 4px 0 0;
-	font-weight: 600;
-	line-height: 45px;
-}
-
-/* Media Queries for Pricing Plans */
-@media (max-width: 992px) {
-	.pricing-plans-container {
-		box-shadow: none;
-		display: block;
-		margin-top: -40px;
-	}
-
-	.pricing-plan {
-		box-shadow: 0 0 25px rgba(0,0,0,0.1);
-		margin-bottom: 40px;
-		flex: auto;
-		width: 100%;
-		border-radius: 4px;
-		padding: 35px;
-	}
-
-	.pricing-plan.recommended {
-		padding: 35px;
-		margin: 0 0 40px 0;
-	}
-
-	.recommended.pricing-plan {
-		box-shadow: 0 0 25px rgba(0,0,0,0.1);
-		margin-top: 80px;
-	}
-}
-
-
-/* Media Queries for Billing Cycle */
-@media (max-width: 768px) {
-	.billing-cycle  {
-		display: flex;
-		flex-direction: column;
-	}
-	.billing-cycle .radio {
-		margin-right: 0;
-	}
-}
-
-
-
-/* Booking Confirmation Page
-------------------------------------- */
-.order-confirmation-page {
-	text-align: center;
-	padding-bottom: 120px;
-	padding-top: 0px;
-}
-
-.order-confirmation-page h2 {
-	font-size: 48px;
-	font-weight: 700;
-	letter-spacing: -0.5px;
-	margin-bottom: 25px;
-	display: block;
-}
-
-.order-confirmation-page p {
-	font-size: 20px;
-	color: #808080;
-	font-weight: 300;
-	display: block;
-	line-height: 32px;
-}
-
-.order-confirmation-page a.button:before { display: none; }
-.order-confirmation-page a.button {
-	background-color: #eee;
-	color: #606060;
-	font-weight: 600;
-	font-size: 18px;
-	box-shadow: none;
-	padding-top: 14px;
-	padding-bottom: 14px;
-}
-
-.order-confirmation-page a.button i { font-size: 24px; }
-
-.book-now.button { padding: 9px; margin-bottom: -4px; }
-
-.breathing-icon {
-	background-color: #66676b;
-	width: 120px;
-	height: 120px;
-	line-height: 0;
-	font-size: 18px;
-	border-radius: 50%;
-	margin: 0 auto;
-	margin-top: 30px;
-	position: relative;
-	z-index: 100;
-	transition: 0.4s;
-	color: #fff;
-	font-weight: 500;
-	animation: bicokAnim 3s infinite;
-	box-shadow: 0 0 0 15px rgba(102,103,107,0.07);
-	margin-bottom: 70px;
-	font-size: 90px;
-}
-
-.breathing-icon i {
-	color: #fff;
-	position: absolute;
-	top: 53%;
-	left: 0;
-	right: 0;
-	transform: translateY(-50%);
-}
-
-@keyframes bicokAnim {
-	0%,100% {
-		box-shadow: 0 0 0 15px rgba(102,103,107,0.07);
-	}
-	50% {
-		box-shadow: 0 0 0 28px rgba(102,103,107,0.12);
-	}
-}
-
-@media (max-width: 991px) {
-	.order-confirmation-page i { font-size: 100px; }
-	.order-confirmation-page p { font-size: 18px; }
-	.order-confirmation-page h2 { font-size: 30px; }
-}
-
 
 /* ---------------------------------- */
 /* Icon Boxes
@@ -11353,7 +11092,7 @@ a.dashboard-responsive-nav-trigger { display: none; }
 .dashboard-box {
 	display: block;
 	border-radius: 4px;
-	background-color: #fff;
+	background-color:#243a29;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 	margin-top: 30px;
 	position: relative;
@@ -11369,7 +11108,7 @@ a.dashboard-responsive-nav-trigger { display: none; }
 .dashboard-box .headline h3 {
 	font-size: 16px;
 	font-weight: 600;
-	color: #333;
+	color: #fff;
 	line-height: 26px;
 }
 
@@ -11520,10 +11259,10 @@ ul.dashboard-box-list > li:last-child {
 	border-bottom: none;
 }
 .jb-head{
-	background: #eee;
+	background: #243a29;
 }
 .dashboard-box .content{
-	background: #fff;
+	background: #243a29;
 }
 ul.dashboard-box-list > li:hover {
 	background-color: #fcfcfc;
@@ -12001,7 +11740,7 @@ ul.dashboard-box-list > li:hover .list-apply-button{
 .submit-field h5 {
 	font-size: 16px;
 	font-weight: 600;
-	color: #333;
+	color: #fff;
 	margin-bottom: 12px;
 }
 
@@ -12261,7 +12000,7 @@ ul.dashboard-box-list > li:hover .list-apply-button{
 		color: #666;
 		font-size: 16px;
 		line-height: 27px;
-		background-color: #fff;
+		background-color: #152913;
 	}
 
 	body.gray { background-color: #fbfbfb; }
@@ -12270,7 +12009,7 @@ ul.dashboard-box-list > li:hover .list-apply-button{
 	/* Main Font */
 	body, h1, h2, h3, h4, h5, h6,  input[type="text"], input[type="password"], input[type="email"],
 	textarea, select, input[type="button"], input[type="submit"], button, body .pac-container
-	{ font-family: "Nunito", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; text-transform: none; }
+	{ font-family: 'MogenBold'; text-transform: none; }
 
 	/* Headlines */
 	h1, h2, h3, h4, h5, h6 {
@@ -12291,7 +12030,7 @@ ul.dashboard-box-list > li:hover .list-apply-button{
 
 	.section { display: block; }
 	.section.white { background: #fff; }
-	.section.gray { background: #f9f9f9; }
+	.section.gray { background: #0c2a14; }
 	.section.border-top { border-top: 1px solid #e0e0e0; }
 	.section.border-bottom { border-bottom: 1px solid #e0e0e0; }
 
@@ -12322,8 +12061,9 @@ ul.dashboard-box-list > li:hover .list-apply-button{
 	.section-headline h4 {
 		font-size: 26px;
 		line-height: 36px;
-		font-weight: 500;
-		color: #333;
+		font-weight: 700;
+		color: #fff;
+		font-family: 'HenriDidot';
 	}
 
 	.section-headline h4 {

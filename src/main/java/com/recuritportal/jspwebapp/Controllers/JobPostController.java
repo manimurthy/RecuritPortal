@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.recuritportal.jspwebapp.Entity.JobApplied;
-import com.recuritportal.jspwebapp.Entity.JobPost1;
+import com.recuritportal.jspwebapp.Entity.JobPost;
 import com.recuritportal.jspwebapp.Entity.JobPostFAQ;
 import com.recuritportal.jspwebapp.Service.ApplyJobService;
 import com.recuritportal.jspwebapp.Service.JobPostService;
@@ -32,45 +32,19 @@ public class JobPostController {
     	this.jobpostService = jpService;
     	this.applyJobService = ajServ;
     } 
-    @GetMapping("/jobfirmdashboard")
+ /*   @GetMapping("/jobfirmdashboard")
     public String firmDashboard(Model model) {
         // Add necessary attributes to the model and return the view name
         return "firmdashboard"; // This should be the name of the .html or .jsp file, if using templates
-    }
-    
-    @GetMapping("/jobfirmdashboardview")
-    public String firmDashboardView(Model model) {
-        // Add necessary attributes to the model and return the view name
-        return "jobDetailsView"; // This should be the name of the .html or .jsp file, if using templates
-    }
+    }*/
     
 	@PostMapping ("/savejobdetails")
-	public String details(JobPost1 jobPost, Model model)
+	public String details(JobPost jobPost, Model model)
 	{
 		 jobpostService.insertJobPostDetails(jobPost);
 		 model.addAttribute("error", "Job details posted  successfully!!! ");
 		return "postjob";
 	}	
-	
-	@PostMapping ("/searchjob_backup")
-	public String details(@RequestParam String jobId, @RequestParam String jobDesc, Model model)
-	{
-        if (jobId != null && !jobId.isEmpty()) {
-            // Only JobId is provided
-            /* if (jobpostService.findByjobtitle(jobId)){
-            	return  "firmdashboard";
-            } else if (jobDesc != null) {
-                jobpostService.findByjobdesc(jobDesc);
-                return  "firmdashboard";
-            }
-            else {
-                // Handle the case where neither is provided
-                model.addAttribute("error", "No sufficient input provided");
-                return "firmdashboard"; // Redirect to an error page or similar
-            }*/     
-        }	
-       return "firmdashboard";
-	}
 	
     @GetMapping("/searchjob")
    // public String searchJob(@RequestParam Boolean fromsrch,Model model, HttpSession session) {
@@ -87,20 +61,38 @@ public class JobPostController {
         // Add empname and empid to the model
         model.addAttribute("empName", empName);
         model.addAttribute("empId", empId);
-        //boolean fromsrch=false;
-/*        if (!fromsrch) {
-            List<JobPost1> jobPost = null;
-        	jobPost = jobpostService.findByAllPostedJob();
-        	if (jobPost ==null || jobPost.isEmpty()) {
-        		model.addAttribute("info", "Did not find any posted jobs");
-        	}
-        	else {
-            model.addAttribute("jobPost", jobPost);
-        	}
-        }*/
-        
-        List<JobPost1> jobPost = null;
+
+        List<JobPost> jobPost = null;
     	jobPost = jobpostService.findByAllPostedJob();
+    	
+        // Define the DateTimeFormatter according to your date format, e.g., "yyyy-MM-dd"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        LocalDate today = LocalDate.now();
+        
+        //Check of the jobPost that has passed the expirty Date and only display to the users        
+        jobPost = jobPost.stream()
+                .filter(job -> {
+                    try {
+                        LocalDate applyByDate = LocalDate.parse(job.getApplybydate(), formatter);
+                        return !applyByDate.isBefore(today);
+                    } catch (Exception e) {
+                        // If parsing fails, treat the date as invalid (exclude the job)
+                        return false;
+                    }
+                })
+                .collect(Collectors.toList());
+        
+        //Check of Job for this Emp has already applied for the job if so remove that record.
+        // Get the list of job IDs the employee has already applied to
+        List<Integer> appliedJobIds = applyJobService.findJobIdsByEmployeeId(empId);
+
+        // Filter out jobs the employee has already applied to
+        jobPost = jobPost.stream()
+                .filter(job -> !appliedJobIds.contains(job.getJobpostingid()))
+                .collect(Collectors.toList());	        
+        
+        //Check for data and return
     	if (jobPost ==null || jobPost.isEmpty()) {
     		model.addAttribute("info", "Did not find any posted jobs");
     	}
@@ -126,7 +118,7 @@ public class JobPostController {
         model.addAttribute("empName", empName);
         model.addAttribute("empId", empId);
         
-		 List<JobPost1> jobPost = null;
+		 List<JobPost> jobPost = null;
 	        if (jobId != null && jobId !="") {
 	            jobPost = jobpostService.findByjobtitle(jobId);
 	        	//return "Hello";
@@ -149,7 +141,7 @@ public class JobPostController {
 	        //String datenow = today1.format(formatter);
 	        //LocalDate today = LocalDate.parse(datenow,formatter);
 	        
-// Check of the jobPost that has passed the expirty Date and only display to the users        
+	        // Check of the jobPost that has passed the expirty Date and only display to the users        
 	        jobPost = jobPost.stream()
 	                .filter(job -> {
 	                    try {
@@ -162,7 +154,7 @@ public class JobPostController {
 	                })
 	                .collect(Collectors.toList());
 	        
-//Check of Job for this Emp has already applied for the job if so remove that record.
+	        //Check of Job for this Emp has already applied for the job if so remove that record.
 	        // Get the list of job IDs the employee has already applied to
 	        List<Integer> appliedJobIds = applyJobService.findJobIdsByEmployeeId(empId);
 
@@ -180,13 +172,10 @@ public class JobPostController {
         		//redirectAttributes.addFlashAttribute("jobPost", jobPost);
         		model.addAttribute("jobPost", jobPost);
         	}
-	        //return "jobDetailsView";
-	        //return "redirect:/searchjob?fromsrch=true";
         	return "searchjob"; 
 	}		
 
 	@GetMapping("/searchalljobsfirm")
-    //@GetMapping("/firmhome")
     public String firmsearchJob(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		//get the firmid stored in the session  
 		Integer firmId = (Integer) session.getAttribute("firmid");
@@ -195,12 +184,11 @@ public class JobPostController {
             redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
             return "redirect:/login"; 
         }		
-        List<JobPost1> jobPost =  jobpostService.findByfirm(firmId);
-        //redirectAttributes.addFlashAttribute("firmJobPosted", jobPost); 
+        List<JobPost> jobPost =  jobpostService.findByfirm(firmId);
         
         model.addAttribute("firmJobPosted", jobPost);
         // Add necessary attributes to the model and return the view name
-        //return "redirect:/firmsearchjob";
+
        return "firmsearchjob";
     }
 	
@@ -225,14 +213,12 @@ public class JobPostController {
     }
     
 	@PostMapping("/saveFAQJob")
-    public String saveJobPost(JobPost1 jobPost1, RedirectAttributes redirectAttributes) {
-        for (JobPostFAQ faq : jobPost1.getFaqs()) {
-            faq.setJobPost(jobPost1);
+    public String saveJobPost(JobPost jobPost, RedirectAttributes redirectAttributes) {
+        for (JobPostFAQ faq : jobPost.getFaqs()) {
+            faq.setJobPost(jobPost);
         }
-		/*jobPost1.getFaqs().forEach(faq -> {
-		        faq.setJobPost(jobPost1);  // Set the parent
-		    });*/
-        jobpostService.savefaq(jobPost1);
+
+        jobpostService.savefaq(jobPost);
         redirectAttributes.addFlashAttribute("info","Job Post created successfully!!!");
         return "redirect:/postjob";
     }

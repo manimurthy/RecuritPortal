@@ -38,10 +38,10 @@
 					<!-- Main Navigation -->
 					<nav id="navigation">
 						<ul id="responsive">						
-						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
-						<li><a href="firmappliedjob" class="current">Job Applicants</a></li>
-						<li><a href="firmclculate" class="current">Calculate Weightage</a></li>
+							<li><a href="postjob" class="current">Post Jobs</a></li>
+							<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
+	<!-- 					<li><a href="firmappliedjob?jobpostingid=0" class="current">Job Applicants</a></li>
+							<li><a href="firmclculate" class="current">Calculate Weightage</a></li> -->	
 						</ul>
 					</nav>
 					<div class="clearfix"></div>				
@@ -50,7 +50,7 @@
 				<!-- Right Side Content / End -->
 				<div class="right-side">
 					<div class="header-widget">
-						<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+						<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 					</div>
 					<!-- Mobile Navigation Button -->
 					<span class="mmenu-trigger">
@@ -79,18 +79,6 @@
 <div class="intro-banner" data-background-image="assets/img/home-background.jpg">
 	<div class="container">
 		
-		<!-- Intro Headline -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="banner-headline">
-					<h3>
-						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
-						<br>
-						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
-					</h3>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -154,22 +142,64 @@
 							</div>
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Years of Experience required </h5>
+									<h5>Minimum Years of Experience required </h5>
 									<input type="text" id = "yearsofexp" name ="yearsofexp" class="with-border" />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
-							</div>
+							</div>			
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Exp. Weightage</h5>
+									<h5>Final Experience Weightage</h5>
 									<input type="text" id ="expweightpercent"  name ="expweightpercent" class="with-border" />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Edu. Weightage</h5>
+									<h5>Yearly Weightage</h5>
+									<input type="text" id = "yearlyExpweight" name ="yearlyExpweight" class="with-border" />
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Minimum Education Qual Required</h5>
+									<select id="mineduqualify" name="mineduqualify" class="with-border">
+									    <option value="Select">Select</option>
+									    <option value="High School">High School</option>
+									    <option value="Under Graduate">Under Graduate</option>
+									    <option value="Graduate">Graduate</option>
+									    <option value="Post Graduate">Post Graduate</option>
+									    <option value="Doctrate">Doctorate</option>
+									</select>									
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>														
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Final Education Weightage</h5>
 									<input type="text" id = "eduweightpercent" name ="eduweightpercent" class="with-border" />
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Each Education Year Weightage</h5>
+									<input type="text" id = "yearlyeduweightpercent" name ="yearlyeduweightpercent" class="with-border" />
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>	
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Name of Skill required</h5>
+									<input type="text" id = "skillname" name ="skillname" class="with-border" />
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>													
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Minimum Exp. Skills Year</h5>
+									<input type="text" id = "minexpskills" name ="minexpskills" class="with-border" />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
@@ -177,6 +207,13 @@
 								<div class="submit-field">
 									<h5>Exp. Skills Weightage</h5>
 									<input type="text" id = "expskills" name ="expskills" class="with-border" />
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Yearly Exp. Skills Year</h5>
+									<input type="text" id = "yearlyexpskills" name ="yearlyexpskills" class="with-border" />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>

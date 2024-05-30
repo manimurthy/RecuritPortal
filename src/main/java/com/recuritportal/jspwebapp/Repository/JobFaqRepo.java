@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.recuritportal.jspwebapp.Entity.JobPost1;
+import com.recuritportal.jspwebapp.Entity.JobPost;
 
-public interface JobFaqRepo  extends CrudRepository<JobPost1, Integer>{
-	JobPost1  findByjobpostingid( Integer jobpostingid);
-	List<JobPost1>  findByjobtitle( String jobTitle);
-	List<JobPost1> findByjobdesc(String jobDesc);
+public interface JobFaqRepo  extends CrudRepository<JobPost, Integer>{
+	JobPost  findByjobpostingid( Integer jobpostingid);
+	List<JobPost>  findByjobtitle( String jobTitle);
+	List<JobPost> findByjobdesc(String jobDesc);
 }

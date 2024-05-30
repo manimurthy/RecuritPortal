@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +38,7 @@
 				<nav id="navigation">
 					<ul id="responsive">						
 						<li><a href="#search-jobs" class="current">Search Jobs</a></li>
-						<li><a href="#liked-jobs" class="current">Liked Jobs</a></li>	
+						<li><a href="#post-jobs" class="current">Post Jobs</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
@@ -48,7 +48,7 @@
 			<div class="right-side">					
 
 				<div class="header-widget">
-					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -89,16 +89,12 @@
 				</div>
 			</div>
 		</div>
-		
-		
-
-		
-
 	</div>
 </div>
 
 <!-- Features Jobs -->
 <div class="section margin-top-45" id="search-jobs">
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12">
@@ -109,64 +105,66 @@
 				</div>
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0 jb-head">
-
 						<div class="row">
+						<!-- <form action="/searchjob" method="post"> -->
 							<div class="col-md-12 p-5 pb-0 pt-4">
-																
 									<div class="row">
 										<div class="col-xl-4">
 											<div class="submit-field mb-3">
 												<h5>Job ID</h5>
-												<input type="text" class="with-border">
+												<input type="text" id ="jobId" name ="jobId" class="with-border">
 											</div>
 										</div>
 			
 										<div class="col-xl-4">
 											<div class="submit-field mb-3">
 												<h5>Job Status</h5>
-												<input type="text" class="with-border">
+												<input type="text" id = "jobDesc"  name = "jobDesc" class="with-border">
 											</div>
 										</div>
 										
 										<div class="col-xl-3">
-											<a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Search Jobs</a>
+											<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Search Jobs</a> -->
+											<button type="submit" class="button ripple-effect big margin-top-30">Search</button>
+											
 										</div>
 									</div>
-								
 							</div>
+							<!-- </form> -->
 						</div>
 						
 
 						<div class="content">
-							
+							<span> This is the JobPost Return value ${jobPost} </span>
 							<ul class="dashboard-box-list">
 								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
-
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-
-											<!-- Logo -->
-											<a href="#" class="job-listing-company-logo">
-												<img src="assets/img/company-logo-01.png" alt="">
-											</a>
-
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">Barista and Cashier</a></h3>
-
-												
-											</div>
-										</div>
-									</div>
-									<!-- Buttons -->
-									<div class="buttons-to-right single-right-button">
-										
-										<a href="#" class="list-apply-button ripple-effect">Apply Now</a>
-									</div>
-								</li>
-
+						    <c:forEach var="i" begin="1" end="5">
+						        <p>Hello</p>
+						    </c:forEach>								
+								    <c:forEach items="${jobPost}" var="jp">
+								    <p>INSDIE CLOOP</p>
+								        <!-- Job Listing -->
+								        <div class="job-listing">
+								            <!-- Job Listing Details -->
+								            <div class="job-listing-details">
+								                <!-- Logo -->
+								                <!-- Details -->
+								                <div class="job-listing-description">
+								                    <h3 class="job-listing-title">
+								                        <!-- Correct the query string syntax and close the 'a' tag properly -->
+								                        <a href="/applyjob">WHAT THE HELL!!!<c:out value= "${jp.jobtitle}" /></a>
+								                    </h3>
+								                    <p>${jp.jobdesc}</p> <!-- Displaying job description -->
+								                </div>
+								            </div>
+								        </div>
+								        <!-- Buttons -->
+								        <div class="buttons-to-right single-right-button">
+								            <!-- Use dynamic jobpostingId in the link to apply to make it functional -->
+								            <a href="/applyjob" class="list-apply-button ripple-effect">Apply Now</a>
+								        </div>
+								    </c:forEach>
+								</li> 							
 								<li>
 									<!-- Job Listing -->
 									<div class="job-listing">
@@ -231,9 +229,6 @@
 						</div>
 					</div>
 				</div>
-				
-				
-
 			</div>
 		</div>
 	</div>
@@ -242,6 +237,7 @@
 
 
 <div id="post-jobs" class="section margin-top-65 gray padding-top-65 padding-bottom-75">
+<form action="/savejobdetails" method="post">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -265,49 +261,74 @@
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Unique Handle</h5>
-									<input type="text" class="with-border" />
+									<input type="text" id = "firmunqid" name = "firmunqid" class="with-border" />
 								</div>
 							</div>
 
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>First Name</h5>
-									<input type="text" class="with-border" />
+									<h5>Job Title</h5>
+									<input type="text" id = "jobtitle" name = "jobtitle" class="with-border" />
+								</div>
+							</div>
+
+							<!-- <div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Job Desc</h5>
+									<!-- <input type="text" name = "jobdesc" class="with-border" /> 
+ 									<textarea cols="30" rows="5" class="with-border"></textarea>
+								</div>
+							</div>-->
+
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Department</h5>
+									<input type="text" id = "dept" name = "dept" class="with-border" />
 								</div>
 							</div>
 
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Last Name</h5>
-									<input type="text" class="with-border" />
+									<h5>Admin in charge </h5>
+									<input type="text" id = "admin_in_charge" name = "admin_in_charge" class="with-border" />
 								</div>
 							</div>
 
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Address 1</h5>
-									<input type="text" class="with-border" />
+									<h5>Apply by date </h5>
+									<input type="date" id = "applybydate" name ="applybydate" class="with-border" />
 								</div>
 							</div>
-
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Address 2</h5>
-									<input type="text" class="with-border" />
+									<h5>Years of Experience required </h5>
+									<input type="text" id = "yearsofexp" name ="yearsofexp" class="with-border" />
 								</div>
 							</div>
-
 							<div class="col-xl-4">
 								<div class="submit-field">
-									<h5>Pin Code</h5>
-									<input type="text" class="with-border" />
+									<h5>Exp. Weightage</h5>
+									<input type="text" id ="expweightpercent"  name ="expweightpercent" class="with-border" />
 								</div>
 							</div>
-
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Edu. Weightage</h5>
+									<input type="text" id = "eduweightpercent" name ="eduweightpercent" class="with-border" />
+								</div>
+							</div>
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Exp. Skills Weightage</h5>
+									<input type="text" id = "expskills" name ="expskills" class="with-border" />
+								</div>
+							</div>
+														
 							<div class="col-xl-12">
 								<div class="submit-field">
 									<h5>Job Description</h5>
-									<textarea cols="30" rows="5" class="with-border"></textarea>
+									<textarea id = "jobdesc" name="jobdesc" cols="30" rows="5" class="with-border"></textarea>
 									<div class="uploadButton margin-top-30">
 										<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple="" />
 										<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
@@ -321,11 +342,12 @@
 			</div>
 
 			<div class="col-xl-12">
-				<a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a>
+				<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a> -->
+				<button type="submit" class="button ripple-effect big margin-top-30">Submit</button>
 			</div>
 		</div>
 	</div>
-	
+	</form>
 </div>
 <!-- Category Boxes -->
 

@@ -53,7 +53,7 @@
 					<input type="hidden" id="firmname" name="firmname" value="${firmdtl.firmid}" />-->
 					<span>Firm Name</span> 
 					<input type="hidden" id="firmname" name="firmname" value="1" />
-					<a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -82,18 +82,6 @@
 <div class="intro-banner" data-background-image="assets/img/home-background.jpg">
 	<div class="container">
 		
-		<!-- Intro Headline -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="banner-headline">
-					<h3>
-						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
-						<br>
-						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
-					</h3>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -116,10 +104,7 @@
 						            <tr>
 						                <th>Employee Name</th>
 						                <th>Applied Date</th>
-						                <th>Years of Experience</th>
-						                <th>Skills</th>
-						                <th>Educational Qualification</th>
-						                <th>Miscellaneous Info</th>
+						                <th>Cumulative Weightage</th>
 						                <th>Status</th>
 						                <th>Action</th>
 						            </tr>
@@ -129,10 +114,8 @@
 						                <tr>
 						                    <td>${jobApplication.employee.firstname} ${jobApplication.employee.lastname}</td>
 						                    <td>${jobApplication.applieddate}</td>
-						                    <td>${jobApplication.noofyearsofexp}</td>
-						                    <td>${jobApplication.expinskills}</td>
-						                    <td>${jobApplication.eduqualify}</td>
-						                    <td>${jobApplication.miscinfo}</td>
+						                    <td>${jobApplication.calcTotalWeight}</td>
+						                    <td>${jobApplication.status}</td>
 						                    <td>
 						                        <form action="/updateStatus" method="post">
 						                            <input type="hidden" name="jobapplyid" value="${jobApplication.jobapplyid}">
@@ -144,6 +127,9 @@
 						                            <input type="submit" value="Update">
 						                        </form>
 						                    </td>
+						                    <td>
+                    							<a href="/viewjobapplicationdetails?jobapplyid=${jobApplication.jobapplyid}" class="list-apply-button ripple-effect">View Details</a>
+                							</td>
 						                </tr>
 						            </c:forEach>
 						        </tbody>
@@ -207,13 +193,7 @@
 							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 						</div>
 					</a>
-
-					
-
-					
-
 				</div>
-
 			</div>
 		</div>
 	</div>
