@@ -48,14 +48,14 @@ public class JobPostController {
 	
     @GetMapping("/searchjob")
    // public String searchJob(@RequestParam Boolean fromsrch,Model model, HttpSession session) {
-    public String searchJob(Model model, HttpSession session) {
+    public String searchJob(Model model, HttpSession session,RedirectAttributes redirectAttributes ) {
         // Get the empname and empid from the session
     	
         String empName = (String) session.getAttribute("empname");
         Integer empId = (Integer) session.getAttribute("empId");
 
         if (empId == null) {
-        	model.addAttribute("error", "You are not logged in. Please log in to access this page.");
+        	redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
             return "redirect:/login"; 
         }
         // Add empname and empid to the model
@@ -178,6 +178,7 @@ public class JobPostController {
 	@GetMapping("/searchalljobsfirm")
     public String firmsearchJob(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		//get the firmid stored in the session  
+		String firmname = (String) session.getAttribute("firmname");
 		Integer firmId = (Integer) session.getAttribute("firmid");
         // If firm ID is null, redirect to login page with error message
         if (firmId == null) {
@@ -186,6 +187,8 @@ public class JobPostController {
         }		
         List<JobPost> jobPost =  jobpostService.findByfirm(firmId);
         
+        model.addAttribute("firmname",firmname);
+        model.addAttribute("firmid",firmId);
         model.addAttribute("firmJobPosted", jobPost);
         // Add necessary attributes to the model and return the view name
 
@@ -194,13 +197,16 @@ public class JobPostController {
 	
 	@GetMapping("/postjob")
     public String firmPostJob(Model model ,HttpSession session, RedirectAttributes redirectAttributes) {
-		//get the firmid stored in the session  
+		//get the firmid  and firmname stored in the session  
+		String firmname = (String) session.getAttribute("firmname");
 		Integer firmId = (Integer) session.getAttribute("firmid");
         // If firm ID is null, redirect to login page with error message
         if (firmId == null) {
             redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
             return "redirect:/login"; 
-        }		
+        }
+        model.addAttribute("firmname", firmname);
+        model.addAttribute("firmid", firmId);
 		 model.addAttribute("firmunqid", firmId); 
         // Add necessary attributes to the model and return the view name
         return "postjob"; // This should be the name of the .html or .jsp file, if using templates

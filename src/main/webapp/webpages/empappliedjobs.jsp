@@ -47,9 +47,18 @@
 			<!-- Left Side Content / End -->
 			<!-- Right Side Content / End -->
 			<div class="right-side">					
-
-				<div class="header-widget">
-					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+				<div class="header-widget" style="display: flex; flex-direction: column; ">
+				    <div>
+				        <a href="editEmployee?empid=${empId}">
+				            <i class="icon-material-outline-power-settings-new"></i>${empName}
+				        </a> 
+				        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
+				    </div>
+				    <div>
+				        <a href="/logout">
+				            <i class="icon-material-outline-power-settings-new"></i> Logout
+				        </a>
+				    </div>
 				</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">

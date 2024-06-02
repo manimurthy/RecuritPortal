@@ -32,13 +32,17 @@ public class LikedJobsController {
     @GetMapping("/likedjobs")
     public String showEmployeeLikedJobs( RedirectAttributes redirectAttributes , HttpSession session, Model model) {
     	
-    	Integer empid = (Integer) session.getAttribute("empId");
+        String empName = (String) session.getAttribute("empname");
+    	Integer empId = (Integer) session.getAttribute("empId");
 
-            if (empid == null) {
+            if (empId == null) {
             	redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");						
                 return "redirect:/login"; 
             }    		    	
-        List<JobPost> likedJobs = likedJobsService.getLikedJobsForEmployee(empid);
+            
+        model.addAttribute("empName", empName);
+        model.addAttribute("empId", empId);            
+        List<JobPost> likedJobs = likedJobsService.getLikedJobsForEmployee(empId);
         model.addAttribute("likedJobs", likedJobs);
         return "emplikedjobs"; // return the name of the JSP file
     }	

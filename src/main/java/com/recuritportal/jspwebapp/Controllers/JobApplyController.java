@@ -41,19 +41,17 @@ public class JobApplyController {
 		this.empService = eServ;
 	}
 	
- /*   @GetMapping("/applyjob")
-    public String applyJob(Model model) {
-        // Add necessary attributes to the model and return the view name
-        return "/applyjobs"; // This should be the name of the .html or .jsp file, if using templates
-    }*/
     
     @GetMapping("/applyjobid")
     public String applyJob(@RequestParam Integer jobpostingid, @RequestParam String skillname, Model model, HttpSession session) {
         // Add necessary attributes to the model and return the view name
-    	Integer empid = (Integer) session.getAttribute("empId");
+        String empName = (String) session.getAttribute("empname");
+        Integer empId = (Integer) session.getAttribute("empId");
+        
     	model.addAttribute("jobpostingid", jobpostingid);
     	model.addAttribute("skillname",skillname);
-    	model.addAttribute("empid", empid);
+        model.addAttribute("empName", empName);
+    	model.addAttribute("empid", empId);
         return "/applyjobs"; // This should be the name of the .html or .jsp file, if using templates
     }  
 	
@@ -96,14 +94,19 @@ public class JobApplyController {
     }
     
     @GetMapping("/empappliedjob")
-    public String getJobDetails(Model model, HttpSession session) {
-    	Integer empid = (Integer) session.getAttribute("empId");
-
-            if (empid == null) {
-            	model.addAttribute("error", "You are not logged in. Please log in to access this page.");
+    public String getJobDetails(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    	
+        String empName = (String) session.getAttribute("empname");
+        Integer empId = (Integer) session.getAttribute("empId");
+        
+            if (empId == null) {
+            	redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
                 return "redirect:/login"; 
             }    		
-        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByEmployeeId(empid);
+         
+        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByEmployeeId(empId);
+        model.addAttribute("empName", empName);
+        model.addAttribute("empId", empId);        
         model.addAttribute("jobApplications", jobApplications);
         return "empappliedjobs"; // Return the name of your JSP file
     }
@@ -185,6 +188,5 @@ public class JobApplyController {
         //Display the success message
         redirectAttributes.addFlashAttribute ("info","Weigatge Calculation for applied jobs completed");
         return "redirect:/searchalljobsfirm"; 
-        
     }
 }

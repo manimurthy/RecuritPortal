@@ -55,13 +55,19 @@
 			<!-- Right Side Content / End -->
 			<div class="right-side">					
 
-				<div class="header-widget">
-					<!-- <span>${firmdtl.firmname}</span> 
-					<input type="hidden" id="firmname" name="firmname" value="${firmdtl.firmid}" />-->
-					<span>${empName}</span> 
-					<input type="hidden" id="firmname" name="firmname" value="${empId}" />
-					<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
-				</div>
+			<div class="header-widget" style="display: flex; flex-direction: column; ">
+			    <div>
+			        <a href="editEmployee?empid=${empId}">
+			            <i class="icon-material-outline-power-settings-new"></i>${empName}
+			        </a> 
+			        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
+			    </div>
+			    <div>
+			        <a href="/logout">
+			            <i class="icon-material-outline-power-settings-new"></i> Logout
+			        </a>
+			    </div>
+			</div>
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
 					<button class="hamburger hamburger--collapse" type="button">
@@ -88,19 +94,7 @@
 <!-- add class "disable-gradient" to enable consistent background overlay -->
 <div class="intro-banner" data-background-image="assets/img/home-background.jpg">
 	<div class="container">
-		
-		<!-- Intro Headline -->
-		<!-- <div class="row">
-			<div class="col-md-12">
-				<div class="banner-headline">
-					<h3>
-						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
-						<br>
-						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
-					</h3>
-				</div>
-			</div>
-		</div> -->
+
 	</div>
 </div>
 

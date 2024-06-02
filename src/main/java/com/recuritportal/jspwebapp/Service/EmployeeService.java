@@ -23,8 +23,12 @@ public class EmployeeService {
     	employeeRepository.save(emp);
         return true;
     }    
-/*    public boolean validatefirmCredentials(String firmemail, String password) {
-        Firm firm= firmRepo.findByFirmemailAndPassword(firmemail, password);
-        return firm != null;
-    }*/    
+    public Employee getEmployeeById(Integer empid) {
+        return employeeRepository.findById(empid).orElse(null);
+    }   
+    public boolean updatetEmployeeDetails(Employee emp) {
+        
+    	employeeRepository.save(emp);
+        return true;
+    }        
 }

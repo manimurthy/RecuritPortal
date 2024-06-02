@@ -40,8 +40,6 @@
 						<ul id="responsive">						
 							<li><a href="postjob" class="current">Post Jobs</a></li>
 							<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
-	<!-- 					<li><a href="firmappliedjob?jobpostingid=0" class="current">Job Applicants</a></li>
-							<li><a href="firmclculate" class="current">Calculate Weightage</a></li> -->	
 						</ul>
 					</nav>
 					<div class="clearfix"></div>				
@@ -49,9 +47,18 @@
 				<!-- Left Side Content / End -->
 				<!-- Right Side Content / End -->
 				<div class="right-side">
-					<div class="header-widget">
-						<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
-					</div>
+				<div class="header-widget" style="display: flex; flex-direction: column; ">
+				    <div>
+				        <a>
+				            <i class="icon-material-outline-power-settings-new"></i>${firmname}
+				        </a> 
+				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
+				    </div>
+				    <div>
+				        <a href="/logout">
+				            <i class="icon-material-outline-power-settings-new"></i> Logout
+				        </a>
+				    </div>
 					<!-- Mobile Navigation Button -->
 					<span class="mmenu-trigger">
 						<button class="hamburger hamburger--collapse" type="button">

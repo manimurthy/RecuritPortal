@@ -38,9 +38,9 @@
 					<!-- Main Navigation -->
 					<nav id="navigation">
 						<ul id="responsive">						
-						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
-						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
-						<li><a href="empappliedjob?empid=0" class="current">Applied jobs</a></li>
+							<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
+							<li><a href="likedjobs" class="current">Liked Jobs</a></li>
+							<li><a href="empappliedjob" class="current">Applied jobs</a></li>
 						</ul>
 					</nav>
 					<div class="clearfix"></div>				
@@ -48,8 +48,18 @@
 				<!-- Left Side Content / End -->
 				<!-- Right Side Content / End -->
 				<div class="right-side">
-					<div class="header-widget">
-						<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
+					<div class="header-widget" style="display: flex; flex-direction: column; ">
+					    <div>
+					        <a href="editEmployee?empid=${empId}">
+					            <i class="icon-material-outline-power-settings-new"></i>${empName}
+					        </a> 
+					        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
+					    </div>
+					    <div>
+					        <a href="/logout">
+					            <i class="icon-material-outline-power-settings-new"></i> Logout
+					        </a>
+					    </div>
 					</div>
 					<!-- Mobile Navigation Button -->
 					<span class="mmenu-trigger">
@@ -120,18 +130,24 @@
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Emp Id</h5>
-									<input type="text" id = "empid" name = "empid"  value ="${empid}" class="with-border" readonly />
+									<input type="hidden" id = "empid" name = "empid"  value ="${empid}" class="with-border" readonly />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Job Id</h5>
-									<input type="text" id = "job_post_id" name = "job_post_id" value="${jobpostingid}"  class="with-border" readonly />
+									<input type="hidden" id = "job_post_id" name = "job_post_id" value="${jobpostingid}"  class="with-border" readonly />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
-
+							<div class="col-xl-4">
+								<div class="submit-field">
+									<h5>Job Title</h5>
+									<input type="text" id = "job_title" name = "job_title" value="${jobtitle}"  class="with-border" readonly />
+									<span class="error-message" style="color: red; display: none;"></span>
+								</div>
+							</div>
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Apply date </h5>

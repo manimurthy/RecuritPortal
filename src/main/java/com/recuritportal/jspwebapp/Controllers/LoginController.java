@@ -45,8 +45,7 @@ public class LoginController {
     public String login(@RequestParam String empemail, @RequestParam String password, @RequestParam(required = false) String emptype,RedirectAttributes redirectAttributes, HttpSession session) {
     	Firm firm;
     	Employee emp;
-        //Employee employee = employeeRepo.findByEmpemailAndPassword(empemail, password);
-       if ("Employee".equals(emptype.trim())) {
+        if ("Employee".equals(emptype.trim())) {
     	   emp = empService.validateCredentials(empemail, password);
 	    	if (emp != null) {
 	     	   redirectAttributes.addFlashAttribute("empdtl", emp);
@@ -65,7 +64,8 @@ public class LoginController {
 	           if (firm != null) {
 	        	   redirectAttributes.addFlashAttribute("firmdtl", firm);
 		           session.setAttribute("firmid",firm.getFirmid());
-		           session.setAttribute("usertype","Firm");	        	   
+		           session.setAttribute("usertype","Firm");	 
+		           session.setAttribute("firmname",  firm.getFirmname());
 	        	   return "redirect:/firmhome";
 	           } else {
 	        	   redirectAttributes.addFlashAttribute("error", "Invalid Firm credentials!! Please try again");
@@ -119,4 +119,22 @@ public class LoginController {
         model.addAttribute("info", "You have been successfully logged out! Login once again to continue");
         return "login"; // Redirect to login page or any other page you want
     }	
+    
+    // Method to handle edit request
+    @GetMapping("/editEmployee")
+    public String editEmployee(@RequestParam("empid") Integer empid, Model model) {
+        Employee employee = empService.getEmployeeById(empid);
+        model.addAttribute("employee", employee);
+        return "empedit"; // Your JSP page to display the form
+    }    
+    
+	@PostMapping ("/updatedetails")
+	public String updatedetails(Employee empReg, Model model, RedirectAttributes redirectAttributes)
+	{
+		 empService.insertEmployeeDetails(empReg);
+		 redirectAttributes.addFlashAttribute("info", "Your profile has been updated successfully. Please continue to search for your dream job!");
+		//return "login";
+		 return "redirect:/searchjob";
+	}    
+	
 }
