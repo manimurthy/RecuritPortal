@@ -15,6 +15,7 @@ import com.recuritportal.jspwebapp.Entity.Applyjob;
 import com.recuritportal.jspwebapp.Entity.Employee;
 import com.recuritportal.jspwebapp.Entity.JobApplied;
 import com.recuritportal.jspwebapp.Entity.JobPost;
+import com.recuritportal.jspwebapp.Exception.CustomApplicationException;
 import com.recuritportal.jspwebapp.Service.ApplyJobService;
 import com.recuritportal.jspwebapp.Service.EmployeeService;
 import com.recuritportal.jspwebapp.Service.InsertApplyService;
@@ -22,6 +23,7 @@ import com.recuritportal.jspwebapp.Service.JobPostService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
@@ -65,32 +67,40 @@ public class JobApplyController {
                                @RequestParam("expinskills") int expInSkills,
                                @RequestParam("miscinfo") String miscInfo,
                                @RequestParam("status") String status,
-                               Model model) {
-        // Create a new JobApplied object
-        JobApplied jobApplied = new JobApplied();
-
-        // Set the jobPost property by creating a new JobPost object with the specified ID
-        //JobPost jobPost = new JobPost();
-     // Fetch JobPost entity from the database
-        JobPost jobPost = entityManager.find(JobPost.class, jobPostId);
-     // Fetch Employee entity from the database
-        Employee employee = entityManager.find(Employee.class, empId);
-        // Set the merged JobPost entity to the JobApplied entity
-        jobApplied.setJobPost(jobPost);
-        jobApplied.setEmployee(employee);
-        // Set other properties of the jobApplied object
-        jobApplied.setApplieddate(appliedDate);
-        jobApplied.setNoofyearsofexp(noOfYearsOfExp);
-        jobApplied.setEduqualify(eduQualify);
-        jobApplied.setExpinskills(expInSkills);
-        jobApplied.setMiscinfo(miscInfo);
-        jobApplied.setStatus(status);
-        // Save the jobApplied object
-        applyjobService.insertApplyJob(jobApplied);
-        // Add a success message to the model
-        model.addAttribute("info", "Job details posted successfully!!!");
-
-        return "redirect:/empappliedjob";
+                               Model model,
+                               HttpServletRequest request) {
+    	try {
+	        // Create a new JobApplied object
+	        JobApplied jobApplied = new JobApplied();
+	
+	        // Set the jobPost property by creating a new JobPost object with the specified ID
+	        //JobPost jobPost = new JobPost();
+	     // Fetch JobPost entity from the database
+	        JobPost jobPost = entityManager.find(JobPost.class, jobPostId);
+	     // Fetch Employee entity from the database
+	        Employee employee = entityManager.find(Employee.class, empId);
+	        // Set the merged JobPost entity to the JobApplied entity
+	        jobApplied.setJobPost(jobPost);
+	        jobApplied.setEmployee(employee);
+	        // Set other properties of the jobApplied object
+	        jobApplied.setApplieddate(appliedDate);
+	        jobApplied.setNoofyearsofexp(noOfYearsOfExp);
+	        jobApplied.setEduqualify(eduQualify);
+	        jobApplied.setExpinskills(expInSkills);
+	        jobApplied.setMiscinfo(miscInfo);
+	        jobApplied.setStatus(status);
+	        // Save the jobApplied object
+	        applyjobService.insertApplyJob(jobApplied);
+	        // Add a success message to the model
+	        model.addAttribute("info", "Job details posted successfully!!!");
+	
+	        return "redirect:/empappliedjob";
+	} catch (Exception e) {
+	    model.addAttribute("error", "An error occurred while saving the job application:" + e.getMessage());
+	    String referer = request.getHeader("Referer");
+	    model.addAttribute("referer", referer);
+	    return "error"; // Redirect to error page
+	}        
     }
     
     @GetMapping("/empappliedjob")
@@ -137,22 +147,30 @@ public class JobApplyController {
     
     @PostMapping("/updateStatus")
     public String updateStatus(@RequestParam("jobapplyid") int jobApplyId,
-                               @RequestParam("status") String status,@RequestParam("jobpostid") Integer jobpostid,  RedirectAttributes redirectAttributes, Model model,HttpSession session ) {
+                               @RequestParam("status") String status,@RequestParam("jobpostid") Integer jobpostid,  RedirectAttributes redirectAttributes, Model model,HttpSession session ,HttpServletRequest request) {
 
-    	//Code for checking of the frim user has logged in. If not then send to login page
-    	Integer firmid = (Integer) session.getAttribute("firmid");
-
-            if (firmid == null) {
-            	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
-                return "redirect:/login"; 
-            }    		
-            
-    	applyjobService.updateStatus(jobApplyId, status);
-    	List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostid);
-               
-        model.addAttribute("jobApplications", jobApplications);
-    	model.addAttribute("info", "Record updated successfully");
-    	return "jobappliedselection";
+    	try {
+	    	//Code for checking of the frim user has logged in. If not then send to login page
+	    	Integer firmid = (Integer) session.getAttribute("firmid");
+	
+	            if (firmid == null) {
+	            	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
+	                return "redirect:/login"; 
+	            }    		
+	            
+	    	applyjobService.updateStatus(jobApplyId, status);
+	    	List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostid);
+	               
+	        model.addAttribute("jobApplications", jobApplications);
+	    	model.addAttribute("info", "Record updated successfully");
+	    	return "jobappliedselection";
+	} catch (Exception e) {
+	    model.addAttribute("error", "An error occurred while updating the status  for Job Post: " + jobpostid + "Error Message :" + e.getMessage());
+	    String referer = request.getHeader("Referer");
+	    model.addAttribute("referer", referer);
+	    return "error"; // Redirect to error page
+	}
+    	
     }    
 
     @GetMapping("/viewjobapplicationdetails")
@@ -169,24 +187,31 @@ public class JobApplyController {
     }
     
     @GetMapping("/clacweightscore")
-    public String getclacweightscore(@RequestParam Integer jobpostingid, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
-       
-    	//Code for checking of the frim user has logged in. If not then send to login page
-    	Integer firmid = (Integer) session.getAttribute("firmid");
-
-            if (firmid == null) {
-            	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
-                return "redirect:/login"; 
-            }    		
-        JobPost jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
-        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostingid);
-        
-        // Iterate over the job applications and call calcWeightandUpdate for each
-        for (JobApplied jobApplied : jobApplications) {
-            applyjobService.calcWeightandUpdate(jobpost, jobApplied);
-        }
-        //Display the success message
-        redirectAttributes.addFlashAttribute ("info","Weigatge Calculation for applied jobs completed");
-        return "redirect:/searchalljobsfirm"; 
+    public String getclacweightscore(@RequestParam Integer jobpostingid, Model model, HttpSession session,RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    	try {
+	    	//Code for checking of the frim user has logged in. If not then send to login page
+	    	Integer firmid = (Integer) session.getAttribute("firmid");
+	
+	            if (firmid == null) {
+	            	redirectAttributes.addFlashAttribute ("error", "You are not logged in. Please log in to access this page.");
+	                return "redirect:/login"; 
+	            }    		
+	        JobPost jobpost = applyjobService.getJobDtlsForApply(jobpostingid);
+	        List<JobApplied> jobApplications = applyjobService.getJobApplicationsByPostingId(jobpostingid);
+	        
+	        // Iterate over the job applications and call calcWeightandUpdate for each
+	        for (JobApplied jobApplied : jobApplications) {
+	            applyjobService.calcWeightandUpdate(jobpost, jobApplied);
+	        }
+	        //Display the success message
+	        redirectAttributes.addFlashAttribute ("info","Weigatge Calculation for applied jobs completed");
+	        return "redirect:/searchalljobsfirm"; 
+		} catch (CustomApplicationException e) {
+		    model.addAttribute("error", "An error occurred while fetching job all details as per the given values: " + e.getMessage());
+		    String referer = request.getHeader("Referer");
+		    model.addAttribute("referer", referer);
+		    return "error"; // Redirect to error page
+		}
     }
+
 }
