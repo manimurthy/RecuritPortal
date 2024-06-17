@@ -38,8 +38,9 @@
 					<!-- Main Navigation -->
 					<nav id="navigation">
 						<ul id="responsive">						
-							<li><a href="postjob" class="current">Post Jobs</a></li>
-							<li><a href="firmsearchjob" class="current">Posted Job</a></li>
+						<li><a href="searchjob?fromsrch=false" class="current">Search Jobs</a></li>
+						<li><a href="likedjobs" class="current">Liked Jobs</a></li>
+						<li><a href="empappliedjob?empid=0" class="current">Applied jobs</a></li>
 						</ul>
 					</nav>
 					<div class="clearfix"></div>				
@@ -47,28 +48,18 @@
 				<!-- Left Side Content / End -->
 				<!-- Right Side Content / End -->
 				<div class="right-side">
-					<div class="header-widget" style="display: flex; flex-direction: column; ">
-					    <div>
-					        <a>
-					            <i class="fa fa-user" aria-hidden="true"></i>
-	 								${firmname}
-					        </a> 
-					        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
-					    </div>
-					    <div>
-					        <a href="/logout">
-					             Logout
-					        </a>
-					    </div>
-						<!-- Mobile Navigation Button -->
-						<span class="mmenu-trigger">
-							<button class="hamburger hamburger--collapse" type="button">
-								<span class="hamburger-box">
-									<span class="hamburger-inner"></span>
-								</span>
-							</button>
-						</span>
+					<div class="header-widget">
+						<a href="/logout"><i class="icon-material-outline-power-settings-new"></i> Logout</a>
 					</div>
+					<!-- Mobile Navigation Button -->
+					<span class="mmenu-trigger">
+						<button class="hamburger hamburger--collapse" type="button">
+							<span class="hamburger-box">
+								<span class="hamburger-inner"></span>
+							</span>
+						</button>
+					</span>
+
 				</div>
 				<!-- Right Side Content / End -->
 			</div>
@@ -88,6 +79,17 @@
 	<div class="container">
 		
 		<!-- Intro Headline -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="banner-headline">
+					<h3>
+						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
+						<br>
+						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
+					</h3>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -163,6 +165,50 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
+
+					<div class="section-headline centered margin-bottom-50">
+						<h3>Popular Job</h3>
+					</div>
+
+					<!-- Category Boxes Container -->
+					<div class="categories-container d-flex align-items-center justify-content-center">
+						<!-- Category Box -->
+						<a href="jobs-list-layout-1.html" class="category-box">
+							<div class="category-box-icon">
+								<i class="icon-line-awesome-pencil"></i>
+							</div>
+							
+							<div class="category-box-content">
+								<h3>Lorem Ipsum is simply dummy </h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							</div>
+						</a>
+
+						<!-- Category Box -->
+						<a href="jobs-list-layout-2.html" class="category-box">
+							<div class="category-box-icon">
+								<i class="icon-line-awesome-pie-chart"></i>
+							</div>
+												
+							<div class="category-box-content">
+								<h3>Lorem Ipsum is simply dummy </h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							</div>
+						</a>
+
+						<!-- Category Box -->
+						<a href="jobs-list-layout-1.html" class="category-box">
+							<div class="category-box-icon">
+								<i class="icon-line-awesome-image"></i>
+							</div>
+							
+							<div class="category-box-content">
+								<h3>Lorem Ipsum is simply dummy </h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							</div>
+						</a>
+
+					</div>
 
 				</div>
 			</div>

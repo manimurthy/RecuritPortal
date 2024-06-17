@@ -328,7 +328,7 @@ header.fullwidth .container {
 
 .job-listing h3.job-listing-title {
 	font-size: 20px;
-	color: #fff;
+	color: #333;
 	line-height: 30px;
 }
 
@@ -11265,12 +11265,12 @@ ul.dashboard-box-list > li:last-child {
 	background: #243a29;
 }
 ul.dashboard-box-list > li:hover {
-	/* background-color: #fcfcfc; */
+	background-color: #fcfcfc;
 }
 ul.dashboard-box-list > li:hover .list-apply-button{
-    /* box-shadow: 0 4px 12px rgba(42, 65, 232, 0.15); */
+    box-shadow: 0 4px 12px rgba(42, 65, 232, 0.15);
 	background-color: #2a41e8;
-	/* color: #fff; */
+	color: #fff;
 }
 .dashboard-box-list .notification-text { font-size: 14.7px; flex: 1; }
 .dashboard-box-list .notification-icon { flex: 0 0 40px; }

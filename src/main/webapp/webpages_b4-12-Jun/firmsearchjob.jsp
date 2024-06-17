@@ -10,24 +10,7 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style-home.css">
 <link rel="stylesheet" href="assets/css/blue.css">
-<style>
-	.job-listing h3.job-listing-title{color:#fff}
-	ul.dashboard-box-list>li:hover{background-color:transparent}
-	ul.dashboard-box-list>li:hover .list-apply-button{box-shadow:none;background-color:#2a41e8;color:#000}
-	.buttons-to-right,.dashboard-box-list .button.to-right{opacity:1;box-shadow:none;background-color:transparent}
-	table{font-family:arial,sans-serif;border-collapse:collapse;width:100%}
-	th{    background: #fff;
-	color: #000;
-	border: 1px solid #000 !important;}
-	td{color:#fff}
-	td,th{border:1px solid #fff;text-align:left;padding:8px}
-	ul.dashboard-box-list > li{border: 0;}
-	.dashboard-box .button.ico i{    color: #dc3139;}
-	.dashboard-box .button.red {
-	background-color: #fff;
-	box-shadow: none;
-	}
-</style>
+
 </head>
 <body onload="showAlert('${info}')">
 
@@ -54,7 +37,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="firmsearchjob" class="current">Posted Job</a></li>
+						<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
@@ -65,17 +48,15 @@
 				<div class="header-widget" style="display: flex; flex-direction: column; ">
 				    <div>
 				        <a>
-				            <i class="fa fa-user" aria-hidden="true"></i>
- 								${firmname}
+				            <i class="icon-material-outline-power-settings-new"></i>${firmname}
 				        </a> 
 				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
 				    </div>
 				    <div>
 				        <a href="/logout">
-				             Logout
+				            <i class="icon-material-outline-power-settings-new"></i> Logout
 				        </a>
-				    </div>
-
+				    </div>				
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
 					<button class="hamburger hamburger--collapse" type="button">
@@ -103,6 +84,18 @@
 <div class="intro-banner" data-background-image="assets/img/home-background.jpg">
 	<div class="container">
 		
+		<!-- Intro Headline -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="banner-headline">
+					<h3>
+						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
+						<br>
+						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
+					</h3>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -114,55 +107,48 @@
 				
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
-					<h3>Job Application Selection</h3>					
+					<h3>Posted Jobs</h3>					
 				</div>
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0 jb-head">
-						<div class="headline">
-							<h3> Job Application Table</h3>
-						</div>
-						<div class="content p-4">
-						     <table>
-						        <thead>
-						            <tr>
-						                <th width="30%">Employee Name</th>
-						                <th width="15%">Applied Date</th>
-						                <th width="15%">Cumulative Weightage</th>
-						                <th width="15%">Status</th>
-						                <th width="25%">Action</th>
-						            </tr>
-						        </thead>
-						        <tbody>
-						            <c:forEach items="${jobApplications}" var="jobApplication">
-						                <tr>
-						                    <td>${jobApplication.employee.firstname} ${jobApplication.employee.lastname}</td>
-						                    <td>${jobApplication.applieddate}</td>
-						                    <td>${jobApplication.calcTotalWeight}</td>
-						                    <td>${jobApplication.status}</td>
-						                    <td>
-						                        <form action="/updateStatus" method="post" style="    display: flex;
-												flex-wrap: wrap;
-												align-items: flex-start;
-												justify-content: center;">
-						                            <input type="hidden" name="jobapplyid" value="${jobApplication.jobapplyid}">
-						                            <input type="hidden" name="jobpostid" value="${jobApplication.jobPost.jobpostingid}">
-						                            <select name="status" class="mb-3">
-						                                <option value="Accept" ${jobApplication.status eq 'Accept' ? 'selected' : ''}>Accept</option>
-						                                <option value="Reject" ${jobApplication.status eq 'Reject' ? 'selected' : ''}>Reject</option>
-						                            </select>
-						                            <input type="submit" value="Update">
-													<a href="/viewjobapplicationdetails?jobapplyid=${jobApplication.jobapplyid}" class="list-apply-button ripple-effect">View Details</a>
-						                        </form>
-												
-						                    </td>
-						                    
-						                </tr>
-						            </c:forEach>
-						        </tbody>
-						    </table>							
+						<div class="content">
+							<ul class="dashboard-box-list">
+								<c:forEach items="${firmJobPosted}" var="jp">
+								<li>
+									<!-- Job Listing -->
+									<div class="job-listing">
+
+										<!-- Job Listing Details -->
+										<div class="job-listing-details">
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><c:out value= "${jp.jobtitle}" /></h3>
+											</div>
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
+											</div>
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><c:out value= "${jp.applybydate}" /></h3>
+											</div>
+										</div>
+									</div>
+									
+									<div class="buttons-to-right single-right-button">
+										<a href="clacweightscore?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Calculate Weightage</a>
+										<a href="firmappliedjob?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">View Applications</a>
+									</div>
+
+								</li>
+								</c:forEach>
+							</ul>
 						</div>
 					</div>
 				</div>
+				
+				
+
 			</div>
 		</div>
 	</div>
@@ -174,7 +160,61 @@
 
 <!-- Featured Jobs / End -->
 <div class="section margin-top-45 gray padding-top-65 padding-bottom-75">
-	
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+
+				<div class="section-headline centered margin-bottom-50">
+					<h3>Popular Job</h3>
+				</div>
+
+				<!-- Category Boxes Container -->
+				<div class="categories-container d-flex align-items-center justify-content-center">
+					<!-- Category Box -->
+					<a href="jobs-list-layout-1.html" class="category-box">
+						<div class="category-box-icon">
+							<i class="icon-line-awesome-pencil"></i>
+						</div>
+						
+						<div class="category-box-content">
+							<h3>Lorem Ipsum is simply dummy </h3>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+						</div>
+					</a>
+
+					<!-- Category Box -->
+					<a href="jobs-list-layout-2.html" class="category-box">
+						<div class="category-box-icon">
+							<i class="icon-line-awesome-pie-chart"></i>
+						</div>
+											
+						<div class="category-box-content">
+							<h3>Lorem Ipsum is simply dummy </h3>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+						</div>
+					</a>
+
+					<!-- Category Box -->
+					<a href="jobs-list-layout-1.html" class="category-box">
+						<div class="category-box-icon">
+							<i class="icon-line-awesome-image"></i>
+						</div>
+						
+						<div class="category-box-content">
+							<h3>Lorem Ipsum is simply dummy </h3>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+						</div>
+					</a>
+
+					
+
+					
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Category Boxes / End -->
 
@@ -193,7 +233,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					ï¿½ 2024 <strong>Logo</strong>. All Rights Reserved.
+					© 2024 <strong>Logo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>
@@ -228,10 +268,10 @@
 	});
 	
     function showAlert(message) {
-      	 if (message.trim() !== '') {
-               alert(message);
-           }
-      }	
+   	 if (message.trim() !== '') {
+            alert(message);
+        }
+   }	
  </script>
 </body>
 </html>

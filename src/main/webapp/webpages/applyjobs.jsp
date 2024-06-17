@@ -51,13 +51,14 @@
 					<div class="header-widget" style="display: flex; flex-direction: column; ">
 					    <div>
 					        <a href="editEmployee?empid=${empId}">
-					            <i class="icon-material-outline-power-settings-new"></i>${empName}
+					            <i class="fa fa-user" aria-hidden="true"></i>
+ 												${empName}
 					        </a> 
 					        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
 					    </div>
 					    <div>
 					        <a href="/logout">
-					            <i class="icon-material-outline-power-settings-new"></i> Logout
+					             Logout
 					        </a>
 					    </div>
 					</div>
@@ -91,13 +92,7 @@
 		<!-- Intro Headline -->
 		<div class="row">
 			<div class="col-md-12">
-				<div class="banner-headline">
-					<h3>
-						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
-						<br>
-						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
-					</h3>
-				</div>
+
 			</div>
 		</div>
 	</div>
@@ -128,26 +123,15 @@
 					<div class="content with-padding padding-bottom-10">
 						<div class="row">
 							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Emp Id</h5>
+								<div class="submit-field">	
+									<h5>Job Title</h5>							
 									<input type="hidden" id = "empid" name = "empid"  value ="${empid}" class="with-border" readonly />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Job Id</h5>
 									<input type="hidden" id = "job_post_id" name = "job_post_id" value="${jobpostingid}"  class="with-border" readonly />
-									<span class="error-message" style="color: red; display: none;"></span>
-								</div>
-							</div>
-							<div class="col-xl-4">
-								<div class="submit-field">
-									<h5>Job Title</h5>
 									<input type="text" id = "job_title" name = "job_title" value="${jobtitle}"  class="with-border" readonly />
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
+							
 							<div class="col-xl-4">
 								<div class="submit-field">
 									<h5>Apply date </h5>
@@ -192,15 +176,16 @@
 									<input type="hidden" id = "status" name ="status" value ="Applied" class="with-border" />
 								</div>
 							</div>
+							<div class="col-xl-12">
+								<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a> -->
+								<button type="submit" class="button ripple-effect big mt-3 mb-3">Submit</button>			
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-xl-12">
-				<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a> -->
-				<button type="submit" class="button ripple-effect big margin-top-30">Submit</button>			
-			</div>
+			
 		</div>
 	</div>
 	<!--  </form>-->
@@ -209,57 +194,7 @@
 
 	<!-- Featured Jobs / End -->
 	<div class="section  padding-top-65 padding-bottom-75">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
-
-					<div class="section-headline centered margin-bottom-50">
-						<h3>Popular Job</h3>
-					</div>
-
-					<!-- Category Boxes Container -->
-					<div class="categories-container d-flex align-items-center justify-content-center">
-						<!-- Category Box -->
-						<a href="jobs-list-layout-1.html" class="category-box">
-							<div class="category-box-icon">
-								<i class="icon-line-awesome-pencil"></i>
-							</div>
-							
-							<div class="category-box-content">
-								<h3>Lorem Ipsum is simply dummy </h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-							</div>
-						</a>
-
-						<!-- Category Box -->
-						<a href="jobs-list-layout-2.html" class="category-box">
-							<div class="category-box-icon">
-								<i class="icon-line-awesome-pie-chart"></i>
-							</div>
-												
-							<div class="category-box-content">
-								<h3>Lorem Ipsum is simply dummy </h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-							</div>
-						</a>
-
-						<!-- Category Box -->
-						<a href="jobs-list-layout-1.html" class="category-box">
-							<div class="category-box-icon">
-								<i class="icon-line-awesome-image"></i>
-							</div>
-							
-							<div class="category-box-content">
-								<h3>Lorem Ipsum is simply dummy </h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-							</div>
-						</a>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
+		
 	</div>
 	<!-- Category Boxes / End -->
 

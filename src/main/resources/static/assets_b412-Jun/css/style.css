@@ -66,9 +66,6 @@ main
     position: relative;
     z-index: 10000;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 main::after
 {
@@ -86,7 +83,7 @@ main::after
 }
 .wrapper
 {
-    padding: 40px;
+    padding: 40px 0px 120px 120px;
     width: 85%;
     height: auto;
 
@@ -111,11 +108,9 @@ main::after
     width: auto;
    
 }
-.logo-icon img {
-    width: 140px;
-    background: #fff;
-    padding: 8px;
-    border-radius: 9px;
+.logo-icon img
+{
+    width: 100%;
 }
 
 .p-relate

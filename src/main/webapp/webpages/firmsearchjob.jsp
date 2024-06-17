@@ -10,7 +10,26 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style-home.css">
 <link rel="stylesheet" href="assets/css/blue.css">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	#accordionContainer{display:none;padding:10px 0;margin-top:10px}
+   .job-listing h3.job-listing-title{color:#fff}
+   ul.dashboard-box-list>li:hover{background-color:transparent}
+   ul.dashboard-box-list>li:hover .list-apply-button{box-shadow:none;background-color:#2a41e8;color:#000}
+   .buttons-to-right,.dashboard-box-list .button.to-right{opacity:1;box-shadow:none;background-color:transparent}
+   table{font-family:arial,sans-serif;border-collapse:collapse;width:100%}
+   th{    background: #fff;
+	   color: #000;
+	   border: 1px solid #000 !important;}
+   td{color:#fff}
+   td,th{border:1px solid #fff;text-align:left;padding:8px}
+   ul.dashboard-box-list > li{border: 0;}
+   .dashboard-box .button.ico i{    color: #dc3139;}
+   .dashboard-box .button.red {
+	   background-color: #fff;
+	   box-shadow: none;
+   }
+   </style>
 </head>
 <body onload="showAlert('${info}')">
 
@@ -48,13 +67,14 @@
 				<div class="header-widget" style="display: flex; flex-direction: column; ">
 				    <div>
 				        <a>
-				            <i class="icon-material-outline-power-settings-new"></i>${firmname}
+				            <i class="fa fa-user" aria-hidden="true"></i>
+								${firmname}
 				        </a> 
 				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
 				    </div>
 				    <div>
 				        <a href="/logout">
-				            <i class="icon-material-outline-power-settings-new"></i> Logout
+				            Logout
 				        </a>
 				    </div>				
 				<!-- Mobile Navigation Button -->
@@ -85,17 +105,6 @@
 	<div class="container">
 		
 		<!-- Intro Headline -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="banner-headline">
-					<h3>
-						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
-						<br>
-						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
-					</h3>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -111,38 +120,37 @@
 				</div>
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0 jb-head">
-						<div class="content">
-							<ul class="dashboard-box-list">
-								<c:forEach items="${firmJobPosted}" var="jp">
-								<li>
-									<!-- Job Listing -->
-									<div class="job-listing">
+						<div class="headline">
+							<h3> Posted Jobs Table</h3>
+						</div>
+						<div class="content p-5">
+							<table>
+								<tr>
+								  <th width="20%">Job Post</th>
+								  <th width="40%">Job Detail</th>
+								  <th width="15%">Job Date</th>
+								  <th width="35%">Status</th>										  
+								</tr>
 
-										<!-- Job Listing Details -->
-										<div class="job-listing-details">
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><c:out value= "${jp.jobtitle}" /></h3>
-											</div>
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><c:out value= "${jp.jobdesc}" /></h3>
-											</div>
-											<!-- Details -->
-											<div class="job-listing-description">
-												<h3 class="job-listing-title"><c:out value= "${jp.applybydate}" /></h3>
-											</div>
-										</div>
-									</div>
-									
-									<div class="buttons-to-right single-right-button">
+
+
+							
+								<c:forEach items="${firmJobPosted}" var="jp">
+
+								<tr>
+									<td><c:out value= "${jp.jobtitle}" /></td>
+									<td><c:out value= "${jp.jobdesc}" /></td>
+									<td><c:out value= "${jp.applybydate}" /></td>
+									<td style="display: flex;">
+									  
 										<a href="clacweightscore?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">Calculate Weightage</a>
 										<a href="firmappliedjob?jobpostingid=${jp.jobpostingid}" class="list-apply-button ripple-effect">View Applications</a>
-									</div>
-
-								</li>
+									  
+									</td>
+								  </tr>
+								
 								</c:forEach>
-							</ul>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -160,61 +168,7 @@
 
 <!-- Featured Jobs / End -->
 <div class="section margin-top-45 gray padding-top-65 padding-bottom-75">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-12">
-
-				<div class="section-headline centered margin-bottom-50">
-					<h3>Popular Job</h3>
-				</div>
-
-				<!-- Category Boxes Container -->
-				<div class="categories-container d-flex align-items-center justify-content-center">
-					<!-- Category Box -->
-					<a href="jobs-list-layout-1.html" class="category-box">
-						<div class="category-box-icon">
-							<i class="icon-line-awesome-pencil"></i>
-						</div>
-						
-						<div class="category-box-content">
-							<h3>Lorem Ipsum is simply dummy </h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-						</div>
-					</a>
-
-					<!-- Category Box -->
-					<a href="jobs-list-layout-2.html" class="category-box">
-						<div class="category-box-icon">
-							<i class="icon-line-awesome-pie-chart"></i>
-						</div>
-											
-						<div class="category-box-content">
-							<h3>Lorem Ipsum is simply dummy </h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-						</div>
-					</a>
-
-					<!-- Category Box -->
-					<a href="jobs-list-layout-1.html" class="category-box">
-						<div class="category-box-icon">
-							<i class="icon-line-awesome-image"></i>
-						</div>
-						
-						<div class="category-box-content">
-							<h3>Lorem Ipsum is simply dummy </h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-						</div>
-					</a>
-
-					
-
-					
-
-				</div>
-
-			</div>
-		</div>
-	</div>
+	
 </div>
 <!-- Category Boxes / End -->
 
@@ -233,7 +187,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2024 <strong>Logo</strong>. All Rights Reserved.
+					ï¿½ 2024 <strong>Logo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>

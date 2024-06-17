@@ -11,20 +11,7 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style-home.css">
 <link rel="stylesheet" href="assets/css/blue.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style>
-.job-listing h3.job-listing-title{color:#fff}
-ul.dashboard-box-list>li:hover{background-color:transparent}
-ul.dashboard-box-list>li:hover .list-apply-button{box-shadow:none;background-color:#2a41e8;color:#000}
-.buttons-to-right,.dashboard-box-list .button.to-right{opacity:1;box-shadow:none;background-color:transparent}
-table{font-family:arial,sans-serif;border-collapse:collapse;width:100%}
-th{    background: #fff;
-color: #000;
-border: 1px solid #000 !important;}
-td{color:#fff}
-td,th{border:1px solid #fff;text-align:left;padding:8px}
-</style>
 </head>
 <body>
 
@@ -65,14 +52,13 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 				<div class="header-widget" style="display: flex; flex-direction: column; ">
 				    <div>
 				        <a href="editEmployee?empid=${empId}">
-							<i class="fa fa-user" aria-hidden="true"></i>
-							${empName}
+				            <i class="icon-material-outline-power-settings-new"></i>${empName}
 				        </a> 
 				        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
 				    </div>
 				    <div>
 				        <a href="/logout">
-				            Logout
+				            <i class="icon-material-outline-power-settings-new"></i> Logout
 				        </a>
 				    </div>
 				</div>
@@ -104,6 +90,17 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 	<div class="container">
 		
 		<!-- Intro Headline -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="banner-headline">
+					<h3>
+						<strong>Lorem Ipsum is simply dummy text of the printing..</strong>
+						<br>
+						<span>Lorem Ipsum has been the industry's standard <strong class="color">Dummy</strong> text ever since the 1500s, when an unknown printer.</span>
+					</h3>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -125,33 +122,34 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 							<h3><i class="icon-material-outline-business-center"></i> Jobs</h3>
 						</div>
 
-						<div class="content p-5">
-							<table>
-								<tr>
-								  <th width="35%">Job Title</th>
-								  <th width="50%">Job Detail</th>								  
-								  <th width="15%">Status</th>										  
-								</tr>
-
+						<div class="content">
+							<ul class="dashboard-box-list">
 							<c:forEach items="${likedJobs}" var="jp">
+								<li>
+									<!-- Job Listing -->
+									<div class="job-listing">
 
-							
-								<tr>
-								  <td>${jp.jobtitle}</td>
-								  <td>${jp.jobdesc}</td>
-								  
-								  <td>
-									
-									<a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}&jobtitle=${jp.jobtitle}" class="list-apply-button ripple-effect">Apply Now</a>	
-									
-								  </td>
-								</tr>
-								
-								
-							  
+										<!-- Job Listing Details -->
+										<div class="job-listing-details">
+
+											<!-- Logo -->
+											<a href="#" class="job-listing-company-logo">
+												<img src="assets/img/company-logo-01.png" alt=""> 
+											</a>
+
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">${jp.jobdesc}</a></h3>
+											</div>
+										</div>
+									</div>
+									<!-- Buttons -->
+									<div class="buttons-to-right single-right-button">
+										<a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}" class="list-apply-button ripple-effect">Apply Now</a>										
+									</div>
+								</li>
 							</c:forEach>
-						</table>
-						<br/>	
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -161,7 +159,55 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 </div>
 <!-- Featured Jobs / End -->
 <div class="section margin-top-45 gray padding-top-65 padding-bottom-75">
-	
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+
+				<div class="section-headline centered margin-bottom-50">
+					<h3>Popular Job</h3>
+				</div>
+
+				<!-- Category Boxes Container -->
+				<div class="categories-container d-flex align-items-center justify-content-center">
+				<!-- Category Box -->
+					<a href="jobs-list-layout-1.html" class="category-box">
+						<div class="category-box-icon">
+							<i class="icon-line-awesome-pencil"></i>
+						</div>
+						
+						<div class="category-box-content">
+							<h3>Data Scientist </h3>
+							<p>Inviting highly skilled and qualified people for an exciting  opportunity in our company. /p>
+						</div>
+					</a>
+
+					<!-- Category Box -->
+					<a href="jobs-list-layout-2.html" class="category-box">
+						<div class="category-box-icon">
+							<i class="icon-line-awesome-pie-chart"></i>
+						</div>
+											
+						<div class="category-box-content">
+							<h3>Data Engineer</h3>
+							<p>Like challenges!  Love to solve complex problems! This is a right place for you. Apply now!</p>
+						</div>
+					</a>
+
+					<!-- Category Box -->
+					<a href="jobs-list-layout-1.html" class="category-box">
+						<div class="category-box-icon">
+							<i class="icon-line-awesome-image"></i>
+						</div>
+						
+						<div class="category-box-content">
+							<h3>Security Analysts </h3>
+							<p>We are looking out for candidates having interests in IT security to join our red team.</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Category Boxes / End -->
 

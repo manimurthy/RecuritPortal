@@ -49,14 +49,6 @@
 
 
         </script>
-        <style>
-            .logo-icon img {
-    width: 140px;
-    background: #fff;
-    padding: 8px;
-    border-radius: 9px;
-}
-        </style>
     </head>
     <body>
         <div class="ls-bg">
@@ -68,14 +60,25 @@
                 <div class="main-inner">
                     <!-- logo -->
                     <div class="logo">
-                        <div class="logo-icon">
-                            <img src="assets/img/logo.png" width="130" alt="">
-                          </div>
-                       
+                        <!-- <div class="logo-icon">
+                        
+                          </div> -->
+                        <div class="logo-text">
+                            LOGO
+                        </div>
                     </div>
                     <div class="row h-100 align-content-center">
                         <div class="col-md-6 tab-100 order_2">
-                           
+                            <!-- side text -->
+                            <div class="side-text">
+                                <article>
+                                    <span>Join Our Marketplace</span>
+                                    <h1 class="main-heading">Company</h1>
+                                    <p>
+                                        The next generation social network & community! Connect with your friends and play with our quests and badges gamification system!
+                                    </p>
+                                </article>                               
+                            </div>
                         </div>
                         <div class="col-md-6 tab-100">
                             <!-- form -->
@@ -88,7 +91,7 @@
                                 </h2>
 
                                 <!-- login form -->
-                                <form action="/login" method="post" id="step1" class="login-form">
+                                <form action="/login" method="post">
                                     <div class="service-area mb-4">
                                         <div class="justify-content-center d-flex align-items-center me-4">
                                             <input checked="" type="radio" name="emptype" value="Employee " />
@@ -136,12 +139,6 @@
                                                 Email
                                             </label>
                                         </div>
-                                        <div class="input-field delay-100ms reveal">
-                                            <input type="text" id="pincode" required="">
-                                            <label>
-                                               Contact Number
-                                            </label>
-                                        </div>
                                         <div class="input-field delay-100ms">
                                             <input type="text" id="fname" name= "firstname" required />
                                             <span class="error-message" style="color: red; display: none;"></span>
@@ -163,14 +160,14 @@
                                                 Pin Code
                                             </label>
                                         </div>
-                                        <div class="input-field delay-100ms col-md-12">
+                                        <div class="input-field delay-100ms">
                                             <input type="text" id="add1" name="address1" required />
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Address 1
                                             </label>
                                         </div>
-                                        <div class="input-field delay-100ms"  style="width: 100%;">
+                                        <div class="input-field delay-100ms">
                                             <input type="text" id="add2" name="address2"  required />
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>

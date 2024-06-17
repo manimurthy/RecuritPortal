@@ -12,18 +12,7 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style-home.css">
 <link rel="stylesheet" href="assets/css/blue.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style>
-	#exampleModalLg h5 {
-		color: #333;
-		font-size: 18px;
-	}
-	#exampleModalLg .button.big{
-		background: #06150a;
-    	color: #fff;
-	}
-</style>
 </head>
 <body>
 
@@ -61,14 +50,13 @@
 				<div class="header-widget" style="display: flex; flex-direction: column; ">
 				    <div>
 				        <a>
-				            <i class="fa fa-user" aria-hidden="true"></i>
- 								${firmname}
+				            <i class="icon-material-outline-power-settings-new"></i>${firmname}
 				        </a> 
 				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
 				    </div>
 				    <div>
 				        <a href="/logout">
-				             Logout
+				            <i class="icon-material-outline-power-settings-new"></i> Logout
 				        </a>
 				    </div>
 					<!-- Mobile Navigation Button -->
@@ -250,17 +238,17 @@
 									<span class="error-message" style="color: red; display: none;"></span>
 								</div>
 							</div>
-
-							<div class="col-xl-12">
-								<button type="button" class="button ripple-effect big mt-2 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Question & Answer</button>			
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-xl-12">
-				<button type="submit" class="button ripple-effect big margin-top-30">Submit</button>							
+				<!-- <a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a> -->
+				<button type="submit" class="button ripple-effect big margin-top-30">Submit</button>
+				<div class="col-xl-6 d-flex align-items-center justify-content-end">
+					<button type="button" class="button ripple-effect big margin-top-30" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Question & Answer</button>
+				</div>				
 			</div>
 		</div>
 	</div>
@@ -348,7 +336,55 @@
 
 	<!-- Featured Jobs / End -->
 	<div class="section  padding-top-65 padding-bottom-75">
-		
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+
+					<div class="section-headline centered margin-bottom-50">
+						<h3>Popular Job</h3>
+					</div>
+
+					<!-- Category Boxes Container -->
+					<div class="categories-container d-flex align-items-center justify-content-center">
+						<!-- Category Box -->
+						<a href="jobs-list-layout-1.html" class="category-box">
+							<div class="category-box-icon">
+								<i class="icon-line-awesome-pencil"></i>
+							</div>
+							
+							<div class="category-box-content">
+								<h3>Lorem Ipsum is simply dummy </h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							</div>
+						</a>
+
+						<!-- Category Box -->
+						<a href="jobs-list-layout-2.html" class="category-box">
+							<div class="category-box-icon">
+								<i class="icon-line-awesome-pie-chart"></i>
+							</div>
+												
+							<div class="category-box-content">
+								<h3>Lorem Ipsum is simply dummy </h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							</div>
+						</a>
+
+						<!-- Category Box -->
+						<a href="jobs-list-layout-1.html" class="category-box">
+							<div class="category-box-icon">
+								<i class="icon-line-awesome-image"></i>
+							</div>
+							
+							<div class="category-box-content">
+								<h3>Lorem Ipsum is simply dummy </h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- Category Boxes / End -->
 	<div class="modal fade" id="exampleModalLg" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -529,7 +565,7 @@
 
         answerCell.innerHTML = '<input type="text" name="faqs['+rowCount+ '].answer" value="' +answer+'" readonly>';
         //answerCell.textContent = answer;
-        deleteCell.innerHTML = '<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><span class="fa fa-times" aria-hidden="true" onclick="deleteRow(this)"></span></button>';
+        deleteCell.innerHTML = '<button type="button" data-bs-toggle="modal" data-bs-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><span class="icon-material-outline-delete" onclick="deleteRow(this)"></span></button>';
 
         // Append cells to the new row
         newRow.appendChild(idCell);

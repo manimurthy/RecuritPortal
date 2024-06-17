@@ -45,7 +45,7 @@ public class JobApplyController {
 	
     
     @GetMapping("/applyjobid")
-    public String applyJob(@RequestParam Integer jobpostingid, @RequestParam String skillname, Model model, HttpSession session) {
+    public String applyJob(@RequestParam Integer jobpostingid, @RequestParam String skillname, @RequestParam String jobtitle, Model model, HttpSession session) {
         // Add necessary attributes to the model and return the view name
         String empName = (String) session.getAttribute("empname");
         Integer empId = (Integer) session.getAttribute("empId");
@@ -54,6 +54,7 @@ public class JobApplyController {
     	model.addAttribute("skillname",skillname);
         model.addAttribute("empName", empName);
     	model.addAttribute("empid", empId);
+    	model.addAttribute("jobtitle", jobtitle);
         return "/applyjobs"; // This should be the name of the .html or .jsp file, if using templates
     }  
 	

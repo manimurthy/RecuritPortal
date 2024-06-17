@@ -6,7 +6,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Company Registration Page</title>
+        <title>Employee Profile Edit</title>
 
         <!-- font-awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
@@ -49,14 +49,6 @@
 
 
         </script>
-        <style>
-            .logo-icon img {
-    width: 140px;
-    background: #fff;
-    padding: 8px;
-    border-radius: 9px;
-}
-        </style>
     </head>
     <body>
         <div class="ls-bg">
@@ -66,16 +58,18 @@
         <main class="overflow-hidden">
             <div class="wrapper">
                 <div class="main-inner">
-                    <!-- logo -->
-                    <div class="logo">
-                        <div class="logo-icon">
-                            <img src="assets/img/logo.png" width="130" alt="">
-                          </div>
-                       
-                    </div>
                     <div class="row h-100 align-content-center">
                         <div class="col-md-6 tab-100 order_2">
-                           
+                            <!-- side text -->
+                            <div class="side-text">
+                                <article>
+                                    <span>Join Our Marketplace</span>
+                                    <h1 class="main-heading">Company</h1>
+                                    <p>
+                                        The next generation social network & community! Connect with your friends and play with our quests and badges gamification system!
+                                    </p>
+                                </article>                               
+                            </div>
                         </div>
                         <div class="col-md-6 tab-100">
                             <!-- form -->
@@ -88,7 +82,7 @@
                                 </h2>
 
                                 <!-- login form -->
-                                <form action="/login" method="post" id="step1" class="login-form">
+                              <!-- <form action="/login" method="post">
                                     <div class="service-area mb-4">
                                         <div class="justify-content-center d-flex align-items-center me-4">
                                             <input checked="" type="radio" name="emptype" value="Employee " />
@@ -113,80 +107,78 @@
                                         </label>
                                     </div>
                                     <div class="d-flex justify-content-between flex-wrap mb-3 ps-2 pe-2">
-                                       <!-- <div class="rememberme">
-                                            <input type="checkbox" />
-                                            <label>Remember Me</label>
-                                        </div>-->
+
                                     </div>
                                     <div class="login-btn">
                                         <button type="submit" class="login">Submit</button>
                                     </div>
+                                </form>-->
                                     <div class="logSign">
                                         <button id="showregister" type="button">register</button>
                                     </div>
-                                </form>
 
                                 <!-- sign up form -->
-                                <form id="step2" action = "/savedetails" class="signup-form" method="post">
+                                <form id="step2" action = "/updatedetails" class="signup-form" method="post">
                                     <div class="signup-frm-inner">
+                                    <input type="hidden" id="empid" name="empid" value="${employee.empid}" />
                                         <div class="input-field delay-100ms">
-                                            <input type="email" id="unique-handle"  name="empemail" required  />
+                                            <input type="email" id="unique-handle"  name="empemail" required value="${employee.empemail}" readonly  />
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Email
                                             </label>
                                         </div>
-                                        <div class="input-field delay-100ms reveal">
-                                            <input type="text" id="pincode" required="">
-                                            <label>
-                                               Contact Number
-                                            </label>
-                                        </div>
                                         <div class="input-field delay-100ms">
-                                            <input type="text" id="fname" name= "firstname" required />
+                                            <input type="text" id="fname" name= "firstname" required value="${employee.firstname}" />
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 First Name
                                             </label>
                                         </div>
                                         <div class="input-field delay-100ms">
-                                            <input type="text" id="lname" name = "lastname" required />
+                                            <input type="text" id="lname" name = "lastname" required value="${employee.lastname}"/>
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Last Name
                                             </label>
                                         </div>
                                         <div class="input-field delay-100ms">
-                                            <input type="text" id="pincode" name = "pincode" required />
+                                            <input type="text" id="pincode" name = "pincode" required value="${employee.pincode}"/>
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Pin Code
                                             </label>
                                         </div>
-                                        <div class="input-field delay-100ms col-md-12">
-                                            <input type="text" id="add1" name="address1" required />
+                                        <div class="input-field delay-100ms">
+                                            <input type="text" id="add1" name="address1" required value="${employee.address1}"/>
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Address 1
                                             </label>
                                         </div>
-                                        <div class="input-field delay-100ms"  style="width: 100%;">
-                                            <input type="text" id="add2" name="address2"  required />
+                                        <div class="input-field delay-100ms">
+                                            <input type="text" id="add2" name="address2"  required value="${employee.address2}"/>
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Address 2
                                             </label>
                                         </div>
-
                                         <div class="input-field delay-200ms">
-                                            <input type="password" id="password" name ="password"   required />
+                                            <input type="contact" id="contact" name ="contact"   required value="${employee.contact}" />
+                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <label>
+                                                Phone Number
+                                            </label>
+                                        
+                                        <div class="input-field delay-200ms">
+                                            <input type="password" id="password" name ="password"   required value="${employee.password}" />
                                             <span class="error-message" style="color: red; display: none;"></span>
                                             <label>
                                                 Password
                                             </label>
                                         </div>
                                         <div class="input-field delay-300ms">
-		                                    <input type="password" id="confirm"  required>
+		                                    <input type="password" id="confirm"  required value="${employee.password}">
 		                                    <span class="error-message" style="color: red; display: none;"></span>
 		                                    <label>
 		                                        Confirm Password
@@ -195,11 +187,11 @@
                                     </div>
 
                                     <div class="login-btn">
-                                        <button type="submit" class="signup">Register Now!</button>
+                                        <button type="submit" class="signup">Update</button>
                                     </div>
-                                    <div class="logSign">
+                                   <!--  --> <div class="logSign">
                                         <button id="showlogin" type="button" class="active">Login</button>
-                                    </div>
+                                    </div>-->
                                 </form>
                                 <!-- <div class="signup-form register-text">
                                 You'll receive a confirmation email in your inbox with a link to activate your account. If you have any problems, <a href="#">contact us!</a> 
