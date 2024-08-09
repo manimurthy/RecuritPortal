@@ -7,4 +7,6 @@ import com.recuritportal.jspwebapp.Entity.LikedJobs;
 
 public interface LikedJobsRepo  extends CrudRepository<LikedJobs, Integer>{
     List<LikedJobs> findByEmpID(Integer empID);
+    // Custom delete method
+    void deleteByEmpIDAndJobID(Integer empID, Integer jobID);
 }

@@ -37,4 +37,16 @@ public class LikedJobService {
     	likedJobRepo.save(likeJob);
         return true;
     }
+    public boolean deleteLikedJobs(LikedJobs likeJob) {
+        // Check if the LikedJobs entry exists before attempting to delete
+        List<LikedJobs> likedJobsList = likedJobRepo.findByEmpID(likeJob.getEmpID());
+        boolean exists = likedJobsList.stream().anyMatch(lj -> lj.getJobID().equals(likeJob.getJobID()));
+
+        if (exists) {
+            likedJobRepo.deleteByEmpIDAndJobID(likeJob.getEmpID(), likeJob.getJobID());
+            return true;
+        } else {
+            throw new RuntimeException("LikedJob entry not found for deletion.");
+        }
+    }
 }

@@ -26,7 +26,7 @@ td{color:#fff}
 td,th{border:1px solid #fff;text-align:left;padding:8px}
 </style>
 </head>
-<body>
+<body onload="showAlert('${info}')">
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -71,7 +71,7 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 				        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
 				    </div>
 				    <div>
-				        <a href="/logout">
+				        <a href="${pageContext.request.contextPath}/logout">
 				            Logout
 				        </a>
 				    </div>
@@ -128,9 +128,9 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 						<div class="content p-5">
 							<table>
 								<tr>
-								  <th width="35%">Job Title</th>
+								  <th width="20%">Job Title</th>
 								  <th width="50%">Job Detail</th>								  
-								  <th width="15%">Status</th>										  
+								  <th width="30%">Status</th>										  
 								</tr>
 
 							<c:forEach items="${likedJobs}" var="jp">
@@ -139,11 +139,9 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 								<tr>
 								  <td>${jp.jobtitle}</td>
 								  <td>${jp.jobdesc}</td>
-								  
 								  <td>
-									
-									<a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}&jobtitle=${jp.jobtitle}" class="list-apply-button ripple-effect">Apply Now</a>	
-									
+									<a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}&jobtitle=${jp.jobtitle}" class="list-apply-button ripple-effect">Apply Now</a>
+									<a href="unlikejob?jobPostId=${jp.jobpostingid}" class="list-apply-button ripple-effect">Unlike</a>		
 								  </td>
 								</tr>
 								
@@ -213,6 +211,14 @@ td,th{border:1px solid #fff;text-align:left;padding:8px}
 		  }
 	   });
 	});
+    /*<![CDATA[*/
+    // JavaScript function to show success message in an alert box
+    function showAlert(message) {
+    	 if (message.trim() !== '') {
+             alert(message);
+         }
+    }
+    /*]]>*/	
  </script>
 </body>
 </html>

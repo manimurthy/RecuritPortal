@@ -37,8 +37,9 @@
 
                 // Check if passwords match
                 if (password !== confirm) {
-                    errorSpan.textContent = 'Passwords do not match.';
-                    errorSpan.style.display = 'inline';
+                	alert('Passwords do not match.');
+                    //errorSpan.textContent = 'Passwords do not match.';
+                    //errorSpan.style.display = 'inline';
                     return; // Stop the form submission
                 }
 
@@ -88,7 +89,7 @@
                                 </h2>
 
                                 <!-- login form -->
-                                <form action="/login" method="post" id="step1" class="login-form">
+                                <form action="${pageContext.request.contextPath}/login" method="post" id="step1" class="login-form">
                                     <div class="service-area mb-4">
                                         <div class="justify-content-center d-flex align-items-center me-4">
                                             <input checked="" type="radio" name="emptype" value="Employee " />
@@ -131,7 +132,7 @@
                                     <div class="signup-frm-inner">
                                         <div class="input-field delay-100ms">
                                             <input type="email" id="unique-handle"  name="empemail" required  />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 Email
                                             </label>
@@ -144,35 +145,35 @@
                                         </div>
                                         <div class="input-field delay-100ms">
                                             <input type="text" id="fname" name= "firstname" required />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 First Name
                                             </label>
                                         </div>
                                         <div class="input-field delay-100ms">
                                             <input type="text" id="lname" name = "lastname" required />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 Last Name
                                             </label>
                                         </div>
                                         <div class="input-field delay-100ms">
                                             <input type="text" id="pincode" name = "pincode" required />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 Pin Code
                                             </label>
                                         </div>
                                         <div class="input-field delay-100ms col-md-12">
                                             <input type="text" id="add1" name="address1" required />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 Address 1
                                             </label>
                                         </div>
                                         <div class="input-field delay-100ms"  style="width: 100%;">
                                             <input type="text" id="add2" name="address2"  required />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 Address 2
                                             </label>
@@ -180,14 +181,14 @@
 
                                         <div class="input-field delay-200ms">
                                             <input type="password" id="password" name ="password"   required />
-                                            <span class="error-message" style="color: red; display: none;"></span>
+                                            <!-- <span class="error-message" style="color: red; display: none;"></span> -->
                                             <label>
                                                 Password
                                             </label>
                                         </div>
                                         <div class="input-field delay-300ms">
 		                                    <input type="password" id="confirm"  required>
-		                                    <span class="error-message" style="color: red; display: none;"></span>
+		                                    <!-- <span class="error-message" style="color: red; display: none;"></span> -->
 		                                    <label>
 		                                        Confirm Password
 		                                    </label>

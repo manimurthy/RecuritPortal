@@ -87,7 +87,7 @@
                                     <input type="hidden" id="firmname" name="firmname" value="${empId}" />
                                 </div>
                                 <div>
-                                    <a href="/logout">
+                                    <a href="${pageContext.request.contextPath}/logout">
                                          Logout
                                     </a>
                                 </div>
@@ -112,7 +112,7 @@
             <!-- Header Container / End -->
             
 
-            <form action="/updatedetails" method="post">
+            <form action="${pageContext.request.contextPath}/updatedetails" method="post">
                 <div id="post-jobs" class="section margin-top-45 padding-bottom-75">
             
                 <div class="container">

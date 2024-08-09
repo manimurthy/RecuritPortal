@@ -16,6 +16,7 @@ import com.recuritportal.jspwebapp.Service.JobPostService;
 import com.recuritportal.jspwebapp.Service.LikedJobService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 
 @Controller
@@ -64,5 +65,27 @@ public class LikedJobsController {
     	//return "redirect:/likedjobs";
     	return "redirect:/searchjob?fromsrch=false";
     }
+    @GetMapping("/unlikejob")
+    @Transactional
+    public String unLikeJob(@RequestParam int jobPostId, HttpSession session,RedirectAttributes redirectAttributes, Model model) {
+
+    	String empName = (String) session.getAttribute("empname");
+    	Integer empid = (Integer) session.getAttribute("empId");
+
+        if (empid == null) {
+        	redirectAttributes.addFlashAttribute("error", "You are not logged in. Please log in to access this page.");
+            return "redirect:/login"; 
+        }    		
+    	LikedJobs likeJob = new LikedJobs();
+    	likeJob.setJobID(jobPostId);
+    	likeJob.setEmpID(empid);
+    	likedJobsService.deleteLikedJobs(likeJob);
+    	
+    	//redirectAttributes.addFlashAttribute("info", "Selected job removed from liked jobs list.");
+        model.addAttribute("empName", empName);
+        model.addAttribute("empId", empid);      
+    	model.addAttribute("info", "Selected job removed from liked jobs list.");
+    	return "emplikedjobs"; 
+    }    
 }
 

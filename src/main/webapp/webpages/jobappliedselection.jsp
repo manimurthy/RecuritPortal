@@ -71,7 +71,7 @@
 				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
 				    </div>
 				    <div>
-				        <a href="/logout">
+				        <a href="${pageContext.request.contextPath}/logout">
 				             Logout
 				        </a>
 				    </div>
@@ -140,7 +140,7 @@
 						                    <td>${jobApplication.calcTotalWeight}</td>
 						                    <td>${jobApplication.status}</td>
 						                    <td>
-						                        <form action="/updateStatus" method="post" style="    display: flex;
+						                        <form action="${pageContext.request.contextPath}/updateStatus" method="post" style="    display: flex;
 												flex-wrap: wrap;
 												align-items: flex-start;
 												justify-content: center;">

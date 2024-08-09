@@ -67,7 +67,7 @@
 				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
 				    </div>
 				    <div>
-				        <a href="/logout">
+				        <a href="${pageContext.request.contextPath}/logout">
 				             Logout
 				        </a>
 				    </div>
@@ -102,7 +102,7 @@
 </div>
 
 
-	<form action="/saveFAQJob" method="post">
+	<form action="${pageContext.request.contextPath}/saveFAQJob" method="post">
 	<div id="post-jobs" class="section margin-top-45 padding-bottom-75">
 
 	<div class="container">

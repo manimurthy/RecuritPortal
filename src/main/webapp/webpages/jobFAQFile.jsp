@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/saveFAQJob" method="post">
+<form action="${pageContext.request.contextPath}/saveFAQJob" method="post">
     <label for="title">Job Title:</label>
     <input type="text" id="jobtitle" name="jobtitle"><br>
 

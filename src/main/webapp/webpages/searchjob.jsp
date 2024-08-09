@@ -76,7 +76,7 @@ ul.dashboard-box-list > li{border: 0;}
 			        <input type="hidden" id="firmname" name="firmname" value="${empId}" />
 			    </div>
 			    <div>
-			        <a href="/logout">
+			        <a href="${pageContext.request.contextPath}/logout">
 			             Logout
 			        </a>
 			    </div>
@@ -125,7 +125,7 @@ ul.dashboard-box-list > li{border: 0;}
 					<div class="dashboard-box margin-top-0 jb-head">
 
 						<div class="row">
-						<form action="/searchjobbyval" method ="post">
+						<form action="${pageContext.request.contextPath}/searchjobbyval" method ="post">
 							<div class="col-md-12 p-5 pb-0 pt-4">
 																
 									<div class="row">

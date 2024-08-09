@@ -98,7 +98,6 @@ public class LoginController {
 	public String details(Employee empReg, Model model, HttpServletRequest request)
 	{
 		try {
-			int a =  5/0;
 			if (empService.checkEmployeeExists(empReg.getEmpemail()) )	{
 				model.addAttribute("error", "This email is already registered. Please login in directly.");
 				return  "login";

@@ -73,7 +73,7 @@
 				        <input type="hidden" id="firmname" name="firmname" value="${firmid}" />
 				    </div>
 				    <div>
-				        <a href="/logout">
+				        <a href="${pageContext.request.contextPath}/logout">
 				            Logout
 				        </a>
 				    </div>				
