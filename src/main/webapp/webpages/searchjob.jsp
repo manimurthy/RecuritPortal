@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
- #accordionContainer{display:none;padding:10px 0;margin-top:10px}
+
 .job-listing h3.job-listing-title{color:#fff}
 ul.dashboard-box-list>li:hover{background-color:transparent}
 ul.dashboard-box-list>li:hover .list-apply-button{box-shadow:none;background-color:#2a41e8;color:#000}
@@ -30,6 +30,12 @@ ul.dashboard-box-list > li{border: 0;}
     background-color: #fff;
     box-shadow: none;
 }
+
+.accordion-item{border-bottom:0px solid #ccc}
+	.accordion-header{background-color:transparent;padding:10px;cursor:pointer;box-shadow: none;}
+	.accordion-content{padding:10px;display:none}
+	.accordion-content.open{display:block}	
+	.accordion-header h4{color: #fff;font-weight: 600;margin: 0;}
 </style>
 </head>
 <body onload="showAlert('${info}')">
@@ -165,6 +171,9 @@ ul.dashboard-box-list > li{border: 0;}
 								</tr>
 							
 								<c:forEach items="${jobPost}" var="jp">
+								
+
+									
 										<tr>
 										  <td><c:out value= "${jp.jobtitle}" /></td>
 										  <td><c:out value= "${jp.jobdesc}" /></td>
@@ -182,64 +191,73 @@ ul.dashboard-box-list > li{border: 0;}
 										  <td colspan="5">
 
 											<div class="faqs-section">
-												<h4 style="color: #fff;" onclick="toggleContent()">FAQs:</h4>
-												<div id="accordionContainer">
-													
-													<c:forEach items="${jp.faqs}" var="faq">
-														<div class="accordion_gride">
-															<strong>Q:</strong> <c:out value="${faq.question}"/>
-														</div>
-															
-														<div class="panel">
-															<p><strong>A:</strong> <c:out value="${faq.answer}"/></p>
-														</div>
-														
-													</c:forEach>
-													
+												<div class="accordion-item">
+													<div class="accordion-header">
+														<h4>FAQs:</h4>
+													</div>
+													<div class="accordion-content">
+														<c:forEach items="${jp.faqs}" var="faq">
+															<p><strong>Q:</strong> <c:out value="${faq.question}"/></p>
+															<p><strong>A:</strong> <c:out value="${faq.answer}"/> </p>
+														</c:forEach>
+													</div>
 												</div>
 											</div>
 										  </td>
 										 
 										</tr>
 										
-									  
-									
-									
-
-								
+										<!-- <tr>
+											<td>Alfreds Futterkiste</td>
+											<td><c:out value= "${jp.jobdesc}" /></td>
+											<td>25 May</td>
+											<td>12 Year</td>
+											<td>
+											  
+												  <a href="savelikejob?jobPostId=${jp.jobpostingid} " class="button red ripple-effect ico"><i class="fa fa-heart" aria-hidden="true"></i>
+												  </a>
+												  <a href="applyjobid?jobpostingid=${jp.jobpostingid}&skillname=${jp.skillname}" class="list-apply-button ripple-effect">Apply Now</a>
+											  
+											</td>
+										  </tr>
+										  <tr>
+											<td colspan="5">
+  
+											  <div class="faqs-section">
+												  <div class="accordion-item">
+													  <div class="accordion-header">
+														  <h4>FAQs:</h4>
+													  </div>
+													  <div class="accordion-content">
+														  <c:forEach items="${jp.faqs}" var="faq">
+															  <p><strong>Q:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+															  <p><strong>A:</strong> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden </p>
+														  </c:forEach>
+													  </div>
+												  </div>
+											  </div>
+											</td>
+										   
+										  </tr> -->
 								</c:forEach>
 							</table>
 						</div>
 					</div>
 				</div>
-				
-				
-
 			</div>
 		</div>
 	</div>
 </div>
 <!-- Featured Jobs / End -->
-
-
-
-
 <!-- Featured Jobs / End -->
 <div class="section margin-top-45 gray padding-top-65 padding-bottom-75">
 	
 </div>
 <!-- Category Boxes / End -->
-
-
-
-
-
 <!-- Footer
 ================================================== -->
 <div id="footer">
-	
 
-	
 	<!-- Footer Copyrights -->
 	<div class="footer-bottom-section">
 		<div class="container">
@@ -288,16 +306,21 @@ ul.dashboard-box-list > li{border: 0;}
          }
     }
     /*]]>*/	
-	// Get all accordion buttons
-	var contentDiv = document.getElementById('accordionContainer');
-
-    function toggleContent() {
-        if (contentDiv.style.display === 'none') {
-            contentDiv.style.display = 'block';
-        } else {
-            contentDiv.style.display = 'none';
-        }
-    }  
+	// For Faq Accordion Script
+	document.addEventListener("DOMContentLoaded", function() {
+		const accordionHeaders = document.querySelectorAll('.accordion-header');
+		accordionHeaders.forEach(header => {
+			header.addEventListener('click', function() {
+				const accordionItem = this.parentElement;
+				const accordionContent = accordionItem.querySelector('.accordion-content');
+				const openAccordionContent = document.querySelector('.accordion-content.open');
+				if (openAccordionContent && openAccordionContent !== accordionContent) {
+					openAccordionContent.classList.remove('open');
+				}
+				accordionContent.classList.toggle('open');
+			});
+		});
+	});
  </script>
 </body>
 </html>

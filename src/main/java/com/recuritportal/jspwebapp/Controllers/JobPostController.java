@@ -66,7 +66,7 @@ public class JobPostController {
         
         LocalDate today = LocalDate.now();
         
-        //Check of the jobPost that has passed the expirty Date and only display to the users        
+        //Check of the jobPost that has passed the expiry Date and only display to the users        
         jobPost = jobPost.stream()
                 .filter(job -> {
                     try {
@@ -83,7 +83,10 @@ public class JobPostController {
         // Get the list of job IDs the employee has already applied to
         List<Integer> appliedJobIds = applyJobService.findJobIdsByEmployeeId(empId);
 
-        // Filter out jobs the employee has already applied to
+        // Filter out jobs the employee has already applied to already.
+        //Using the stream() method provided by java along with .filter()method. These methods internally iterates thru  
+        //the collection of Jobpost and filters out those jobs which the logged in employee has already applied. 
+        //Applied job details are fetched from the above line of code
         jobPost = jobPost.stream()
                 .filter(job -> !appliedJobIds.contains(job.getJobpostingid()))
                 .collect(Collectors.toList());	        
@@ -143,6 +146,8 @@ public class JobPostController {
             // Check if Job for this Emp has already applied for the job if so remove that record.
             List<Integer> appliedJobIds = applyJobService.findJobIdsByEmployeeId(empId);
 
+            // Loop trhu the applied jobs job positing id and check if the same job exists
+            // The below logic imitates 
             jobPost = jobPost.stream()
                     .filter(job -> !appliedJobIds.contains(job.getJobpostingid()))
                     .collect(Collectors.toList());
@@ -200,11 +205,11 @@ public class JobPostController {
         return "postjob"; // This should be the name of the .html or .jsp file, if using templates
     }
 	
-	@GetMapping("/faqjob")
+/*	@GetMapping("/faqjob")
     public String firmfaqJob(Model model) {
         // Add necessary attributes to the model and return the view name
         return "jobFAQFile"; // This should be the name of the .html or .jsp file, if using templates
-    }
+    }*/
     
 	@PostMapping("/saveFAQJob")
     public String saveJobPost(JobPost jobPost, RedirectAttributes redirectAttributes, Model model, HttpServletRequest request) {

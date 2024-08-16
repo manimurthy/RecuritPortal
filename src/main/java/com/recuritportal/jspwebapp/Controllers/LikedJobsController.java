@@ -82,10 +82,13 @@ public class LikedJobsController {
     	likedJobsService.deleteLikedJobs(likeJob);
     	
     	//redirectAttributes.addFlashAttribute("info", "Selected job removed from liked jobs list.");
-        model.addAttribute("empName", empName);
+        /*model.addAttribute("empName", empName);
         model.addAttribute("empId", empid);      
-    	model.addAttribute("info", "Selected job removed from liked jobs list.");
-    	return "emplikedjobs"; 
+    	model.addAttribute("info", "Selected job removed from liked jobs list.");*/
+    	redirectAttributes.addFlashAttribute("empName", empName);
+    	redirectAttributes.addFlashAttribute("empId", empid);      
+    	redirectAttributes.addFlashAttribute("info", "Selected job removed from liked jobs list.");
+    	return "redirect:/likedjobs"; 
     }    
 }
 

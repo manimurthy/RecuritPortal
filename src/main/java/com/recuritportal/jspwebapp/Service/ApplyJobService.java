@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recuritportal.jspwebapp.Entity.Applyjob;
+//import com.recuritportal.jspwebapp.Entity.Applyjob;
 import com.recuritportal.jspwebapp.Entity.JobApplied;
 import com.recuritportal.jspwebapp.Entity.JobPost;
 import com.recuritportal.jspwebapp.Exception.CustomApplicationException;
@@ -82,12 +82,16 @@ public class ApplyJobService {
 
     public void calcWeightandUpdate(JobPost jp1, JobApplied jobApplied ) {
     	try {
+    				//Call the method to calculate Work experience weight by passing required values.
 			    	int workExWeight = clacWorkExWeight (jp1.getYearsofexp(),jp1.getYearlyExpweight(), jp1.getExpweightpercent(), jobApplied.getNoofyearsofexp());
 			    	    	
+    				//Call the method to calculate Weightage of educational qualification by passing required values.
 			    	int eduQualWeight =calcEduQualWeight(jp1.getMineduqualify(),jp1.getYearlyeduweightpercent(), jp1.getEduweightpercent(), jobApplied.getEduqualify());
+			    	
+			    	//Call the method to calculate Skills weightage by passing required values.
 			    	int skillsExWeight = calcSkillsWeight(jp1.getMinexpskills(), jp1.getYearlyexpskills(), jp1.getExpskills(),jobApplied.getExpinskills());
 			    	
-			        // Calculate total weight
+			        // Calculate total weight by applying the formula 
 			        int totalWeight = workExWeight + eduQualWeight + skillsExWeight;
 			        
 			        // Update the calcTotalWeight column using the repository method
@@ -100,8 +104,9 @@ public class ApplyJobService {
     private int clacWorkExWeight( int minWorkExYearRequired , int eachWorkYearWeight,int jobPostsWorkExWeight, int applicantsWorkEx) {
     	int finalWorkExWeight;
     	try {
-	    	//Check if the candidates years at skill is eligible. If not the weight to be 0
+	    	//Check if the candidates years at skill is eligible. 
 	        if (applicantsWorkEx > minWorkExYearRequired) {
+	        	//Calculate the weightage by applying the formula, i.e. Difference in work experience * Weight of each work year set in the job post. 
 	        	finalWorkExWeight= (applicantsWorkEx-minWorkExYearRequired) * eachWorkYearWeight;
 	        	finalWorkExWeight=Math.min(finalWorkExWeight, 100);
 	        } else {
@@ -113,6 +118,7 @@ public class ApplyJobService {
 	
 	        return finalWeight;
 	    } catch (Exception e) {
+	    	//Format the error message and throw it to the caller method to be handled as required by that method 
 	    	String errorMessage = "Error calculating weight and updating for clacWorkExWeight with values: Min Work Ex Req " + minWorkExYearRequired 
 	    			+ " and Each Work Year Weight: " + eachWorkYearWeight 
 	    			+ " and Work Ex Weight for job: " + jobPostsWorkExWeight 
@@ -126,6 +132,7 @@ public class ApplyJobService {
 
     	 int finalEduCalcWeight;
     	 try {
+    		// load the Qualification Index  as defined in edu_weight.properties file  
 	    	int minQualificationIndex = configReader.getEduIndex(minQualification);
 	    	// Convert the applicant's education qualification to an index
 	        int applicantsEduQualIndex = configReader.getEduIndex(applicantsEduQual);
@@ -144,7 +151,7 @@ public class ApplyJobService {
 	        	finalEduCalcWeight = 0;
 	        }
 	        
-	        // Calculate the final weight
+	        // Calculate the final weight percentage.
 	        int finalWeight = (jobPostEduWeight * finalEduCalcWeight) / 100;
 	
 	        return finalWeight;
@@ -161,8 +168,9 @@ public class ApplyJobService {
     	int finalSkillWeight;
     	
     	try {
-		    	//Check if the candidates years at skill is eligible. If not the weight to be 0
+		    	//Check if the candidates years at skill is eligible. 
 			        if (applicantsSkillsWorkEx > minSkillYearRequired) {
+			        	//Calculate the candidates skill weightage by using the formula: difference in number of years in skills * weight for each skill year as defined in the job post
 			        	finalSkillWeight= (applicantsSkillsWorkEx-minSkillYearRequired) * eachskillYearWeight;
 			        	finalSkillWeight=Math.min(finalSkillWeight, 100);
 			        } else {

@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.recuritportal.jspwebapp.Entity.Applyjob;
+//import com.recuritportal.jspwebapp.Entity.Applyjob;
 import com.recuritportal.jspwebapp.Entity.Employee;
 import com.recuritportal.jspwebapp.Entity.JobApplied;
 import com.recuritportal.jspwebapp.Entity.JobPost;
 import com.recuritportal.jspwebapp.Exception.CustomApplicationException;
 import com.recuritportal.jspwebapp.Service.ApplyJobService;
 import com.recuritportal.jspwebapp.Service.EmployeeService;
-import com.recuritportal.jspwebapp.Service.InsertApplyService;
 import com.recuritportal.jspwebapp.Service.JobPostService;
 
 import jakarta.persistence.EntityManager;
@@ -31,15 +30,16 @@ import jakarta.transaction.Transactional;
 public class JobApplyController {
 	@Autowired
 	ApplyJobService applyjobService;
-	InsertApplyService insertapplyService;
+	//InsertApplyService insertapplyService;
 	EmployeeService empService;
     
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	public JobApplyController (ApplyJobService ajServ,InsertApplyService jpServ,EmployeeService eServ ){
+	//public JobApplyController (ApplyJobService ajServ,InsertApplyService jpServ,EmployeeService eServ ){
+	public JobApplyController (ApplyJobService ajServ,EmployeeService eServ ){
 		this.applyjobService = ajServ;
-		this.insertapplyService = jpServ;
+		//this.insertapplyService = jpServ;
 		this.empService = eServ;
 	}
 	

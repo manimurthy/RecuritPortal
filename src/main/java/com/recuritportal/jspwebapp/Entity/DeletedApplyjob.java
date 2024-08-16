@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Applyjob {
+public class DeletedApplyjob {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobapplyid;

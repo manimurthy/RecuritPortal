@@ -54,7 +54,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 						<li><a href="postjob" class="current">Post Jobs</a></li>
-						<li><a href="firmsearchjob" class="current">Posted Job</a></li>
+						<li><a href="searchalljobsfirm" class="current">Posted Job</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>				
